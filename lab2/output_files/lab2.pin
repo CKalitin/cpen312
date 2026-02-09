@@ -76,21 +76,21 @@ RESERVED_INPUT               : A3        :        :                   :         
 RESERVED_INPUT               : A4        :        :                   :         : 8         :                
 RESERVED_INPUT               : A5        :        :                   :         : 8         :                
 RESERVED_INPUT               : A6        :        :                   :         : 8         :                
-RESERVED_INPUT               : A7        :        :                   :         : 7         :                
+KEY[1]                       : A7        : input  : 2.5 V Schmitt Trigger :         : 7         : Y              
 LED[0]                       : A8        : output : 2.5 V             :         : 7         : Y              
 LED[1]                       : A9        : output : 2.5 V             :         : 7         : Y              
 LED[2]                       : A10       : output : 2.5 V             :         : 7         : Y              
-RESERVED_INPUT               : A11       :        :                   :         : 7         :                
+LED[8]                       : A11       : output : 2.5 V             :         : 7         : Y              
 SW[4]                        : A12       : input  : 2.5 V             :         : 7         : Y              
 SW[6]                        : A13       : input  : 2.5 V             :         : 7         : Y              
 SW[7]                        : A14       : input  : 2.5 V             :         : 7         : Y              
 RESERVED_INPUT               : A15       :        :                   :         : 7         :                
 RESERVED_INPUT               : A16       :        :                   :         : 7         :                
-RESERVED_INPUT               : A17       :        :                   :         : 7         :                
-RESERVED_INPUT               : A18       :        :                   :         : 7         :                
+disp_7seg_1[4]               : A17       : output : 2.5 V             :         : 7         : Y              
+disp_7seg_1[5]               : A18       : output : 2.5 V             :         : 7         : Y              
 RESERVED_INPUT               : A19       :        :                   :         : 7         :                
-RESERVED_INPUT               : A20       :        :                   :         : 7         :                
-RESERVED_INPUT               : A21       :        :                   :         : 6         :                
+disp_7seg_2[1]               : A20       : output : 2.5 V             :         : 7         : Y              
+disp_7seg_2[3]               : A21       : output : 2.5 V             :         : 6         : Y              
 GND                          : A22       : gnd    :                   :         :           :                
 RESERVED_INPUT               : AA1       :        :                   :         : 3         :                
 RESERVED_INPUT               : AA2       :        :                   :         : 3         :                
@@ -143,21 +143,21 @@ RESERVED_INPUT               : B4        :        :                   :         
 RESERVED_INPUT               : B5        :        :                   :         : 8         :                
 GND                          : B6        : gnd    :                   :         :           :                
 RESERVED_INPUT               : B7        :        :                   :         : 8         :                
-RESERVED_INPUT               : B8        :        :                   :         : 7         :                
+KEY[0]                       : B8        : input  : 2.5 V Schmitt Trigger :         : 7         : Y              
 GND                          : B9        : gnd    :                   :         :           :                
 LED[3]                       : B10       : output : 2.5 V             :         : 7         : Y              
-RESERVED_INPUT               : B11       :        :                   :         : 7         :                
+LED[9]                       : B11       : output : 2.5 V             :         : 7         : Y              
 SW[5]                        : B12       : input  : 2.5 V             :         : 7         : Y              
 GND                          : B13       : gnd    :                   :         :           :                
-RESERVED_INPUT               : B14       :        :                   :         : 7         :                
+SW[8]                        : B14       : input  : 2.5 V             :         : 7         : Y              
 RESERVED_INPUT               : B15       :        :                   :         : 7         :                
-RESERVED_INPUT               : B16       :        :                   :         : 7         :                
-RESERVED_INPUT               : B17       :        :                   :         : 7         :                
+disp_7seg_1[3]               : B16       : output : 2.5 V             :         : 7         : Y              
+disp_7seg_1[6]               : B17       : output : 2.5 V             :         : 7         : Y              
 GND                          : B18       : gnd    :                   :         :           :                
-RESERVED_INPUT               : B19       :        :                   :         : 7         :                
-RESERVED_INPUT               : B20       :        :                   :         : 6         :                
-RESERVED_INPUT               : B21       :        :                   :         : 6         :                
-RESERVED_INPUT               : B22       :        :                   :         : 6         :                
+disp_7seg_2[2]               : B19       : output : 2.5 V             :         : 7         : Y              
+disp_7seg_2[0]               : B20       : output : 2.5 V             :         : 6         : Y              
+disp_7seg_2[4]               : B21       : output : 2.5 V             :         : 6         : Y              
+disp_7seg_2[6]               : B22       : output : 2.5 V             :         : 6         : Y              
 RESERVED_INPUT               : C1        :        :                   :         : 1B        :                
 RESERVED_INPUT               : C2        :        :                   :         : 8         :                
 RESERVED_INPUT               : C3        :        :                   :         : 8         :                
@@ -171,15 +171,15 @@ SW[0]                        : C10       : input  : 2.5 V             :         
 SW[1]                        : C11       : input  : 2.5 V             :         : 7         : Y              
 SW[3]                        : C12       : input  : 2.5 V             :         : 7         : Y              
 LED[5]                       : C13       : output : 2.5 V             :         : 7         : Y              
-RESERVED_INPUT               : C14       :        :                   :         : 7         :                
-RESERVED_INPUT               : C15       :        :                   :         : 7         :                
-RESERVED_INPUT               : C16       :        :                   :         : 7         :                
-RESERVED_INPUT               : C17       :        :                   :         : 7         :                
-RESERVED_INPUT               : C18       :        :                   :         : 7         :                
-RESERVED_INPUT               : C19       :        :                   :         : 7         :                
-RESERVED_INPUT               : C20       :        :                   :         : 6         :                
+disp_7seg_0[0]               : C14       : output : 2.5 V             :         : 7         : Y              
+disp_7seg_0[2]               : C15       : output : 2.5 V             :         : 7         : Y              
+disp_7seg_0[3]               : C16       : output : 2.5 V             :         : 7         : Y              
+disp_7seg_0[6]               : C17       : output : 2.5 V             :         : 7         : Y              
+disp_7seg_1[0]               : C18       : output : 2.5 V             :         : 7         : Y              
+disp_7seg_3[3]               : C19       : output : 2.5 V             :         : 7         : Y              
+disp_7seg_3[4]               : C20       : output : 2.5 V             :         : 6         : Y              
 RESERVED_INPUT               : C21       :        :                   :         : 6         :                
-RESERVED_INPUT               : C22       :        :                   :         : 6         :                
+disp_7seg_2[5]               : C22       : output : 2.5 V             :         : 6         : Y              
 RESERVED_INPUT               : D1        :        :                   :         : 1B        :                
 RESERVED_INPUT               : D2        :        :                   :         : 1B        :                
 RESERVED_INPUT               : D3        :        :                   :         : 1B        :                
@@ -196,9 +196,9 @@ LED[4]                       : D13       : output : 2.5 V             :         
 LED[7]                       : D14       : output : 2.5 V             :         : 7         : Y              
 RESERVED_INPUT               : D15       :        :                   :         : 7         :                
 GND                          : D16       : gnd    :                   :         :           :                
-RESERVED_INPUT               : D17       :        :                   :         : 7         :                
-RESERVED_INPUT               : D18       :        :                   :         : 6         :                
-RESERVED_INPUT               : D19       :        :                   :         : 6         :                
+disp_7seg_0[5]               : D17       : output : 2.5 V             :         : 7         : Y              
+disp_7seg_1[1]               : D18       : output : 2.5 V             :         : 6         : Y              
+disp_7seg_3[5]               : D19       : output : 2.5 V             :         : 6         : Y              
 GND                          : D20       : gnd    :                   :         :           :                
 RESERVED_INPUT               : D21       :        :                   :         : 6         :                
 RESERVED_INPUT               : D22       :        :                   :         : 6         :                
@@ -216,14 +216,14 @@ RESERVED_INPUT               : E11       :        :                   :         
 RESERVED_INPUT               : E12       :        :                   :         : 7         :                
 RESERVED_INPUT               : E13       :        :                   :         : 7         :                
 LED[6]                       : E14       : output : 2.5 V             :         : 7         : Y              
-RESERVED_INPUT               : E15       :        :                   :         : 7         :                
-RESERVED_INPUT               : E16       :        :                   :         : 7         :                
-RESERVED_INPUT               : E17       :        :                   :         : 6         :                
-RESERVED_INPUT               : E18       :        :                   :         : 6         :                
-RESERVED_INPUT               : E19       :        :                   :         : 6         :                
-RESERVED_INPUT               : E20       :        :                   :         : 6         :                
-RESERVED_INPUT               : E21       :        :                   :         : 6         :                
-RESERVED_INPUT               : E22       :        :                   :         : 6         :                
+disp_7seg_0[1]               : E15       : output : 2.5 V             :         : 7         : Y              
+disp_7seg_0[4]               : E16       : output : 2.5 V             :         : 7         : Y              
+disp_7seg_3[6]               : E17       : output : 2.5 V             :         : 6         : Y              
+disp_7seg_1[2]               : E18       : output : 2.5 V             :         : 6         : Y              
+disp_7seg_4[2]               : E19       : output : 2.5 V             :         : 6         : Y              
+disp_7seg_4[1]               : E20       : output : 2.5 V             :         : 6         : Y              
+disp_7seg_3[2]               : E21       : output : 2.5 V             :         : 6         : Y              
+disp_7seg_3[1]               : E22       : output : 2.5 V             :         : 6         : Y              
 RESERVED_INPUT               : F1        :        :                   :         : 1B        :                
 RESERVED_INPUT               : F2        :        :                   :         : 1B        :                
 RESERVED_INPUT               : F3        :        :                   :         : 1A        :                
@@ -238,13 +238,13 @@ VCCIO8                       : F11       : power  :                   : 2.5V    
 VCCIO7                       : F12       : power  :                   : 2.5V    : 7         :                
 GND                          : F13       : gnd    :                   :         :           :                
 VCCIO7                       : F14       : power  :                   : 2.5V    : 7         :                
-RESERVED_INPUT               : F15       :        :                   :         : 7         :                
+SW[9]                        : F15       : input  : 2.5 V             :         : 7         : Y              
 RESERVED_INPUT               : F16       :        :                   :         : 7         :                
 RESERVED_INPUT               : F17       :        :                   :         : 6         :                
-RESERVED_INPUT               : F18       :        :                   :         : 6         :                
-RESERVED_INPUT               : F19       :        :                   :         : 6         :                
-RESERVED_INPUT               : F20       :        :                   :         : 6         :                
-RESERVED_INPUT               : F21       :        :                   :         : 6         :                
+disp_7seg_4[0]               : F18       : output : 2.5 V             :         : 6         : Y              
+disp_7seg_4[5]               : F19       : output : 2.5 V             :         : 6         : Y              
+disp_7seg_4[6]               : F20       : output : 2.5 V             :         : 6         : Y              
+disp_7seg_3[0]               : F21       : output : 2.5 V             :         : 6         : Y              
 RESERVED_INPUT               : F22       :        :                   :         : 6         :                
 RESERVED_INPUT               : G1        :        :                   :         : 1B        :                
 ~ALTERA_TCK~ / RESERVED_INPUT : G2        : input  : 2.5 V Schmitt Trigger :         : 1B        : N              
@@ -286,7 +286,7 @@ VCCA2                        : H15       : power  :                   : 2.5V    
 VCCIO6                       : H16       : power  :                   : 2.5V    : 6         :                
 RESERVED_INPUT               : H17       :        :                   :         : 6         :                
 RESERVED_INPUT               : H18       :        :                   :         : 6         :                
-RESERVED_INPUT               : H19       :        :                   :         : 6         :                
+disp_7seg_4[4]               : H19       : output : 2.5 V             :         : 6         : Y              
 RESERVED_INPUT               : H20       :        :                   :         : 6         :                
 RESERVED_INPUT               : H21       :        :                   :         : 6         :                
 RESERVED_INPUT               : H22       :        :                   :         : 6         :                
@@ -307,9 +307,9 @@ RESERVED_INPUT               : J14       :        :                   :         
 RESERVED_INPUT               : J15       :        :                   :         : 6         :                
 GND                          : J16       : gnd    :                   :         :           :                
 VCCIO6                       : J17       : power  :                   : 2.5V    : 6         :                
-RESERVED_INPUT               : J18       :        :                   :         : 6         :                
+disp_7seg_4[3]               : J18       : output : 2.5 V             :         : 6         : Y              
 GND                          : J19       : gnd    :                   :         :           :                
-RESERVED_INPUT               : J20       :        :                   :         : 6         :                
+disp_7seg_5[0]               : J20       : output : 2.5 V             :         : 6         : Y              
 RESERVED_INPUT               : J21       :        :                   :         : 6         :                
 RESERVED_INPUT               : J22       :        :                   :         : 6         :                
 RESERVED_INPUT               : K1        :        :                   :         : 1B        :                
@@ -331,7 +331,7 @@ VCCIO6                       : K16       : power  :                   : 2.5V    
 VCCIO6                       : K17       : power  :                   : 2.5V    : 6         :                
 RESERVED_INPUT               : K18       :        :                   :         : 6         :                
 RESERVED_INPUT               : K19       :        :                   :         : 6         :                
-RESERVED_INPUT               : K20       :        :                   :         : 6         :                
+disp_7seg_5[1]               : K20       : output : 2.5 V             :         : 6         : Y              
 RESERVED_INPUT               : K21       :        :                   :         : 6         :                
 RESERVED_INPUT               : K22       :        :                   :         : 6         :                
 RESERVED_INPUT               : L1        :        :                   :         : 1B        :                
@@ -351,7 +351,7 @@ RESERVED_INPUT               : L14       :        :                   :         
 RESERVED_INPUT               : L15       :        :                   :         : 6         :                
 VCCIO6                       : L16       : power  :                   : 2.5V    : 6         :                
 GND                          : L17       : gnd    :                   :         :           :                
-RESERVED_INPUT               : L18       :        :                   :         : 6         :                
+disp_7seg_5[2]               : L18       : output : 2.5 V             :         : 6         : Y              
 RESERVED_INPUT               : L19       :        :                   :         : 6         :                
 RESERVED_INPUT               : L20       :        :                   :         : 6         :                
 GND                          : L21       : gnd    :                   :         :           :                
@@ -375,7 +375,7 @@ GND                          : M16       : gnd    :                   :         
 VCCIO6                       : M17       : power  :                   : 2.5V    : 6         :                
 RESERVED_INPUT               : M18       :        :                   :         : 6         :                
 GND                          : M19       : gnd    :                   :         :           :                
-RESERVED_INPUT               : M20       :        :                   :         : 6         :                
+disp_7seg_5[4]               : M20       : output : 2.5 V             :         : 6         : Y              
 RESERVED_INPUT               : M21       :        :                   :         : 5         :                
 RESERVED_INPUT               : M22       :        :                   :         : 5         :                
 RESERVED_INPUT               : N1        :        :                   :         : 2         :                
@@ -395,9 +395,9 @@ RESERVED_INPUT               : N14       :        :                   :         
 RESERVED_INPUT               : N15       :        :                   :         : 6         :                
 VCCIO5                       : N16       : power  :                   : 2.5V    : 5         :                
 VCCIO6                       : N17       : power  :                   : 2.5V    : 6         :                
-RESERVED_INPUT               : N18       :        :                   :         : 6         :                
-RESERVED_INPUT               : N19       :        :                   :         : 6         :                
-RESERVED_INPUT               : N20       :        :                   :         : 6         :                
+disp_7seg_5[3]               : N18       : output : 2.5 V             :         : 6         : Y              
+disp_7seg_5[5]               : N19       : output : 2.5 V             :         : 6         : Y              
+disp_7seg_5[6]               : N20       : output : 2.5 V             :         : 6         : Y              
 RESERVED_INPUT               : N21       :        :                   :         : 5         :                
 RESERVED_INPUT               : N22       :        :                   :         : 5         :                
 RESERVED_INPUT               : P1        :        :                   :         : 2         :                
