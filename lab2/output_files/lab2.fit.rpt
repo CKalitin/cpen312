@@ -1,5 +1,5 @@
 Fitter report for lab2
-Mon Feb  9 00:10:18 2026
+Sun Feb 22 10:38:16 2026
 Quartus Prime Version 25.1std.0 Build 1129 10/21/2025 SC Standard Edition
 
 
@@ -66,7 +66,7 @@ on the Quartus Prime software download page.
 +------------------------------------------------------------------------------------------+
 ; Fitter Summary                                                                           ;
 +------------------------------------+-----------------------------------------------------+
-; Fitter Status                      ; Successful - Mon Feb  9 00:10:18 2026               ;
+; Fitter Status                      ; Successful - Sun Feb 22 10:38:16 2026               ;
 ; Quartus Prime Version              ; 25.1std.0 Build 1129 10/21/2025 SC Standard Edition ;
 ; Revision Name                      ; lab2                                                ;
 ; Top-level Entity Name              ; lab2                                                ;
@@ -152,12 +152,12 @@ on the Quartus Prime software download page.
 ; Number detected on machine ; 16          ;
 ; Maximum allowed            ; 16          ;
 ;                            ;             ;
-; Average used               ; 1.16        ;
+; Average used               ; 1.14        ;
 ; Maximum used               ; 16          ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processors 2-16        ;   1.0%      ;
+;     Processors 2-16        ;   0.9%      ;
 +----------------------------+-------------+
 
 
@@ -1669,7 +1669,7 @@ Info (170199): The Fitter performed an Auto Fit compilation.  Optimizations were
     Info (170201): Optimizations that may affect the design's routability were skipped
     Info (170200): Optimizations that may affect the design's timing were skipped
 Info (170194): Fitter routing operations ending: elapsed time is 00:00:00
-Info (11888): Total time spent on timing analysis during the Fitter is 0.07 seconds.
+Info (11888): Total time spent on timing analysis during the Fitter is 0.08 seconds.
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
 Info (334003): Started post-fitting delay annotation
@@ -1681,9 +1681,9 @@ Warning (169177): 2 pins must meet Intel FPGA requirements for 3.3-, 3.0-, and 2
     Info (169178): Pin KEY[0] uses I/O standard 2.5 V Schmitt Trigger at B8 File: C:/_Dev/cpen312/lab2/lab2.vhd Line: 12
 Info (144001): Generated suppressed messages file C:/_Dev/cpen312/lab2/output_files/lab2.fit.smsg
 Info: Quartus Prime Fitter was successful. 0 errors, 5 warnings
-    Info: Peak virtual memory: 6625 megabytes
-    Info: Processing ended: Mon Feb  9 00:10:19 2026
-    Info: Elapsed time: 00:00:07
+    Info: Peak virtual memory: 6649 megabytes
+    Info: Processing ended: Sun Feb 22 10:38:17 2026
+    Info: Elapsed time: 00:00:09
     Info: Total CPU time (on all processors): 00:00:11
 
 

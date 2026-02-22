@@ -66,7 +66,7 @@ set_global_assignment -name VHDL_FILE lab2.vhd
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_global_assignment -name VHDL_FILE binary_adder.vhd
+
 set_location_assignment PIN_C11 -to SW[1]
 set_location_assignment PIN_C10 -to SW[0]
 set_location_assignment PIN_D12 -to SW[2]
@@ -75,6 +75,9 @@ set_location_assignment PIN_A12 -to SW[4]
 set_location_assignment PIN_B12 -to SW[5]
 set_location_assignment PIN_A13 -to SW[6]
 set_location_assignment PIN_A14 -to SW[7]
+set_location_assignment PIN_B14 -to SW[8]
+set_location_assignment PIN_F15 -to SW[9]
+
 set_location_assignment PIN_A8 -to LED[0]
 set_location_assignment PIN_A9 -to LED[1]
 set_location_assignment PIN_A10 -to LED[2]
@@ -83,17 +86,16 @@ set_location_assignment PIN_D13 -to LED[4]
 set_location_assignment PIN_C13 -to LED[5]
 set_location_assignment PIN_E14 -to LED[6]
 set_location_assignment PIN_D14 -to LED[7]
-set_global_assignment -name VHDL_FILE bcd_adder.vhd
-set_global_assignment -name VHDL_FILE disp7seg.vhd
+set_location_assignment PIN_A11 -to LED[8]
+set_location_assignment PIN_B11 -to LED[9]
+
+set_location_assignment PIN_B8 -to KEY[0]
+set_location_assignment PIN_A7 -to KEY[1]
+
 set_instance_assignment -name IO_STANDARD "2.5 V SCHMITT TRIGGER" -to KEY[0]
 set_instance_assignment -name IO_STANDARD "2.5 V SCHMITT TRIGGER" -to KEY[1]
 set_instance_assignment -name IO_STANDARD "2.5 V SCHMITT TRIGGER" -to KEY
-set_location_assignment PIN_B14 -to SW[8]
-set_location_assignment PIN_F15 -to SW[9]
-set_location_assignment PIN_A11 -to LED[8]
-set_location_assignment PIN_B11 -to LED[9]
-set_location_assignment PIN_B8 -to KEY[0]
-set_location_assignment PIN_A7 -to KEY[1]
+
 set_location_assignment PIN_C14 -to disp_7seg_0[0]
 set_location_assignment PIN_E15 -to disp_7seg_0[1]
 set_location_assignment PIN_C15 -to disp_7seg_0[2]
@@ -141,8 +143,9 @@ set_location_assignment PIN_M20 -to disp_7seg_5[4]
 set_location_assignment PIN_N19 -to disp_7seg_5[5]
 set_location_assignment PIN_N20 -to disp_7seg_5[6]
 
-set_global_assignment -name VHDL_FILE bcd_adder_8bit.vhd
+set_global_assignment -name VHDL_FILE disp7seg.vhd
+set_global_assignment -name VHDL_FILE binary_adder.vhd
 set_global_assignment -name VHDL_FILE bcd_addsub.vhd
-set_global_assignment -name VHDL_FILE output_files/bcd_addsub_8bit.vhd
 set_global_assignment -name VHDL_FILE bcd_addsub_8bit.vhd
+
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
