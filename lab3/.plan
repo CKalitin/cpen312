@@ -1,0 +1,11 @@
+Goals:
+- Display HH:MM:SS in 12 hr format on 7segs, with LED9 as AM/PM indicator (AM = off, PM = on)
+- Functionality to set HH MM SS using switches
+  - I have 2 buttons and SW8, when SW8=0, B0=1 set SS, when SW8=0, B1=1 set MM, when SW8=1, B1=1 set HH
+  - BCD encoding for inputting, using SW7-0, 4 highest bits for tens place, 4 lowest bits for ones place
+- Implement a simple clock that increments every second in VHDL
+- Handle edge cases for time incrementing (e.g., 59 seconds rolls over to 00, 11:59:59 rolls over to 12:00:00, etc.)
+- Ensure that the clock correctly transitions between AM and PM at 12:00:00
+- When SW9 is on, we are in alarm mode
+  - Functionality for setting HH MM SS should also work for the alarm, with the new requirement that SW9=1
+  - When the current time matches the alarm time, LED0 should turn on to indicate the alarm is ringing

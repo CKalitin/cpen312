@@ -1,13 +1,13 @@
-Analysis & Synthesis Status : Successful - Sun Feb 22 10:45:11 2026
+Analysis & Synthesis Status : Successful - Sun Feb 22 12:13:00 2026
 Quartus Prime Version : 25.1std.0 Build 1129 10/21/2025 SC Standard Edition
 Revision Name : lab3
 Top-level Entity Name : lab3
 Family : MAX 10
-Total logic elements : 0
-    Total combinational functions : 0
-    Dedicated logic registers : 0
-Total registers : 0
-Total pins : 64
+Total logic elements : 244
+    Total combinational functions : 237
+    Dedicated logic registers : 87
+Total registers : 87
+Total pins : 68
 Total virtual pins : 0
 Total memory bits : 0
 Embedded Multiplier 9-bit elements : 0
