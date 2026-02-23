@@ -1,5 +1,5 @@
 Analysis & Synthesis report for lab2
-Mon Feb  9 00:10:11 2026
+Mon Feb  9 15:14:16 2026
 Quartus Prime Version 25.1std.0 Build 1129 10/21/2025 SC Standard Edition
 
 
@@ -45,7 +45,7 @@ on the Quartus Prime software download page.
 +------------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                             ;
 +------------------------------------+-----------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Mon Feb  9 00:10:11 2026               ;
+; Analysis & Synthesis Status        ; Successful - Mon Feb  9 15:14:16 2026               ;
 ; Quartus Prime Version              ; 25.1std.0 Build 1129 10/21/2025 SC Standard Edition ;
 ; Revision Name                      ; lab2                                                ;
 ; Top-level Entity Name              ; lab2                                                ;
@@ -155,8 +155,8 @@ on the Quartus Prime software download page.
 +----------------------------+-------------+
 ; Processors                 ; Number      ;
 +----------------------------+-------------+
-; Number detected on machine ; 16          ;
-; Maximum allowed            ; 16          ;
+; Number detected on machine ; 12          ;
+; Maximum allowed            ; 6           ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
 ; Maximum used               ; 1           ;
@@ -166,17 +166,17 @@ on the Quartus Prime software download page.
 +----------------------------+-------------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                    ;
-+----------------------------------+-----------------+-----------------+------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path             ; Library ;
-+----------------------------------+-----------------+-----------------+------------------------------------------+---------+
-; lab2.vhd                         ; yes             ; User VHDL File  ; C:/_Dev/cpen312/lab2/lab2.vhd            ;         ;
-; binary_adder.vhd                 ; yes             ; User VHDL File  ; C:/_Dev/cpen312/lab2/binary_adder.vhd    ;         ;
-; disp7seg.vhd                     ; yes             ; User VHDL File  ; C:/_Dev/cpen312/lab2/disp7seg.vhd        ;         ;
-; bcd_addsub.vhd                   ; yes             ; User VHDL File  ; C:/_Dev/cpen312/lab2/bcd_addsub.vhd      ;         ;
-; bcd_addsub_8bit.vhd              ; yes             ; User VHDL File  ; C:/_Dev/cpen312/lab2/bcd_addsub_8bit.vhd ;         ;
-+----------------------------------+-----------------+-----------------+------------------------------------------+---------+
++------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                         ;
++----------------------------------+-----------------+-----------------+---------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                                  ; Library ;
++----------------------------------+-----------------+-----------------+---------------------------------------------------------------+---------+
+; lab2.vhd                         ; yes             ; User VHDL File  ; C:/Users/Chris/Documents/Git/cpen312/lab2/lab2.vhd            ;         ;
+; binary_adder.vhd                 ; yes             ; User VHDL File  ; C:/Users/Chris/Documents/Git/cpen312/lab2/binary_adder.vhd    ;         ;
+; disp7seg.vhd                     ; yes             ; User VHDL File  ; C:/Users/Chris/Documents/Git/cpen312/lab2/disp7seg.vhd        ;         ;
+; bcd_addsub.vhd                   ; yes             ; User VHDL File  ; C:/Users/Chris/Documents/Git/cpen312/lab2/bcd_addsub.vhd      ;         ;
+; bcd_addsub_8bit.vhd              ; yes             ; User VHDL File  ; C:/Users/Chris/Documents/Git/cpen312/lab2/bcd_addsub_8bit.vhd ;         ;
++----------------------------------+-----------------+-----------------+---------------------------------------------------------------+---------+
 
 
 +-----------------------------------------------------------+
@@ -305,35 +305,35 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 25.1std.0 Build 1129 10/21/2025 SC Standard Edition
-    Info: Processing started: Mon Feb  9 00:10:04 2026
+    Info: Processing started: Mon Feb  9 15:14:09 2026
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off lab2 -c lab2
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
-Info (20030): Parallel compilation is enabled and will use 16 of the 16 processors detected
+Info (20030): Parallel compilation is enabled and will use 6 of the 6 processors detected
 Info (12021): Found 2 design units, including 1 entities, in source file lab2.vhd
-    Info (12022): Found design unit 1: lab2-rtl File: C:/_Dev/cpen312/lab2/lab2.vhd Line: 23
-    Info (12023): Found entity 1: lab2 File: C:/_Dev/cpen312/lab2/lab2.vhd Line: 5
+    Info (12022): Found design unit 1: lab2-rtl File: C:/Users/Chris/Documents/Git/cpen312/lab2/lab2.vhd Line: 23
+    Info (12023): Found entity 1: lab2 File: C:/Users/Chris/Documents/Git/cpen312/lab2/lab2.vhd Line: 5
 Info (12021): Found 2 design units, including 1 entities, in source file binary_adder.vhd
-    Info (12022): Found design unit 1: binary_adder-rtl File: C:/_Dev/cpen312/lab2/binary_adder.vhd Line: 17
-    Info (12023): Found entity 1: binary_adder File: C:/_Dev/cpen312/lab2/binary_adder.vhd Line: 5
+    Info (12022): Found design unit 1: binary_adder-rtl File: C:/Users/Chris/Documents/Git/cpen312/lab2/binary_adder.vhd Line: 17
+    Info (12023): Found entity 1: binary_adder File: C:/Users/Chris/Documents/Git/cpen312/lab2/binary_adder.vhd Line: 5
 Warning (12019): Can't analyze file -- file bcd_adder.vhd is missing
 Info (12021): Found 2 design units, including 1 entities, in source file disp7seg.vhd
-    Info (12022): Found design unit 1: disp7seg-rtl File: C:/_Dev/cpen312/lab2/disp7seg.vhd Line: 12
-    Info (12023): Found entity 1: disp7seg File: C:/_Dev/cpen312/lab2/disp7seg.vhd Line: 5
+    Info (12022): Found design unit 1: disp7seg-rtl File: C:/Users/Chris/Documents/Git/cpen312/lab2/disp7seg.vhd Line: 12
+    Info (12023): Found entity 1: disp7seg File: C:/Users/Chris/Documents/Git/cpen312/lab2/disp7seg.vhd Line: 5
 Warning (12019): Can't analyze file -- file bcd_adder_8bit.vhd is missing
 Info (12021): Found 2 design units, including 1 entities, in source file bcd_addsub.vhd
-    Info (12022): Found design unit 1: bcd_addsub-a File: C:/_Dev/cpen312/lab2/bcd_addsub.vhd Line: 15
-    Info (12023): Found entity 1: bcd_addsub File: C:/_Dev/cpen312/lab2/bcd_addsub.vhd Line: 5
+    Info (12022): Found design unit 1: bcd_addsub-a File: C:/Users/Chris/Documents/Git/cpen312/lab2/bcd_addsub.vhd Line: 15
+    Info (12023): Found entity 1: bcd_addsub File: C:/Users/Chris/Documents/Git/cpen312/lab2/bcd_addsub.vhd Line: 5
 Warning (12019): Can't analyze file -- file output_files/bcd_addsub_8bit.vhd is missing
 Info (12021): Found 2 design units, including 1 entities, in source file bcd_addsub_8bit.vhd
-    Info (12022): Found design unit 1: bcd_addsub_8bit-rtl File: C:/_Dev/cpen312/lab2/bcd_addsub_8bit.vhd Line: 15
-    Info (12023): Found entity 1: bcd_addsub_8bit File: C:/_Dev/cpen312/lab2/bcd_addsub_8bit.vhd Line: 5
+    Info (12022): Found design unit 1: bcd_addsub_8bit-rtl File: C:/Users/Chris/Documents/Git/cpen312/lab2/bcd_addsub_8bit.vhd Line: 15
+    Info (12023): Found entity 1: bcd_addsub_8bit File: C:/Users/Chris/Documents/Git/cpen312/lab2/bcd_addsub_8bit.vhd Line: 5
 Info (12127): Elaborating entity "lab2" for the top level hierarchy
-Info (12128): Elaborating entity "binary_adder" for hierarchy "binary_adder:u_adder" File: C:/_Dev/cpen312/lab2/lab2.vhd Line: 45
-Info (12128): Elaborating entity "bcd_addsub_8bit" for hierarchy "bcd_addsub_8bit:u_bcd_bcd_addsub_8bit_8bit" File: C:/_Dev/cpen312/lab2/lab2.vhd Line: 55
-Info (12128): Elaborating entity "bcd_addsub" for hierarchy "bcd_addsub_8bit:u_bcd_bcd_addsub_8bit_8bit|bcd_addsub:u_bcd_lower" File: C:/_Dev/cpen312/lab2/bcd_addsub_8bit.vhd Line: 20
-Info (12128): Elaborating entity "disp7seg" for hierarchy "disp7seg:u_disp_7seg_0" File: C:/_Dev/cpen312/lab2/lab2.vhd Line: 65
+Info (12128): Elaborating entity "binary_adder" for hierarchy "binary_adder:u_adder" File: C:/Users/Chris/Documents/Git/cpen312/lab2/lab2.vhd Line: 45
+Info (12128): Elaborating entity "bcd_addsub_8bit" for hierarchy "bcd_addsub_8bit:u_bcd_bcd_addsub_8bit_8bit" File: C:/Users/Chris/Documents/Git/cpen312/lab2/lab2.vhd Line: 55
+Info (12128): Elaborating entity "bcd_addsub" for hierarchy "bcd_addsub_8bit:u_bcd_bcd_addsub_8bit_8bit|bcd_addsub:u_bcd_lower" File: C:/Users/Chris/Documents/Git/cpen312/lab2/bcd_addsub_8bit.vhd Line: 20
+Info (12128): Elaborating entity "disp7seg" for hierarchy "disp7seg:u_disp_7seg_0" File: C:/Users/Chris/Documents/Git/cpen312/lab2/lab2.vhd Line: 65
 Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "LED[9]" is stuck at GND File: C:/_Dev/cpen312/lab2/lab2.vhd Line: 13
+    Warning (13410): Pin "LED[9]" is stuck at GND File: C:/Users/Chris/Documents/Git/cpen312/lab2/lab2.vhd Line: 13
 Info (286030): Timing-Driven Synthesis is running
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
@@ -342,8 +342,8 @@ Info (21057): Implemented 252 device resources after synthesis - the final resou
     Info (21059): Implemented 52 output pins
     Info (21061): Implemented 188 logic cells
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 6 warnings
-    Info: Peak virtual memory: 4810 megabytes
-    Info: Processing ended: Mon Feb  9 00:10:11 2026
+    Info: Peak virtual memory: 4807 megabytes
+    Info: Processing ended: Mon Feb  9 15:14:16 2026
     Info: Elapsed time: 00:00:07
     Info: Total CPU time (on all processors): 00:00:17
 

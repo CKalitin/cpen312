@@ -25,7 +25,7 @@ begin
 		else
 			sum_temp <= ('0' & a) - ('0' & b) - ("00000000" & carry_in);
 			if (a < b) then
-				sum_temp <= "000000000";
+				sum_temp <= "011111111";
 			end if;
 		end if;
 		carry <= sum_temp(8);

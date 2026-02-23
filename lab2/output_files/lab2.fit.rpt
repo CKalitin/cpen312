@@ -1,5 +1,5 @@
 Fitter report for lab2
-Mon Feb  9 00:10:18 2026
+Mon Feb  9 15:14:23 2026
 Quartus Prime Version 25.1std.0 Build 1129 10/21/2025 SC Standard Edition
 
 
@@ -66,14 +66,14 @@ on the Quartus Prime software download page.
 +------------------------------------------------------------------------------------------+
 ; Fitter Summary                                                                           ;
 +------------------------------------+-----------------------------------------------------+
-; Fitter Status                      ; Successful - Mon Feb  9 00:10:18 2026               ;
+; Fitter Status                      ; Successful - Mon Feb  9 15:14:23 2026               ;
 ; Quartus Prime Version              ; 25.1std.0 Build 1129 10/21/2025 SC Standard Edition ;
 ; Revision Name                      ; lab2                                                ;
 ; Top-level Entity Name              ; lab2                                                ;
 ; Family                             ; MAX 10                                              ;
 ; Device                             ; 10M50DAF484C7G                                      ;
 ; Timing Models                      ; Final                                               ;
-; Total logic elements               ; 183 / 49,760 ( < 1 % )                              ;
+; Total logic elements               ; 184 / 49,760 ( < 1 % )                              ;
 ;     Total combinational functions  ; 155 / 49,760 ( < 1 % )                              ;
 ;     Dedicated logic registers      ; 34 / 49,760 ( < 1 % )                               ;
 ; Total registers                    ; 34                                                  ;
@@ -149,15 +149,15 @@ on the Quartus Prime software download page.
 +----------------------------+-------------+
 ; Processors                 ; Number      ;
 +----------------------------+-------------+
-; Number detected on machine ; 16          ;
-; Maximum allowed            ; 16          ;
+; Number detected on machine ; 12          ;
+; Maximum allowed            ; 6           ;
 ;                            ;             ;
-; Average used               ; 1.16        ;
-; Maximum used               ; 16          ;
+; Average used               ; 1.07        ;
+; Maximum used               ; 6           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processors 2-16        ;   1.0%      ;
+;     Processors 2-6         ;   1.3%      ;
 +----------------------------+-------------+
 
 
@@ -208,7 +208,7 @@ on the Quartus Prime software download page.
 +--------------+
 ; Pin-Out File ;
 +--------------+
-The pin-out file can be found in C:/_Dev/cpen312/lab2/output_files/lab2.pin.
+The pin-out file can be found in C:/Users/Chris/Documents/Git/cpen312/lab2/output_files/lab2.pin.
 
 
 +----------------------------------------------------------------------+
@@ -216,16 +216,16 @@ The pin-out file can be found in C:/_Dev/cpen312/lab2/output_files/lab2.pin.
 +---------------------------------------------+------------------------+
 ; Resource                                    ; Usage                  ;
 +---------------------------------------------+------------------------+
-; Total logic elements                        ; 183 / 49,760 ( < 1 % ) ;
-;     -- Combinational with no register       ; 149                    ;
-;     -- Register only                        ; 28                     ;
-;     -- Combinational with a register        ; 6                      ;
+; Total logic elements                        ; 184 / 49,760 ( < 1 % ) ;
+;     -- Combinational with no register       ; 150                    ;
+;     -- Register only                        ; 29                     ;
+;     -- Combinational with a register        ; 5                      ;
 ;                                             ;                        ;
 ; Logic element usage by number of LUT inputs ;                        ;
 ;     -- 4 input functions                    ; 68                     ;
 ;     -- 3 input functions                    ; 44                     ;
 ;     -- <=2 input functions                  ; 43                     ;
-;     -- Register only                        ; 28                     ;
+;     -- Register only                        ; 29                     ;
 ;                                             ;                        ;
 ; Logic elements by mode                      ;                        ;
 ;     -- normal mode                          ; 122                    ;
@@ -235,7 +235,7 @@ The pin-out file can be found in C:/_Dev/cpen312/lab2/output_files/lab2.pin.
 ;     -- Dedicated logic registers            ; 34 / 49,760 ( < 1 % )  ;
 ;     -- I/O registers                        ; 0 / 1,749 ( 0 % )      ;
 ;                                             ;                        ;
-; Total LABs:  partially or completely used   ; 32 / 3,110 ( 1 % )     ;
+; Total LABs:  partially or completely used   ; 24 / 3,110 ( < 1 % )   ;
 ; Virtual pins                                ; 0                      ;
 ; I/O pins                                    ; 64 / 360 ( 18 % )      ;
 ;     -- Clock pins                           ; 0 / 8 ( 0 % )          ;
@@ -256,7 +256,7 @@ The pin-out file can be found in C:/_Dev/cpen312/lab2/output_files/lab2.pin.
 ; Oscillator blocks                           ; 0 / 1 ( 0 % )          ;
 ; Impedance control blocks                    ; 0 / 1 ( 0 % )          ;
 ; Average interconnect usage (total/H/V)      ; 0.2% / 0.2% / 0.2%     ;
-; Peak interconnect usage (total/H/V)         ; 2.6% / 3.3% / 1.8%     ;
+; Peak interconnect usage (total/H/V)         ; 2.1% / 2.8% / 1.5%     ;
 ; Maximum fan-out                             ; 82                     ;
 ; Highest non-global fan-out                  ; 82                     ;
 ; Total fan-out                               ; 723                    ;
@@ -273,16 +273,16 @@ The pin-out file can be found in C:/_Dev/cpen312/lab2/output_files/lab2.pin.
 +---------------------------------------------+-----------------------+--------------------------------+
 ; Difficulty Clustering Region                ; Low                   ; Low                            ;
 ;                                             ;                       ;                                ;
-; Total logic elements                        ; 183 / 49760 ( < 1 % ) ; 0 / 49760 ( 0 % )              ;
-;     -- Combinational with no register       ; 149                   ; 0                              ;
-;     -- Register only                        ; 28                    ; 0                              ;
-;     -- Combinational with a register        ; 6                     ; 0                              ;
+; Total logic elements                        ; 184 / 49760 ( < 1 % ) ; 0 / 49760 ( 0 % )              ;
+;     -- Combinational with no register       ; 150                   ; 0                              ;
+;     -- Register only                        ; 29                    ; 0                              ;
+;     -- Combinational with a register        ; 5                     ; 0                              ;
 ;                                             ;                       ;                                ;
 ; Logic element usage by number of LUT inputs ;                       ;                                ;
 ;     -- 4 input functions                    ; 68                    ; 0                              ;
 ;     -- 3 input functions                    ; 44                    ; 0                              ;
 ;     -- <=2 input functions                  ; 43                    ; 0                              ;
-;     -- Register only                        ; 28                    ; 0                              ;
+;     -- Register only                        ; 29                    ; 0                              ;
 ;                                             ;                       ;                                ;
 ; Logic elements by mode                      ;                       ;                                ;
 ;     -- normal mode                          ; 122                   ; 0                              ;
@@ -292,7 +292,7 @@ The pin-out file can be found in C:/_Dev/cpen312/lab2/output_files/lab2.pin.
 ;     -- Dedicated logic registers            ; 34 / 49760 ( < 1 % )  ; 0 / 49760 ( 0 % )              ;
 ;     -- I/O registers                        ; 0                     ; 0                              ;
 ;                                             ;                       ;                                ;
-; Total LABs:  partially or completely used   ; 32 / 3110 ( 1 % )     ; 0 / 3110 ( 0 % )               ;
+; Total LABs:  partially or completely used   ; 24 / 3110 ( < 1 % )   ; 0 / 3110 ( 0 % )               ;
 ;                                             ;                       ;                                ;
 ; Virtual pins                                ; 0                     ; 0                              ;
 ; I/O pins                                    ; 64                    ; 0                              ;
@@ -1018,15 +1018,15 @@ Note: Pin directions (input, output or bidir) are based on device operating in u
 +-------------------------------------------------+-------------+---------------------------+---------------+-------------+------+------------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+------------+-------------------------------------------------------------------------+-----------------+--------------+
 ; Compilation Hierarchy Node                      ; Logic Cells ; Dedicated Logic Registers ; I/O Registers ; Memory Bits ; M9Ks ; UFM Blocks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; ADC blocks ; Full Hierarchy Name                                                     ; Entity Name     ; Library Name ;
 +-------------------------------------------------+-------------+---------------------------+---------------+-------------+------+------------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+------------+-------------------------------------------------------------------------+-----------------+--------------+
-; |lab2                                           ; 183 (49)    ; 34 (34)                   ; 0 (0)         ; 0           ; 0    ; 1          ; 0            ; 0       ; 0         ; 64   ; 0            ; 149 (15)     ; 28 (28)           ; 6 (0)            ; 0          ; |lab2                                                                   ; lab2            ; work         ;
+; |lab2                                           ; 184 (45)    ; 34 (34)                   ; 0 (0)         ; 0           ; 0    ; 1          ; 0            ; 0       ; 0         ; 64   ; 0            ; 150 (14)     ; 29 (29)           ; 5 (1)            ; 0          ; |lab2                                                                   ; lab2            ; work         ;
 ;    |bcd_addsub_8bit:u_bcd_bcd_addsub_8bit_8bit| ; 25 (0)      ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 25 (0)       ; 0 (0)             ; 0 (0)            ; 0          ; |lab2|bcd_addsub_8bit:u_bcd_bcd_addsub_8bit_8bit                        ; bcd_addsub_8bit ; work         ;
 ;       |bcd_addsub:u_bcd_lower|                  ; 13 (13)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 13 (13)      ; 0 (0)             ; 0 (0)            ; 0          ; |lab2|bcd_addsub_8bit:u_bcd_bcd_addsub_8bit_8bit|bcd_addsub:u_bcd_lower ; bcd_addsub      ; work         ;
 ;       |bcd_addsub:u_bcd_upper|                  ; 12 (12)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 12 (12)      ; 0 (0)             ; 0 (0)            ; 0          ; |lab2|bcd_addsub_8bit:u_bcd_bcd_addsub_8bit_8bit|bcd_addsub:u_bcd_upper ; bcd_addsub      ; work         ;
-;    |binary_adder:u_adder|                       ; 45 (45)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 45 (45)      ; 0 (0)             ; 0 (0)            ; 0          ; |lab2|binary_adder:u_adder                                              ; binary_adder    ; work         ;
+;    |binary_adder:u_adder|                       ; 45 (45)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 41 (41)      ; 0 (0)             ; 4 (4)            ; 0          ; |lab2|binary_adder:u_adder                                              ; binary_adder    ; work         ;
 ;    |disp7seg:u_disp_7seg_0|                     ; 7 (7)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 7 (7)        ; 0 (0)             ; 0 (0)            ; 0          ; |lab2|disp7seg:u_disp_7seg_0                                            ; disp7seg        ; work         ;
 ;    |disp7seg:u_disp_7seg_1|                     ; 7 (7)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 7 (7)        ; 0 (0)             ; 0 (0)            ; 0          ; |lab2|disp7seg:u_disp_7seg_1                                            ; disp7seg        ; work         ;
-;    |disp7seg:u_disp_7seg_2|                     ; 14 (14)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 11 (11)      ; 0 (0)             ; 3 (3)            ; 0          ; |lab2|disp7seg:u_disp_7seg_2                                            ; disp7seg        ; work         ;
-;    |disp7seg:u_disp_7seg_3|                     ; 14 (14)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 11 (11)      ; 0 (0)             ; 3 (3)            ; 0          ; |lab2|disp7seg:u_disp_7seg_3                                            ; disp7seg        ; work         ;
+;    |disp7seg:u_disp_7seg_2|                     ; 14 (14)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 14 (14)      ; 0 (0)             ; 0 (0)            ; 0          ; |lab2|disp7seg:u_disp_7seg_2                                            ; disp7seg        ; work         ;
+;    |disp7seg:u_disp_7seg_3|                     ; 14 (14)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 14 (14)      ; 0 (0)             ; 0 (0)            ; 0          ; |lab2|disp7seg:u_disp_7seg_3                                            ; disp7seg        ; work         ;
 ;    |disp7seg:u_disp_7seg_4|                     ; 14 (14)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 14 (14)      ; 0 (0)             ; 0 (0)            ; 0          ; |lab2|disp7seg:u_disp_7seg_4                                            ; disp7seg        ; work         ;
 ;    |disp7seg:u_disp_7seg_5|                     ; 14 (14)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 14 (14)      ; 0 (0)             ; 0 (0)            ; 0          ; |lab2|disp7seg:u_disp_7seg_5                                            ; disp7seg        ; work         ;
 +-------------------------------------------------+-------------+---------------------------+---------------+-------------+------+------------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+------------+-------------------------------------------------------------------------+-----------------+--------------+
@@ -1090,17 +1090,17 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; disp_7seg_5[4] ; Output   ; --            ; --            ; --                    ; --  ; --   ;
 ; disp_7seg_5[5] ; Output   ; --            ; --            ; --                    ; --  ; --   ;
 ; disp_7seg_5[6] ; Output   ; --            ; --            ; --                    ; --  ; --   ;
-; SW[8]          ; Input    ; (6) 868 ps    ; --            ; --                    ; --  ; --   ;
-; SW[9]          ; Input    ; (6) 868 ps    ; --            ; --                    ; --  ; --   ;
+; SW[8]          ; Input    ; --            ; (6) 868 ps    ; --                    ; --  ; --   ;
+; SW[9]          ; Input    ; --            ; (6) 868 ps    ; --                    ; --  ; --   ;
 ; SW[0]          ; Input    ; (6) 868 ps    ; --            ; --                    ; --  ; --   ;
-; KEY[1]         ; Input    ; (0) 0 ps      ; (0) 0 ps      ; --                    ; --  ; --   ;
+; KEY[1]         ; Input    ; --            ; (0) 0 ps      ; --                    ; --  ; --   ;
 ; KEY[0]         ; Input    ; --            ; (0) 0 ps      ; --                    ; --  ; --   ;
 ; SW[7]          ; Input    ; (6) 868 ps    ; --            ; --                    ; --  ; --   ;
 ; SW[6]          ; Input    ; (6) 868 ps    ; --            ; --                    ; --  ; --   ;
-; SW[5]          ; Input    ; (6) 868 ps    ; --            ; --                    ; --  ; --   ;
+; SW[5]          ; Input    ; --            ; (6) 868 ps    ; --                    ; --  ; --   ;
 ; SW[4]          ; Input    ; (6) 868 ps    ; --            ; --                    ; --  ; --   ;
 ; SW[3]          ; Input    ; (6) 868 ps    ; --            ; --                    ; --  ; --   ;
-; SW[2]          ; Input    ; (6) 868 ps    ; --            ; --                    ; --  ; --   ;
+; SW[2]          ; Input    ; --            ; (6) 868 ps    ; --                    ; --  ; --   ;
 ; SW[1]          ; Input    ; (6) 868 ps    ; --            ; --                    ; --  ; --   ;
 +----------------+----------+---------------+---------------+-----------------------+-----+------+
 
@@ -1111,131 +1111,131 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Source Pin / Fanout                                                                  ; Pad To Core Index ; Setting ;
 +--------------------------------------------------------------------------------------+-------------------+---------+
 ; SW[8]                                                                                ;                   ;         ;
-;      - bin_b[0]                                                                      ; 0                 ; 6       ;
-;      - bin_a[0]                                                                      ; 0                 ; 6       ;
-;      - bin_a[7]                                                                      ; 0                 ; 6       ;
-;      - bin_b[7]                                                                      ; 0                 ; 6       ;
-;      - bin_a[6]                                                                      ; 0                 ; 6       ;
-;      - bin_b[6]                                                                      ; 0                 ; 6       ;
-;      - bin_a[5]                                                                      ; 0                 ; 6       ;
-;      - bin_b[5]                                                                      ; 0                 ; 6       ;
-;      - bin_a[4]                                                                      ; 0                 ; 6       ;
-;      - bin_b[4]                                                                      ; 0                 ; 6       ;
-;      - bin_a[3]                                                                      ; 0                 ; 6       ;
-;      - bin_b[3]                                                                      ; 0                 ; 6       ;
-;      - bin_a[2]                                                                      ; 0                 ; 6       ;
-;      - bin_b[2]                                                                      ; 0                 ; 6       ;
-;      - bin_a[1]                                                                      ; 0                 ; 6       ;
-;      - bin_b[1]                                                                      ; 0                 ; 6       ;
-;      - binary_adder:u_adder|Add0~3                                                   ; 0                 ; 6       ;
-;      - binary_adder:u_adder|Add0~7                                                   ; 0                 ; 6       ;
-;      - binary_adder:u_adder|Add0~11                                                  ; 0                 ; 6       ;
-;      - bcd_b[7]                                                                      ; 0                 ; 6       ;
-;      - bcd_b[5]                                                                      ; 0                 ; 6       ;
-;      - bcd_b[6]                                                                      ; 0                 ; 6       ;
-;      - bcd_a[7]                                                                      ; 0                 ; 6       ;
-;      - bcd_a[6]                                                                      ; 0                 ; 6       ;
-;      - bcd_a[5]                                                                      ; 0                 ; 6       ;
-;      - bcd_b[4]                                                                      ; 0                 ; 6       ;
-;      - bcd_a[4]                                                                      ; 0                 ; 6       ;
-;      - bcd_b[3]                                                                      ; 0                 ; 6       ;
-;      - bcd_b[1]                                                                      ; 0                 ; 6       ;
-;      - bcd_b[2]                                                                      ; 0                 ; 6       ;
-;      - bcd_a[3]                                                                      ; 0                 ; 6       ;
-;      - bcd_a[2]                                                                      ; 0                 ; 6       ;
-;      - bcd_a[1]                                                                      ; 0                 ; 6       ;
-;      - bcd_b[0]                                                                      ; 0                 ; 6       ;
-;      - bcd_a[0]                                                                      ; 0                 ; 6       ;
-;      - binary_adder:u_adder|Add0~15                                                  ; 0                 ; 6       ;
-;      - bcd_input_a_overflow                                                          ; 0                 ; 6       ;
-;      - bcd_input_b_overflow                                                          ; 0                 ; 6       ;
-;      - binary_adder:u_adder|Add0~16                                                  ; 0                 ; 6       ;
-;      - binary_adder:u_adder|Add0~20                                                  ; 0                 ; 6       ;
-;      - binary_adder:u_adder|Add0~24                                                  ; 0                 ; 6       ;
-;      - binary_adder:u_adder|Add0~28                                                  ; 0                 ; 6       ;
-;      - binary_adder:u_adder|Add0~32                                                  ; 0                 ; 6       ;
-;      - binary_adder:u_adder|Add0~36                                                  ; 0                 ; 6       ;
-;      - disp_7seg_0_value[0]~0                                                        ; 0                 ; 6       ;
-;      - disp_7seg_0_value[1]~1                                                        ; 0                 ; 6       ;
-;      - disp_7seg_0_value[2]~2                                                        ; 0                 ; 6       ;
-;      - disp_7seg_0_value[2]~3                                                        ; 0                 ; 6       ;
-;      - disp_7seg_0_value[3]~5                                                        ; 0                 ; 6       ;
-;      - disp_7seg_1_value[0]~0                                                        ; 0                 ; 6       ;
-;      - disp_7seg_1_value[1]~1                                                        ; 0                 ; 6       ;
-;      - disp_7seg_1_value[2]~2                                                        ; 0                 ; 6       ;
-;      - disp_7seg_1_value[2]~3                                                        ; 0                 ; 6       ;
-;      - disp_7seg_1_value[3]~5                                                        ; 0                 ; 6       ;
-;      - disp7seg:u_disp_7seg_2|Mux6~3                                                 ; 0                 ; 6       ;
-;      - disp7seg:u_disp_7seg_2|Mux5~3                                                 ; 0                 ; 6       ;
-;      - disp7seg:u_disp_7seg_2|Mux4~3                                                 ; 0                 ; 6       ;
-;      - disp7seg:u_disp_7seg_2|Mux3~3                                                 ; 0                 ; 6       ;
-;      - disp7seg:u_disp_7seg_2|Mux2~3                                                 ; 0                 ; 6       ;
-;      - disp7seg:u_disp_7seg_2|Mux1~3                                                 ; 0                 ; 6       ;
-;      - disp7seg:u_disp_7seg_2|Mux0~3                                                 ; 0                 ; 6       ;
-;      - disp7seg:u_disp_7seg_3|Mux6~3                                                 ; 0                 ; 6       ;
-;      - disp7seg:u_disp_7seg_3|Mux5~3                                                 ; 0                 ; 6       ;
-;      - disp7seg:u_disp_7seg_3|Mux4~3                                                 ; 0                 ; 6       ;
-;      - disp7seg:u_disp_7seg_3|Mux3~3                                                 ; 0                 ; 6       ;
-;      - disp7seg:u_disp_7seg_3|Mux2~3                                                 ; 0                 ; 6       ;
-;      - disp7seg:u_disp_7seg_3|Mux1~3                                                 ; 0                 ; 6       ;
-;      - disp7seg:u_disp_7seg_3|Mux0~3                                                 ; 0                 ; 6       ;
-;      - disp7seg:u_disp_7seg_4|Mux6~3                                                 ; 0                 ; 6       ;
-;      - disp7seg:u_disp_7seg_4|Mux5~3                                                 ; 0                 ; 6       ;
-;      - disp7seg:u_disp_7seg_4|Mux4~3                                                 ; 0                 ; 6       ;
-;      - disp7seg:u_disp_7seg_4|Mux3~3                                                 ; 0                 ; 6       ;
-;      - disp7seg:u_disp_7seg_4|Mux2~3                                                 ; 0                 ; 6       ;
-;      - disp7seg:u_disp_7seg_4|Mux1~3                                                 ; 0                 ; 6       ;
-;      - disp7seg:u_disp_7seg_4|Mux0~3                                                 ; 0                 ; 6       ;
-;      - disp7seg:u_disp_7seg_5|Mux6~3                                                 ; 0                 ; 6       ;
-;      - disp7seg:u_disp_7seg_5|Mux5~3                                                 ; 0                 ; 6       ;
-;      - disp7seg:u_disp_7seg_5|Mux4~3                                                 ; 0                 ; 6       ;
-;      - disp7seg:u_disp_7seg_5|Mux3~3                                                 ; 0                 ; 6       ;
-;      - disp7seg:u_disp_7seg_5|Mux2~3                                                 ; 0                 ; 6       ;
-;      - disp7seg:u_disp_7seg_5|Mux1~3                                                 ; 0                 ; 6       ;
-;      - disp7seg:u_disp_7seg_5|Mux0~3                                                 ; 0                 ; 6       ;
+;      - bin_b[0]                                                                      ; 1                 ; 6       ;
+;      - bin_a[0]                                                                      ; 1                 ; 6       ;
+;      - bin_a[7]                                                                      ; 1                 ; 6       ;
+;      - bin_b[7]                                                                      ; 1                 ; 6       ;
+;      - bin_a[6]                                                                      ; 1                 ; 6       ;
+;      - bin_b[6]                                                                      ; 1                 ; 6       ;
+;      - bin_a[5]                                                                      ; 1                 ; 6       ;
+;      - bin_b[5]                                                                      ; 1                 ; 6       ;
+;      - bin_a[4]                                                                      ; 1                 ; 6       ;
+;      - bin_b[4]                                                                      ; 1                 ; 6       ;
+;      - bin_a[3]                                                                      ; 1                 ; 6       ;
+;      - bin_b[3]                                                                      ; 1                 ; 6       ;
+;      - bin_a[2]                                                                      ; 1                 ; 6       ;
+;      - bin_b[2]                                                                      ; 1                 ; 6       ;
+;      - bin_a[1]                                                                      ; 1                 ; 6       ;
+;      - bin_b[1]                                                                      ; 1                 ; 6       ;
+;      - binary_adder:u_adder|Add0~3                                                   ; 1                 ; 6       ;
+;      - binary_adder:u_adder|Add0~7                                                   ; 1                 ; 6       ;
+;      - binary_adder:u_adder|Add0~11                                                  ; 1                 ; 6       ;
+;      - bcd_b[7]                                                                      ; 1                 ; 6       ;
+;      - bcd_b[5]                                                                      ; 1                 ; 6       ;
+;      - bcd_b[6]                                                                      ; 1                 ; 6       ;
+;      - bcd_a[7]                                                                      ; 1                 ; 6       ;
+;      - bcd_a[6]                                                                      ; 1                 ; 6       ;
+;      - bcd_a[5]                                                                      ; 1                 ; 6       ;
+;      - bcd_b[4]                                                                      ; 1                 ; 6       ;
+;      - bcd_a[4]                                                                      ; 1                 ; 6       ;
+;      - bcd_b[3]                                                                      ; 1                 ; 6       ;
+;      - bcd_b[1]                                                                      ; 1                 ; 6       ;
+;      - bcd_b[2]                                                                      ; 1                 ; 6       ;
+;      - bcd_a[3]                                                                      ; 1                 ; 6       ;
+;      - bcd_a[2]                                                                      ; 1                 ; 6       ;
+;      - bcd_a[1]                                                                      ; 1                 ; 6       ;
+;      - bcd_b[0]                                                                      ; 1                 ; 6       ;
+;      - bcd_a[0]                                                                      ; 1                 ; 6       ;
+;      - binary_adder:u_adder|Add0~15                                                  ; 1                 ; 6       ;
+;      - bcd_input_a_overflow                                                          ; 1                 ; 6       ;
+;      - bcd_input_b_overflow                                                          ; 1                 ; 6       ;
+;      - binary_adder:u_adder|Add0~16                                                  ; 1                 ; 6       ;
+;      - binary_adder:u_adder|Add0~20                                                  ; 1                 ; 6       ;
+;      - binary_adder:u_adder|Add0~24                                                  ; 1                 ; 6       ;
+;      - binary_adder:u_adder|Add0~28                                                  ; 1                 ; 6       ;
+;      - binary_adder:u_adder|Add0~32                                                  ; 1                 ; 6       ;
+;      - binary_adder:u_adder|Add0~36                                                  ; 1                 ; 6       ;
+;      - disp_7seg_0_value[0]~0                                                        ; 1                 ; 6       ;
+;      - disp_7seg_0_value[1]~1                                                        ; 1                 ; 6       ;
+;      - disp_7seg_0_value[2]~2                                                        ; 1                 ; 6       ;
+;      - disp_7seg_0_value[2]~3                                                        ; 1                 ; 6       ;
+;      - disp_7seg_0_value[3]~5                                                        ; 1                 ; 6       ;
+;      - disp_7seg_1_value[0]~0                                                        ; 1                 ; 6       ;
+;      - disp_7seg_1_value[1]~1                                                        ; 1                 ; 6       ;
+;      - disp_7seg_1_value[2]~2                                                        ; 1                 ; 6       ;
+;      - disp_7seg_1_value[2]~3                                                        ; 1                 ; 6       ;
+;      - disp_7seg_1_value[3]~5                                                        ; 1                 ; 6       ;
+;      - disp7seg:u_disp_7seg_2|Mux6~3                                                 ; 1                 ; 6       ;
+;      - disp7seg:u_disp_7seg_2|Mux5~3                                                 ; 1                 ; 6       ;
+;      - disp7seg:u_disp_7seg_2|Mux4~3                                                 ; 1                 ; 6       ;
+;      - disp7seg:u_disp_7seg_2|Mux3~3                                                 ; 1                 ; 6       ;
+;      - disp7seg:u_disp_7seg_2|Mux2~3                                                 ; 1                 ; 6       ;
+;      - disp7seg:u_disp_7seg_2|Mux1~3                                                 ; 1                 ; 6       ;
+;      - disp7seg:u_disp_7seg_2|Mux0~3                                                 ; 1                 ; 6       ;
+;      - disp7seg:u_disp_7seg_3|Mux6~3                                                 ; 1                 ; 6       ;
+;      - disp7seg:u_disp_7seg_3|Mux5~3                                                 ; 1                 ; 6       ;
+;      - disp7seg:u_disp_7seg_3|Mux4~3                                                 ; 1                 ; 6       ;
+;      - disp7seg:u_disp_7seg_3|Mux3~3                                                 ; 1                 ; 6       ;
+;      - disp7seg:u_disp_7seg_3|Mux2~3                                                 ; 1                 ; 6       ;
+;      - disp7seg:u_disp_7seg_3|Mux1~3                                                 ; 1                 ; 6       ;
+;      - disp7seg:u_disp_7seg_3|Mux0~3                                                 ; 1                 ; 6       ;
+;      - disp7seg:u_disp_7seg_4|Mux6~3                                                 ; 1                 ; 6       ;
+;      - disp7seg:u_disp_7seg_4|Mux5~3                                                 ; 1                 ; 6       ;
+;      - disp7seg:u_disp_7seg_4|Mux4~3                                                 ; 1                 ; 6       ;
+;      - disp7seg:u_disp_7seg_4|Mux3~3                                                 ; 1                 ; 6       ;
+;      - disp7seg:u_disp_7seg_4|Mux2~3                                                 ; 1                 ; 6       ;
+;      - disp7seg:u_disp_7seg_4|Mux1~3                                                 ; 1                 ; 6       ;
+;      - disp7seg:u_disp_7seg_4|Mux0~3                                                 ; 1                 ; 6       ;
+;      - disp7seg:u_disp_7seg_5|Mux6~3                                                 ; 1                 ; 6       ;
+;      - disp7seg:u_disp_7seg_5|Mux5~3                                                 ; 1                 ; 6       ;
+;      - disp7seg:u_disp_7seg_5|Mux4~3                                                 ; 1                 ; 6       ;
+;      - disp7seg:u_disp_7seg_5|Mux3~3                                                 ; 1                 ; 6       ;
+;      - disp7seg:u_disp_7seg_5|Mux2~3                                                 ; 1                 ; 6       ;
+;      - disp7seg:u_disp_7seg_5|Mux1~3                                                 ; 1                 ; 6       ;
+;      - disp7seg:u_disp_7seg_5|Mux0~3                                                 ; 1                 ; 6       ;
 ; SW[9]                                                                                ;                   ;         ;
-;      - bcd_addsub_8bit:u_bcd_bcd_addsub_8bit_8bit|bcd_addsub:u_bcd_lower|Add0~1      ; 0                 ; 6       ;
-;      - binary_adder:u_adder|Add0~2                                                   ; 0                 ; 6       ;
-;      - binary_adder:u_adder|Add0~6                                                   ; 0                 ; 6       ;
-;      - binary_adder:u_adder|Add0~10                                                  ; 0                 ; 6       ;
-;      - binary_adder:u_adder|Add0~14                                                  ; 0                 ; 6       ;
-;      - bcd_addsub_8bit:u_bcd_bcd_addsub_8bit_8bit|bcd_addsub:u_bcd_upper|b_temp[3]~0 ; 0                 ; 6       ;
-;      - bcd_addsub_8bit:u_bcd_bcd_addsub_8bit_8bit|bcd_addsub:u_bcd_upper|b_temp[2]~1 ; 0                 ; 6       ;
-;      - bcd_addsub_8bit:u_bcd_bcd_addsub_8bit_8bit|bcd_addsub:u_bcd_upper|b_temp[1]~2 ; 0                 ; 6       ;
-;      - bcd_addsub_8bit:u_bcd_bcd_addsub_8bit_8bit|bcd_addsub:u_bcd_upper|b_temp[0]~3 ; 0                 ; 6       ;
-;      - bcd_addsub_8bit:u_bcd_bcd_addsub_8bit_8bit|bcd_addsub:u_bcd_lower|b_temp[3]~0 ; 0                 ; 6       ;
-;      - bcd_addsub_8bit:u_bcd_bcd_addsub_8bit_8bit|bcd_addsub:u_bcd_lower|b_temp[2]~1 ; 0                 ; 6       ;
-;      - bcd_addsub_8bit:u_bcd_bcd_addsub_8bit_8bit|bcd_addsub:u_bcd_lower|b_temp[1]~2 ; 0                 ; 6       ;
-;      - bcd_addsub_8bit:u_bcd_bcd_addsub_8bit_8bit|bcd_addsub:u_bcd_lower|b_temp[0]~3 ; 0                 ; 6       ;
-;      - binary_adder:u_adder|Add0~15                                                  ; 0                 ; 6       ;
-;      - binary_adder:u_adder|Add0~19                                                  ; 0                 ; 6       ;
-;      - binary_adder:u_adder|Add0~23                                                  ; 0                 ; 6       ;
-;      - binary_adder:u_adder|Add0~27                                                  ; 0                 ; 6       ;
-;      - binary_adder:u_adder|Add0~31                                                  ; 0                 ; 6       ;
-;      - binary_adder:u_adder|Add0~35                                                  ; 0                 ; 6       ;
+;      - bcd_addsub_8bit:u_bcd_bcd_addsub_8bit_8bit|bcd_addsub:u_bcd_lower|Add0~1      ; 1                 ; 6       ;
+;      - binary_adder:u_adder|Add0~2                                                   ; 1                 ; 6       ;
+;      - binary_adder:u_adder|Add0~6                                                   ; 1                 ; 6       ;
+;      - binary_adder:u_adder|Add0~10                                                  ; 1                 ; 6       ;
+;      - binary_adder:u_adder|Add0~14                                                  ; 1                 ; 6       ;
+;      - bcd_addsub_8bit:u_bcd_bcd_addsub_8bit_8bit|bcd_addsub:u_bcd_upper|b_temp[3]~0 ; 1                 ; 6       ;
+;      - bcd_addsub_8bit:u_bcd_bcd_addsub_8bit_8bit|bcd_addsub:u_bcd_upper|b_temp[2]~1 ; 1                 ; 6       ;
+;      - bcd_addsub_8bit:u_bcd_bcd_addsub_8bit_8bit|bcd_addsub:u_bcd_upper|b_temp[1]~2 ; 1                 ; 6       ;
+;      - bcd_addsub_8bit:u_bcd_bcd_addsub_8bit_8bit|bcd_addsub:u_bcd_upper|b_temp[0]~3 ; 1                 ; 6       ;
+;      - bcd_addsub_8bit:u_bcd_bcd_addsub_8bit_8bit|bcd_addsub:u_bcd_lower|b_temp[3]~0 ; 1                 ; 6       ;
+;      - bcd_addsub_8bit:u_bcd_bcd_addsub_8bit_8bit|bcd_addsub:u_bcd_lower|b_temp[2]~1 ; 1                 ; 6       ;
+;      - bcd_addsub_8bit:u_bcd_bcd_addsub_8bit_8bit|bcd_addsub:u_bcd_lower|b_temp[1]~2 ; 1                 ; 6       ;
+;      - bcd_addsub_8bit:u_bcd_bcd_addsub_8bit_8bit|bcd_addsub:u_bcd_lower|b_temp[0]~3 ; 1                 ; 6       ;
+;      - binary_adder:u_adder|Add0~15                                                  ; 1                 ; 6       ;
+;      - binary_adder:u_adder|Add0~19                                                  ; 1                 ; 6       ;
+;      - binary_adder:u_adder|Add0~23                                                  ; 1                 ; 6       ;
+;      - binary_adder:u_adder|Add0~27                                                  ; 1                 ; 6       ;
+;      - binary_adder:u_adder|Add0~31                                                  ; 1                 ; 6       ;
+;      - binary_adder:u_adder|Add0~35                                                  ; 1                 ; 6       ;
 ; SW[0]                                                                                ;                   ;         ;
-;      - bin_a[0]                                                                      ; 0                 ; 6       ;
-;      - bcd_a[0]                                                                      ; 0                 ; 6       ;
-;      - bin_b[0]~feeder                                                               ; 0                 ; 6       ;
 ;      - bcd_b[0]~feeder                                                               ; 0                 ; 6       ;
+;      - bin_b[0]~feeder                                                               ; 0                 ; 6       ;
+;      - bin_a[0]~feeder                                                               ; 0                 ; 6       ;
+;      - bcd_a[0]~feeder                                                               ; 0                 ; 6       ;
 ; KEY[1]                                                                               ;                   ;         ;
 ;      - bin_b[0]                                                                      ; 1                 ; 0       ;
 ;      - bin_b[1]                                                                      ; 1                 ; 0       ;
-;      - bin_b[2]                                                                      ; 0                 ; 0       ;
+;      - bin_b[2]                                                                      ; 1                 ; 0       ;
 ;      - bin_b[3]                                                                      ; 1                 ; 0       ;
-;      - bin_b[4]                                                                      ; 0                 ; 0       ;
-;      - bin_b[5]                                                                      ; 0                 ; 0       ;
+;      - bin_b[4]                                                                      ; 1                 ; 0       ;
+;      - bin_b[5]                                                                      ; 1                 ; 0       ;
 ;      - bin_b[6]                                                                      ; 1                 ; 0       ;
 ;      - bin_b[7]                                                                      ; 1                 ; 0       ;
-;      - bcd_input_b_overflow                                                          ; 0                 ; 0       ;
+;      - bcd_input_b_overflow                                                          ; 1                 ; 0       ;
 ;      - bcd_b[0]                                                                      ; 1                 ; 0       ;
-;      - bcd_b[1]                                                                      ; 0                 ; 0       ;
-;      - bcd_b[2]                                                                      ; 0                 ; 0       ;
-;      - bcd_b[3]                                                                      ; 0                 ; 0       ;
+;      - bcd_b[1]                                                                      ; 1                 ; 0       ;
+;      - bcd_b[2]                                                                      ; 1                 ; 0       ;
+;      - bcd_b[3]                                                                      ; 1                 ; 0       ;
 ;      - bcd_b[4]                                                                      ; 1                 ; 0       ;
-;      - bcd_b[5]                                                                      ; 0                 ; 0       ;
-;      - bcd_b[6]                                                                      ; 0                 ; 0       ;
-;      - bcd_b[7]                                                                      ; 0                 ; 0       ;
+;      - bcd_b[5]                                                                      ; 1                 ; 0       ;
+;      - bcd_b[6]                                                                      ; 1                 ; 0       ;
+;      - bcd_b[7]                                                                      ; 1                 ; 0       ;
 ; KEY[0]                                                                               ;                   ;         ;
 ;      - bin_a[0]                                                                      ; 1                 ; 0       ;
 ;      - bin_a[1]                                                                      ; 1                 ; 0       ;
@@ -1256,45 +1256,45 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ;      - bcd_a[7]                                                                      ; 1                 ; 0       ;
 ; SW[7]                                                                                ;                   ;         ;
 ;      - bcd_b[7]                                                                      ; 0                 ; 6       ;
+;      - bcd_a[7]                                                                      ; 0                 ; 6       ;
 ;      - bin_b[7]                                                                      ; 0                 ; 6       ;
+;      - bin_a[7]                                                                      ; 0                 ; 6       ;
 ;      - process_2~0                                                                   ; 0                 ; 6       ;
-;      - bin_a[7]~feeder                                                               ; 0                 ; 6       ;
-;      - bcd_a[7]~feeder                                                               ; 0                 ; 6       ;
 ; SW[6]                                                                                ;                   ;         ;
 ;      - bcd_b[6]                                                                      ; 0                 ; 6       ;
 ;      - bin_b[6]                                                                      ; 0                 ; 6       ;
-;      - bin_a[6]                                                                      ; 0                 ; 6       ;
 ;      - process_2~0                                                                   ; 0                 ; 6       ;
+;      - bin_a[6]~feeder                                                               ; 0                 ; 6       ;
 ;      - bcd_a[6]~feeder                                                               ; 0                 ; 6       ;
 ; SW[5]                                                                                ;                   ;         ;
-;      - bcd_b[5]                                                                      ; 0                 ; 6       ;
-;      - bin_b[5]                                                                      ; 0                 ; 6       ;
-;      - process_2~0                                                                   ; 0                 ; 6       ;
-;      - bcd_a[5]~feeder                                                               ; 0                 ; 6       ;
-;      - bin_a[5]~feeder                                                               ; 0                 ; 6       ;
+;      - bin_b[5]                                                                      ; 1                 ; 6       ;
+;      - bin_a[5]                                                                      ; 1                 ; 6       ;
+;      - process_2~0                                                                   ; 1                 ; 6       ;
+;      - bcd_a[5]~feeder                                                               ; 1                 ; 6       ;
+;      - bcd_b[5]~feeder                                                               ; 1                 ; 6       ;
 ; SW[4]                                                                                ;                   ;         ;
-;      - bin_b[4]                                                                      ; 0                 ; 6       ;
-;      - bcd_b[4]~feeder                                                               ; 0                 ; 6       ;
-;      - bin_a[4]~feeder                                                               ; 0                 ; 6       ;
+;      - bcd_b[4]                                                                      ; 0                 ; 6       ;
+;      - bin_b[4]~feeder                                                               ; 0                 ; 6       ;
 ;      - bcd_a[4]~feeder                                                               ; 0                 ; 6       ;
+;      - bin_a[4]~feeder                                                               ; 0                 ; 6       ;
 ; SW[3]                                                                                ;                   ;         ;
 ;      - bcd_b[3]                                                                      ; 0                 ; 6       ;
 ;      - bin_b[3]                                                                      ; 0                 ; 6       ;
+;      - bin_a[3]                                                                      ; 0                 ; 6       ;
 ;      - process_2~1                                                                   ; 0                 ; 6       ;
 ;      - bcd_a[3]~feeder                                                               ; 0                 ; 6       ;
-;      - bin_a[3]~feeder                                                               ; 0                 ; 6       ;
 ; SW[2]                                                                                ;                   ;         ;
-;      - bcd_b[2]                                                                      ; 0                 ; 6       ;
-;      - bin_a[2]                                                                      ; 0                 ; 6       ;
-;      - process_2~1                                                                   ; 0                 ; 6       ;
-;      - bin_b[2]~feeder                                                               ; 0                 ; 6       ;
-;      - bcd_a[2]~feeder                                                               ; 0                 ; 6       ;
+;      - bcd_a[2]                                                                      ; 1                 ; 6       ;
+;      - bin_b[2]                                                                      ; 1                 ; 6       ;
+;      - process_2~1                                                                   ; 1                 ; 6       ;
+;      - bcd_b[2]~feeder                                                               ; 1                 ; 6       ;
+;      - bin_a[2]~feeder                                                               ; 1                 ; 6       ;
 ; SW[1]                                                                                ;                   ;         ;
-;      - bcd_b[1]                                                                      ; 0                 ; 6       ;
 ;      - bcd_a[1]                                                                      ; 0                 ; 6       ;
+;      - bin_b[1]                                                                      ; 0                 ; 6       ;
 ;      - bin_a[1]                                                                      ; 0                 ; 6       ;
 ;      - process_2~1                                                                   ; 0                 ; 6       ;
-;      - bin_b[1]~feeder                                                               ; 0                 ; 6       ;
+;      - bcd_b[1]~feeder                                                               ; 0                 ; 6       ;
 +--------------------------------------------------------------------------------------+-------------------+---------+
 
 
@@ -1314,37 +1314,37 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------------------+-------------------------+
 ; Routing Resource Type ; Usage                   ;
 +-----------------------+-------------------------+
-; Block interconnects   ; 271 / 148,641 ( < 1 % ) ;
-; C16 interconnects     ; 21 / 5,382 ( < 1 % )    ;
-; C4 interconnects      ; 155 / 106,704 ( < 1 % ) ;
-; Direct links          ; 12 / 148,641 ( < 1 % )  ;
+; Block interconnects   ; 261 / 148,641 ( < 1 % ) ;
+; C16 interconnects     ; 13 / 5,382 ( < 1 % )    ;
+; C4 interconnects      ; 141 / 106,704 ( < 1 % ) ;
+; Direct links          ; 23 / 148,641 ( < 1 % )  ;
 ; Global clocks         ; 0 / 20 ( 0 % )          ;
-; Local interconnects   ; 51 / 49,760 ( < 1 % )   ;
+; Local interconnects   ; 53 / 49,760 ( < 1 % )   ;
 ; NSLEEPs               ; 0 / 500 ( 0 % )         ;
-; R24 interconnects     ; 29 / 5,406 ( < 1 % )    ;
-; R4 interconnects      ; 279 / 147,764 ( < 1 % ) ;
+; R24 interconnects     ; 24 / 5,406 ( < 1 % )    ;
+; R4 interconnects      ; 269 / 147,764 ( < 1 % ) ;
 +-----------------------+-------------------------+
 
 
 +---------------------------------------------------------------------------+
 ; LAB Logic Elements                                                        ;
 +--------------------------------------------+------------------------------+
-; Number of Logic Elements  (Average = 5.72) ; Number of LABs  (Total = 32) ;
+; Number of Logic Elements  (Average = 7.67) ; Number of LABs  (Total = 24) ;
 +--------------------------------------------+------------------------------+
-; 1                                          ; 7                            ;
-; 2                                          ; 8                            ;
-; 3                                          ; 1                            ;
-; 4                                          ; 2                            ;
-; 5                                          ; 2                            ;
-; 6                                          ; 0                            ;
-; 7                                          ; 3                            ;
-; 8                                          ; 1                            ;
+; 1                                          ; 3                            ;
+; 2                                          ; 4                            ;
+; 3                                          ; 2                            ;
+; 4                                          ; 1                            ;
+; 5                                          ; 0                            ;
+; 6                                          ; 1                            ;
+; 7                                          ; 2                            ;
+; 8                                          ; 2                            ;
 ; 9                                          ; 1                            ;
-; 10                                         ; 1                            ;
+; 10                                         ; 0                            ;
 ; 11                                         ; 0                            ;
 ; 12                                         ; 0                            ;
-; 13                                         ; 0                            ;
-; 14                                         ; 2                            ;
+; 13                                         ; 1                            ;
+; 14                                         ; 3                            ;
 ; 15                                         ; 1                            ;
 ; 16                                         ; 3                            ;
 +--------------------------------------------+------------------------------+
@@ -1353,95 +1353,88 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-------------------------------------------------------------------+
 ; LAB-wide Signals                                                  ;
 +------------------------------------+------------------------------+
-; LAB-wide Signals  (Average = 0.72) ; Number of LABs  (Total = 32) ;
+; LAB-wide Signals  (Average = 0.83) ; Number of LABs  (Total = 24) ;
 +------------------------------------+------------------------------+
-; 1 Clock                            ; 12                           ;
-; 1 Clock enable                     ; 11                           ;
+; 1 Clock                            ; 10                           ;
+; 1 Clock enable                     ; 10                           ;
 +------------------------------------+------------------------------+
 
 
 +----------------------------------------------------------------------------+
 ; LAB Signals Sourced                                                        ;
 +---------------------------------------------+------------------------------+
-; Number of Signals Sourced  (Average = 6.09) ; Number of LABs  (Total = 32) ;
+; Number of Signals Sourced  (Average = 8.12) ; Number of LABs  (Total = 24) ;
 +---------------------------------------------+------------------------------+
 ; 0                                           ; 0                            ;
-; 1                                           ; 7                            ;
-; 2                                           ; 5                            ;
+; 1                                           ; 2                            ;
+; 2                                           ; 1                            ;
 ; 3                                           ; 2                            ;
-; 4                                           ; 3                            ;
-; 5                                           ; 2                            ;
-; 6                                           ; 1                            ;
-; 7                                           ; 3                            ;
-; 8                                           ; 1                            ;
-; 9                                           ; 2                            ;
+; 4                                           ; 4                            ;
+; 5                                           ; 1                            ;
+; 6                                           ; 0                            ;
+; 7                                           ; 2                            ;
+; 8                                           ; 2                            ;
+; 9                                           ; 1                            ;
 ; 10                                          ; 0                            ;
-; 11                                          ; 0                            ;
-; 12                                          ; 0                            ;
+; 11                                          ; 2                            ;
+; 12                                          ; 1                            ;
 ; 13                                          ; 0                            ;
 ; 14                                          ; 2                            ;
 ; 15                                          ; 1                            ;
-; 16                                          ; 1                            ;
-; 17                                          ; 0                            ;
-; 18                                          ; 0                            ;
-; 19                                          ; 2                            ;
+; 16                                          ; 3                            ;
 +---------------------------------------------+------------------------------+
 
 
 +--------------------------------------------------------------------------------+
 ; LAB Signals Sourced Out                                                        ;
 +-------------------------------------------------+------------------------------+
-; Number of Signals Sourced Out  (Average = 4.12) ; Number of LABs  (Total = 32) ;
+; Number of Signals Sourced Out  (Average = 5.62) ; Number of LABs  (Total = 24) ;
 +-------------------------------------------------+------------------------------+
 ; 0                                               ; 0                            ;
-; 1                                               ; 8                            ;
-; 2                                               ; 8                            ;
-; 3                                               ; 2                            ;
-; 4                                               ; 2                            ;
-; 5                                               ; 3                            ;
-; 6                                               ; 0                            ;
+; 1                                               ; 3                            ;
+; 2                                               ; 3                            ;
+; 3                                               ; 3                            ;
+; 4                                               ; 1                            ;
+; 5                                               ; 1                            ;
+; 6                                               ; 1                            ;
 ; 7                                               ; 5                            ;
-; 8                                               ; 0                            ;
+; 8                                               ; 1                            ;
 ; 9                                               ; 2                            ;
-; 10                                              ; 0                            ;
-; 11                                              ; 0                            ;
-; 12                                              ; 1                            ;
-; 13                                              ; 0                            ;
-; 14                                              ; 1                            ;
+; 10                                              ; 3                            ;
+; 11                                              ; 1                            ;
 +-------------------------------------------------+------------------------------+
 
 
 +----------------------------------------------------------------------------+
 ; LAB Distinct Inputs                                                        ;
 +---------------------------------------------+------------------------------+
-; Number of Distinct Inputs  (Average = 6.44) ; Number of LABs  (Total = 32) ;
+; Number of Distinct Inputs  (Average = 8.21) ; Number of LABs  (Total = 24) ;
 +---------------------------------------------+------------------------------+
 ; 0                                           ; 0                            ;
 ; 1                                           ; 0                            ;
-; 2                                           ; 3                            ;
-; 3                                           ; 7                            ;
-; 4                                           ; 7                            ;
-; 5                                           ; 2                            ;
+; 2                                           ; 0                            ;
+; 3                                           ; 3                            ;
+; 4                                           ; 4                            ;
+; 5                                           ; 3                            ;
 ; 6                                           ; 3                            ;
-; 7                                           ; 1                            ;
-; 8                                           ; 1                            ;
+; 7                                           ; 3                            ;
+; 8                                           ; 0                            ;
 ; 9                                           ; 0                            ;
-; 10                                          ; 1                            ;
+; 10                                          ; 0                            ;
 ; 11                                          ; 1                            ;
 ; 12                                          ; 2                            ;
 ; 13                                          ; 0                            ;
 ; 14                                          ; 0                            ;
-; 15                                          ; 0                            ;
-; 16                                          ; 1                            ;
+; 15                                          ; 1                            ;
+; 16                                          ; 0                            ;
 ; 17                                          ; 0                            ;
 ; 18                                          ; 0                            ;
 ; 19                                          ; 0                            ;
-; 20                                          ; 0                            ;
+; 20                                          ; 1                            ;
 ; 21                                          ; 0                            ;
-; 22                                          ; 1                            ;
+; 22                                          ; 0                            ;
 ; 23                                          ; 0                            ;
-; 24                                          ; 0                            ;
-; 25                                          ; 1                            ;
+; 24                                          ; 2                            ;
 +---------------------------------------------+------------------------------+
 
 
@@ -1614,7 +1607,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Fitter Messages ;
 +-----------------+
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
-Info (20030): Parallel compilation is enabled and will use 16 of the 16 processors detected
+Info (20030): Parallel compilation is enabled and will use 6 of the 6 processors detected
 Info (119006): Selected device 10M50DAF484C7G for design "lab2"
 Info (21077): Low junction temperature is 0 degrees C
 Info (21077): High junction temperature is 85 degrees C
@@ -1669,7 +1662,7 @@ Info (170199): The Fitter performed an Auto Fit compilation.  Optimizations were
     Info (170201): Optimizations that may affect the design's routability were skipped
     Info (170200): Optimizations that may affect the design's timing were skipped
 Info (170194): Fitter routing operations ending: elapsed time is 00:00:00
-Info (11888): Total time spent on timing analysis during the Fitter is 0.07 seconds.
+Info (11888): Total time spent on timing analysis during the Fitter is 0.09 seconds.
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
 Info (334003): Started post-fitting delay annotation
@@ -1677,19 +1670,19 @@ Info (334004): Delay annotation completed successfully
 Info (11218): Fitter post-fit operations ending: elapsed time is 00:00:01
 Warning (171167): Found invalid Fitter assignments. See the Ignored Assignments panel in the Fitter Compilation Report for more information.
 Warning (169177): 2 pins must meet Intel FPGA requirements for 3.3-, 3.0-, and 2.5-V interfaces. For more information, refer to AN 447: Interfacing MAX 10 Devices with 3.3/3.0/2.5-V LVTTL/LVCMOS I/O Systems.
-    Info (169178): Pin KEY[1] uses I/O standard 2.5 V Schmitt Trigger at A7 File: C:/_Dev/cpen312/lab2/lab2.vhd Line: 12
-    Info (169178): Pin KEY[0] uses I/O standard 2.5 V Schmitt Trigger at B8 File: C:/_Dev/cpen312/lab2/lab2.vhd Line: 12
-Info (144001): Generated suppressed messages file C:/_Dev/cpen312/lab2/output_files/lab2.fit.smsg
+    Info (169178): Pin KEY[1] uses I/O standard 2.5 V Schmitt Trigger at A7 File: C:/Users/Chris/Documents/Git/cpen312/lab2/lab2.vhd Line: 12
+    Info (169178): Pin KEY[0] uses I/O standard 2.5 V Schmitt Trigger at B8 File: C:/Users/Chris/Documents/Git/cpen312/lab2/lab2.vhd Line: 12
+Info (144001): Generated suppressed messages file C:/Users/Chris/Documents/Git/cpen312/lab2/output_files/lab2.fit.smsg
 Info: Quartus Prime Fitter was successful. 0 errors, 5 warnings
-    Info: Peak virtual memory: 6625 megabytes
-    Info: Processing ended: Mon Feb  9 00:10:19 2026
+    Info: Peak virtual memory: 5779 megabytes
+    Info: Processing ended: Mon Feb  9 15:14:24 2026
     Info: Elapsed time: 00:00:07
-    Info: Total CPU time (on all processors): 00:00:11
+    Info: Total CPU time (on all processors): 00:00:10
 
 
 +----------------------------+
 ; Fitter Suppressed Messages ;
 +----------------------------+
-The suppressed messages can be found in C:/_Dev/cpen312/lab2/output_files/lab2.fit.smsg.
+The suppressed messages can be found in C:/Users/Chris/Documents/Git/cpen312/lab2/output_files/lab2.fit.smsg.
 
 

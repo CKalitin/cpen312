@@ -4,7 +4,7 @@ JedecChain;
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(10M50DAF484) Path("C:/_Dev/cpen312/lab2/output_files/") File("output_file.pof") MfrSpec(OpMask(1) Child_OpMask(2 1 1));
+		Device PartName(10M50DAF484) Path("C:/Users/Chris/Documents/Git/cpen312/lab2/output_files/") File("lab2.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 
