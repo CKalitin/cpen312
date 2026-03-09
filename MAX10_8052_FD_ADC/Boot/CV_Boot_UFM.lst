@@ -1,0 +1,1847 @@
+0000              1   ;--------------------------------------------------------
+0000              2   ; File Created by C51
+0000              3   ; Version 1.0.0 #1170 (Feb 16 2022) (MSVC)
+0000              4   ; This file was generated Tue Mar 03 21:58:59 2026
+0000              5   ;--------------------------------------------------------
+                  5   $name CV_Boot_UFM
+                  6   $optc51 --model-small
+0000              8            R_DSEG    segment data
+0000              9            R_CSEG    segment code
+0000             10            R_BSEG    segment bit
+0000             11            R_XSEG    segment xdata
+0000             12            R_PSEG    segment xdata
+0000             13            R_ISEG    segment idata
+0000             14            R_OSEG    segment data overlay
+0000             15            BIT_BANK  segment data overlay
+0000             16            R_HOME    segment code
+0000             17            R_GSINIT  segment code
+0000             18            R_IXSEG   segment xdata
+0000             19            R_CONST   segment code
+0000             20            R_XINIT   segment code
+0000             21            R_DINIT   segment code
+0000             22   
+0000             23   ;--------------------------------------------------------
+0000             24   ; Public variables in this module
+0000             25   ;--------------------------------------------------------
+0000             26            public _Write_XRAM_PARM_2
+0000             27            public _Write_UFM_control_PARM_2
+0000             28            public _seven_seg
+0000             29            public _hexval
+0000             30            public _dummy_switch
+0000             31            public _main
+0000             32            public _Manual_Load
+0000             33            public _delay
+0000             34            public _OutWord
+0000             35            public _OutByte
+0000             36            public _str2hex
+0000             37            public _loadintelhex
+0000             38            public _Copy_XRAM_to_UFM
+0000             39            public _Load_Ram_Fast_and_Run_Debugger
+0000             40            public _Load_Ram_Fast_and_Run
+0000             41            public _Copy_Flash_to_XRAM
+0000             42            public _Clear_XRAM
+0000             43            public _Read_XRAM
+0000             44            public _Write_XRAM
+0000             45            public _EraseSector
+0000             46            public _getbyte
+0000             47            public _chartohex
+0000             48            public _sends
+0000             49            public _getchare
+0000             50            public _inituart
+0000             51            public _Write_UFM_control
+0000             52            public _Read_UFM_control
+0000             53            public _de2_8052_crt0
+0000             54            public _getchar_echo
+0000             55            public _buff
+0000             56            public _putchar
+0000             57            public _getchar
+0000             58   ;--------------------------------------------------------
+0000             59   ; Special Function Registers
+0000             60   ;--------------------------------------------------------
+0000             61   _P0             DATA 0x80
+0000             62   _SP             DATA 0x81
+0000             63   _DPL            DATA 0x82
+0000             64   _DPH            DATA 0x83
+0000             65   _PCON           DATA 0x87
+0000             66   _TCON           DATA 0x88
+0000             67   _TMOD           DATA 0x89
+0000             68   _TL0            DATA 0x8a
+0000             69   _TL1            DATA 0x8b
+0000             70   _TH0            DATA 0x8c
+0000             71   _TH1            DATA 0x8d
+0000             72   _P1             DATA 0x90
+0000             73   _SCON           DATA 0x98
+0000             74   _SBUF           DATA 0x99
+0000             75   _P2             DATA 0xa0
+0000             76   _IE             DATA 0xa8
+0000             77   _P3             DATA 0xb0
+0000             78   _IP             DATA 0xb8
+0000             79   _PSW            DATA 0xd0
+0000             80   _ACC            DATA 0xe0
+0000             81   _B              DATA 0xf0
+0000             82   _ADC_C          DATA 0xa1
+0000             83   _ADC_L          DATA 0xa2
+0000             84   _ADC_H          DATA 0xa3
+0000             85   _T2CON          DATA 0xc8
+0000             86   _RCAP2L         DATA 0xca
+0000             87   _RCAP2H         DATA 0xcb
+0000             88   _TL2            DATA 0xcc
+0000             89   _TH2            DATA 0xcd
+0000             90   _DPS            DATA 0x86
+0000             91   _DPH1           DATA 0x85
+0000             92   _DPL1           DATA 0x84
+0000             93   _HEX0           DATA 0x91
+0000             94   _HEX1           DATA 0x92
+0000             95   _HEX2           DATA 0x93
+0000             96   _HEX3           DATA 0x94
+0000             97   _HEX4           DATA 0x8e
+0000             98   _HEX5           DATA 0x8f
+0000             99   _LEDRA          DATA 0xe8
+0000            100   _LEDRB          DATA 0x95
+0000            101   _SWA            DATA 0xe8
+0000            102   _SWB            DATA 0x95
+0000            103   _KEY            DATA 0xf8
+0000            104   _P0MOD          DATA 0x9a
+0000            105   _P1MOD          DATA 0x9b
+0000            106   _P2MOD          DATA 0x9c
+0000            107   _P3MOD          DATA 0x9d
+0000            108   _REP_ADD_L      DATA 0xf1
+0000            109   _REP_ADD_H      DATA 0xf2
+0000            110   _REP_VALUE      DATA 0xf3
+0000            111   _DEBUG_CALL_L   DATA 0xfa
+0000            112   _DEBUG_CALL_H   DATA 0xfb
+0000            113   _BPC            DATA 0xfc
+0000            114   _BPS            DATA 0xfd
+0000            115   _BPAL           DATA 0xfe
+0000            116   _BPAH           DATA 0xff
+0000            117   _LBPAL          DATA 0xfa
+0000            118   _LBPAH          DATA 0xfb
+0000            119   _P4             DATA 0xc0
+0000            120   _P4MOD          DATA 0xc1
+0000            121   _XRAMUSEDAS     DATA 0xc3
+0000            122   _UFM_ADD0       DATA 0xe1
+0000            123   _UFM_ADD1       DATA 0xe2
+0000            124   _UFM_ADD2       DATA 0xe3
+0000            125   _UFM_DATA0      DATA 0xe4
+0000            126   _UFM_DATA1      DATA 0xe5
+0000            127   _UFM_DATA2      DATA 0xe6
+0000            128   _UFM_DATA3      DATA 0xe7
+0000            129   _UFM_CONTROL0   DATA 0xe9
+0000            130   _UFM_CONTROL1   DATA 0xea
+0000            131   _UFM_CONTROL2   DATA 0xeb
+0000            132   _UFM_CONTROL3   DATA 0xec
+0000            133   _UFM_DATA_CMD   DATA 0xed
+0000            134   _UFM_DATA_STATUS DATA 0xee
+0000            135   _UFM_CONTROL_CMD DATA 0xef
+0000            136   ;--------------------------------------------------------
+0000            137   ; special function bits
+0000            138   ;--------------------------------------------------------
+0000            139   _P0_0           BIT 0x80
+0000            140   _P0_1           BIT 0x81
+0000            141   _P0_2           BIT 0x82
+0000            142   _P0_3           BIT 0x83
+0000            143   _P0_4           BIT 0x84
+0000            144   _P0_5           BIT 0x85
+0000            145   _P0_6           BIT 0x86
+0000            146   _P0_7           BIT 0x87
+0000            147   _IT0            BIT 0x88
+0000            148   _IE0            BIT 0x89
+0000            149   _IT1            BIT 0x8a
+0000            150   _IE1            BIT 0x8b
+0000            151   _TR0            BIT 0x8c
+0000            152   _TF0            BIT 0x8d
+0000            153   _TR1            BIT 0x8e
+0000            154   _TF1            BIT 0x8f
+0000            155   _P1_0           BIT 0x90
+0000            156   _P1_1           BIT 0x91
+0000            157   _P1_2           BIT 0x92
+0000            158   _P1_3           BIT 0x93
+0000            159   _P1_4           BIT 0x94
+0000            160   _P1_5           BIT 0x95
+0000            161   _P1_6           BIT 0x96
+0000            162   _P1_7           BIT 0x97
+0000            163   _RI             BIT 0x98
+0000            164   _TI             BIT 0x99
+0000            165   _RB8            BIT 0x9a
+0000            166   _TB8            BIT 0x9b
+0000            167   _REN            BIT 0x9c
+0000            168   _SM2            BIT 0x9d
+0000            169   _SM1            BIT 0x9e
+0000            170   _SM0            BIT 0x9f
+0000            171   _P2_0           BIT 0xa0
+0000            172   _P2_1           BIT 0xa1
+0000            173   _P2_2           BIT 0xa2
+0000            174   _P2_3           BIT 0xa3
+0000            175   _P2_4           BIT 0xa4
+0000            176   _P2_5           BIT 0xa5
+0000            177   _P2_6           BIT 0xa6
+0000            178   _P2_7           BIT 0xa7
+0000            179   _EX0            BIT 0xa8
+0000            180   _ET0            BIT 0xa9
+0000            181   _EX1            BIT 0xaa
+0000            182   _ET1            BIT 0xab
+0000            183   _ES             BIT 0xac
+0000            184   _ET2            BIT 0xad
+0000            185   _EA             BIT 0xaf
+0000            186   _P3_0           BIT 0xb0
+0000            187   _P3_1           BIT 0xb1
+0000            188   _P3_2           BIT 0xb2
+0000            189   _P3_3           BIT 0xb3
+0000            190   _P3_4           BIT 0xb4
+0000            191   _P3_5           BIT 0xb5
+0000            192   _P3_6           BIT 0xb6
+0000            193   _P3_7           BIT 0xb7
+0000            194   _RXD            BIT 0xb0
+0000            195   _TXD            BIT 0xb1
+0000            196   _INT0           BIT 0xb2
+0000            197   _INT1           BIT 0xb3
+0000            198   _T0             BIT 0xb4
+0000            199   _T1             BIT 0xb5
+0000            200   _WR             BIT 0xb6
+0000            201   _RD             BIT 0xb7
+0000            202   _PX0            BIT 0xb8
+0000            203   _PT0            BIT 0xb9
+0000            204   _PX1            BIT 0xba
+0000            205   _PT1            BIT 0xbb
+0000            206   _PS             BIT 0xbc
+0000            207   _PT2            BIT 0xbd
+0000            208   _P              BIT 0xd0
+0000            209   _F1             BIT 0xd1
+0000            210   _OV             BIT 0xd2
+0000            211   _RS0            BIT 0xd3
+0000            212   _RS1            BIT 0xd4
+0000            213   _F0             BIT 0xd5
+0000            214   _AC             BIT 0xd6
+0000            215   _CY             BIT 0xd7
+0000            216   _T2CON_0        BIT 0xc8
+0000            217   _T2CON_1        BIT 0xc9
+0000            218   _T2CON_2        BIT 0xca
+0000            219   _T2CON_3        BIT 0xcb
+0000            220   _T2CON_4        BIT 0xcc
+0000            221   _T2CON_5        BIT 0xcd
+0000            222   _T2CON_6        BIT 0xce
+0000            223   _T2CON_7        BIT 0xcf
+0000            224   _CP_RL2         BIT 0xc8
+0000            225   _C_T2           BIT 0xc9
+0000            226   _TR2            BIT 0xca
+0000            227   _EXEN2          BIT 0xcb
+0000            228   _TCLK           BIT 0xcc
+0000            229   _RCLK           BIT 0xcd
+0000            230   _EXF2           BIT 0xce
+0000            231   _TF2            BIT 0xcf
+0000            232   _LEDRA_0        BIT 0xe8
+0000            233   _LEDRA_1        BIT 0xe9
+0000            234   _LEDRA_2        BIT 0xea
+0000            235   _LEDRA_3        BIT 0xeb
+0000            236   _LEDRA_4        BIT 0xec
+0000            237   _LEDRA_5        BIT 0xed
+0000            238   _LEDRA_6        BIT 0xee
+0000            239   _LEDRA_7        BIT 0xef
+0000            240   _SWA_0          BIT 0xe8
+0000            241   _SWA_1          BIT 0xe9
+0000            242   _SWA_2          BIT 0xea
+0000            243   _SWA_3          BIT 0xeb
+0000            244   _SWA_4          BIT 0xec
+0000            245   _SWA_5          BIT 0xed
+0000            246   _SWA_6          BIT 0xee
+0000            247   _SWA_7          BIT 0xef
+0000            248   _KEY_1          BIT 0xf9
+0000            249   _KEY_2          BIT 0xfa
+0000            250   _KEY_3          BIT 0xfb
+0000            251   _KEY_4          BIT 0xfc
+0000            252   _P4_0           BIT 0xc0
+0000            253   _P4_1           BIT 0xc1
+0000            254   _P4_2           BIT 0xc2
+0000            255   _P4_3           BIT 0xc3
+0000            256   _P4_4           BIT 0xc4
+0000            257   _P4_5           BIT 0xc5
+0000            258   _P4_6           BIT 0xc6
+0000            259   _P4_7           BIT 0xc7
+0000            260   ;--------------------------------------------------------
+0000            261   ; overlayable register banks
+0000            262   ;--------------------------------------------------------
+0000            263            rbank0 segment data overlay
+0000            264   ;--------------------------------------------------------
+0000            265   ; internal ram data
+0000            266   ;--------------------------------------------------------
+0000            267            rseg R_DSEG
+0000            268   _getbyte_j_1_82:
+0000            269            ds 1
+0001            270   _loadintelhex_address_1_100:
+0001            271            ds 2
+0003            272   _loadintelhex_j_1_100:
+0003            273            ds 1
+0004            274   _loadintelhex_k_1_100:
+0004            275            ds 1
+0005            276   _loadintelhex_size_1_100:
+0005            277            ds 1
+0006            278   _loadintelhex_type_1_100:
+0006            279            ds 1
+0007            280   _loadintelhex_checksum_1_100:
+0007            281            ds 1
+0008            282   _loadintelhex_n_1_100:
+0008            283            ds 1
+0009            284   _loadintelhex_echo_1_100:
+0009            285            ds 1
+000A            286   ;--------------------------------------------------------
+000A            287   ; overlayable items in internal ram 
+000A            288   ;--------------------------------------------------------
+0000            289            rseg    R_OSEG
+0000            290   _Read_UFM_control_result_1_64:
+0000            291            ds 4
+0004            292            rseg    R_OSEG
+0004            293   _Write_UFM_control_PARM_2:
+0004            294            ds 4
+0008            295   _Write_UFM_control_mybytes_1_66:
+0008            296            ds 4
+000C            297            rseg    R_OSEG
+000C            298            rseg    R_OSEG
+000C            299            rseg    R_OSEG
+000C            300   _Write_XRAM_PARM_2:
+000C            301            ds 1
+000D            302            rseg    R_OSEG
+000D            303            rseg    R_OSEG
+000D            304   _str2hex_sloc0_1_0:
+000D            305            ds 2
+000F            306            rseg    R_OSEG
+000F            307   ;--------------------------------------------------------
+000F            308   ; indirectly addressable internal ram data
+000F            309   ;--------------------------------------------------------
+0000            310            rseg R_ISEG
+0000            311   _buff:
+0000            312            ds 64
+0040            313   ;--------------------------------------------------------
+0040            314   ; absolute internal ram data
+0040            315   ;--------------------------------------------------------
+0000            316            DSEG
+0000            317   ;--------------------------------------------------------
+0000            318   ; bit data
+0000            319   ;--------------------------------------------------------
+0000            320            rseg R_BSEG
+0000            321   _getchar_echo:
+0000            322            DBIT    1
+0001            323   ;--------------------------------------------------------
+0001            324   ; paged external ram data
+0001            325   ;--------------------------------------------------------
+0000            326            rseg R_PSEG
+0000            327   ;--------------------------------------------------------
+0000            328   ; external ram data
+0000            329   ;--------------------------------------------------------
+0000            330            rseg R_XSEG
+0000            331   ;--------------------------------------------------------
+0000            332   ; absolute external ram data
+0000            333   ;--------------------------------------------------------
+0000            334            XSEG
+0000            335   ;--------------------------------------------------------
+0000            336   ; external initialized ram data
+0000            337   ;--------------------------------------------------------
+0000            338            rseg R_IXSEG
+0000            339            rseg R_HOME
+0000            340            rseg R_GSINIT
+0000            341            rseg R_CSEG
+0000            342   ;--------------------------------------------------------
+0000            343   ; Reset entry point and interrupt vectors
+0000            344   ;--------------------------------------------------------
+F000            345            CSEG at 0xf000
+F000 020000     346            ljmp    _crt0
+F003            347   ;--------------------------------------------------------
+F003            348   ; global & static initialisations
+F003            349   ;--------------------------------------------------------
+0000            350            rseg R_HOME
+0000            351            rseg R_GSINIT
+0000            352            rseg R_GSINIT
+0000            353   ;--------------------------------------------------------
+0000            354   ; data variables initialization
+0000            355   ;--------------------------------------------------------
+0000            356            rseg R_DINIT
+0000            357   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:42: bit getchar_echo=0;
+0000 C260       358            clr     _getchar_echo
+0002            359            ; The linker places a 'ret' at the end of segment R_DINIT.
+0002            360   ;--------------------------------------------------------
+0002            361   ; code
+0002            362   ;--------------------------------------------------------
+0000            363            rseg R_CSEG
+0000            364   ;------------------------------------------------------------
+0000            365   ;Allocation info for local variables in function 'de2_8052_crt0'
+0000            366   ;------------------------------------------------------------
+0000            367   ;------------------------------------------------------------
+0000            368   ;        C:/Source/call51/Bin/../include/mcs51/MAX10_8052.h:305: void de2_8052_crt0 (void) _naked
+0000            369   ;        -----------------------------------------
+0000            370   ;         function de2_8052_crt0
+0000            371   ;        -----------------------------------------
+0000            372   _de2_8052_crt0:
+0000            373   ;        naked function: no prologue.
+0000            374   ;        C:/Source/call51/Bin/../include/mcs51/MAX10_8052.h:374: _endasm;
+0000            375            
+0000            376            
+0000            377             rseg R_GSINIT
+0000            378             public _crt0
+0000            379            _crt0:
+0000 7581FF     380             mov sp,#_stack_start-1
+0003 120000     381             lcall __c51_external_startup
+0006 E582       382             mov a,dpl
+0008 6000       383             jz __c51_init_data
+000A 020000     384             ljmp __c51_program_startup
+000D            385            __c51_init_data:
+000D            386            
+000D            387   ; Initialize xdata variables
+000D            388            
+000D 758200     389             mov dpl, #_R_XINIT_start
+0010 758300     390             mov dph, #(_R_XINIT_start>>8)
+0013 758400     391             mov _DPL1, #_R_IXSEG_start
+0016 758500     392             mov _DPH1, #(_R_IXSEG_start>>8)
+0019 7800       393             mov r0, #_R_IXSEG_size
+001B 7900       394             mov r1, #(_R_IXSEG_size>>8)
+001D            395            
+001D            396            XInitLoop?repeat?:
+001D E8         397             mov a, r0
+001E 49         398             orl a, r1
+001F 6000       399             jz XInitLoop?done?
+0021 E4         400             clr a
+0022 758600     401             mov _DPS, #0 ; Using dpl, dph
+0025 93         402             movc a,@a+dptr
+0026 A3         403             inc dptr
+0027 758601     404             mov _DPS, #1 ; Using DPL1, DPH1
+002A F0         405             movx @dptr, a
+002B A3         406             inc dptr
+002C 18         407             dec r0
+002D B8FF68     408             cjne r0, #0xff, XInitLoop?repeat?
+0030 19         409             dec r1
+0031 8000       410             sjmp XInitLoop?repeat?
+0033            411            
+0033            412            XInitLoop?done?:
+0033            413            
+0033            414   ; Clear xdata variables
+0033 758600     415             mov _DPS, #0 ; Make sure we are using dpl, dph
+0036 758200     416             mov dpl, #_R_XSEG_start
+0039 758300     417             mov dph, #(_R_XSEG_start>>8)
+003C 7C00       418             mov r4, #_R_XSEG_size
+003E 7D00       419             mov r5, #(_R_XSEG_size>>8)
+0040            420            
+0040            421            XClearLoop?repeat?:
+0040 EC         422             mov a, r4
+0041 4D         423             orl a, r5
+0042 6000       424             jz XClearLoop?done?
+0044 E4         425             clr a
+0045 F0         426             movx @dptr, a
+0046 A3         427             inc dptr
+0047 1C         428             dec r4
+0048 BCFF78     429             cjne r4, #0xff, XClearLoop?repeat?
+004B 1D         430             dec r5
+004C 8000       431             sjmp XClearLoop?repeat?
+004E            432            
+004E            433            XClearLoop?done?:
+004E 120000     434             lcall _R_DINIT_start ; Initialize data/idata variables
+0051            435            
+0051            436            __c51_program_startup:
+0051 120000     437             lcall _main
+0054            438            
+0054            439            forever?home?:
+0054 8000       440             sjmp forever?home?
+0056            441            
+0056            442             
+0056            443   ;        naked function: no epilogue.
+0056            444   ;------------------------------------------------------------
+0056            445   ;Allocation info for local variables in function 'Read_UFM_control'
+0056            446   ;------------------------------------------------------------
+0056            447   ;addr                      Allocated to registers r2 
+0056            448   ;result                    Allocated with name '_Read_UFM_control_result_1_64'
+0056            449   ;------------------------------------------------------------
+0056            450   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:50: unsigned long Read_UFM_control (unsigned char addr)
+0056            451   ;        -----------------------------------------
+0056            452   ;         function Read_UFM_control
+0056            453   ;        -----------------------------------------
+0056            454   _Read_UFM_control:
+0056            455            using   0
+0056 AA82       456            mov     r2,dpl
+0058            457   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:57: UFM_CONTROL_CMD=addr & 0b_001; // read=0, write=0    
+0058 7401       458            mov     a,#0x01
+005A 5A         459            anl     a,r2
+005B F5EF       460            mov     _UFM_CONTROL_CMD,a
+005D            461   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:58: UFM_CONTROL_CMD|=0b_010; // read=1
+005D 43EF02     462            orl     _UFM_CONTROL_CMD,#0x02
+0060            463   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:59: UFM_CONTROL_CMD=0b_000; // read=0, write=0
+0060 75EF00     464            mov     _UFM_CONTROL_CMD,#0x00
+0063            465   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:61: result.byte[3]=UFM_CONTROL3;
+0063 85EC9B     466            mov     (_Read_UFM_control_result_1_64 + 0x0003),_UFM_CONTROL3
+0066            467   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:62: result.byte[2]=UFM_CONTROL2;
+0066 85EB9A     468            mov     (_Read_UFM_control_result_1_64 + 0x0002),_UFM_CONTROL2
+0069            469   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:63: result.byte[1]=UFM_CONTROL1;
+0069 85EA99     470            mov     (_Read_UFM_control_result_1_64 + 0x0001),_UFM_CONTROL1
+006C            471   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:64: result.byte[0]=UFM_CONTROL0;
+006C 85E998     472            mov     _Read_UFM_control_result_1_64,_UFM_CONTROL0
+006F            473   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:66: return result.l;
+006F 859882     474            mov     dpl,_Read_UFM_control_result_1_64
+0072 859983     475            mov     dph,(_Read_UFM_control_result_1_64 + 1)
+0075 859AF0     476            mov     b,(_Read_UFM_control_result_1_64 + 2)
+0078 E59B       477            mov     a,(_Read_UFM_control_result_1_64 + 3)
+007A 22         478            ret
+007B            479   ;------------------------------------------------------------
+007B            480   ;Allocation info for local variables in function 'Write_UFM_control'
+007B            481   ;------------------------------------------------------------
+007B            482   ;value                     Allocated with name '_Write_UFM_control_PARM_2'
+007B            483   ;addr                      Allocated to registers r2 
+007B            484   ;mybytes                   Allocated with name '_Write_UFM_control_mybytes_1_66'
+007B            485   ;------------------------------------------------------------
+007B            486   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:69: void Write_UFM_control (unsigned char addr, unsigned long value)
+007B            487   ;        -----------------------------------------
+007B            488   ;         function Write_UFM_control
+007B            489   ;        -----------------------------------------
+007B            490   _Write_UFM_control:
+007B AA82       491            mov     r2,dpl
+007D            492   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:76: mybytes.l=value;
+007D 8588E8     493            mov     _Write_UFM_control_mybytes_1_66,_Write_UFM_control_PARM_2
+0080 8589E9     494            mov     (_Write_UFM_control_mybytes_1_66 + 1),(_Write_UFM_control_PARM_2 + 1)
+0083 858AEA     495            mov     (_Write_UFM_control_mybytes_1_66 + 2),(_Write_UFM_control_PARM_2 + 2)
+0086 858BEB     496            mov     (_Write_UFM_control_mybytes_1_66 + 3),(_Write_UFM_control_PARM_2 + 3)
+0089            497   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:77: UFM_CONTROL3=mybytes.byte[3];
+0089 85EBEC     498            mov     _UFM_CONTROL3,(_Write_UFM_control_mybytes_1_66 + 0x0003)
+008C            499   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:78: UFM_CONTROL2=mybytes.byte[2];
+008C 85EAEB     500            mov     _UFM_CONTROL2,(_Write_UFM_control_mybytes_1_66 + 0x0002)
+008F            501   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:79: UFM_CONTROL1=mybytes.byte[1];
+008F 85E9EA     502            mov     _UFM_CONTROL1,(_Write_UFM_control_mybytes_1_66 + 0x0001)
+0092            503   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:80: UFM_CONTROL0=mybytes.byte[0];
+0092 85E8E9     504            mov     _UFM_CONTROL0,_Write_UFM_control_mybytes_1_66
+0095            505   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:82: UFM_CONTROL_CMD=addr & 0b_001; // read=0, write=0    
+0095 7401       506            mov     a,#0x01
+0097 5A         507            anl     a,r2
+0098 F5EF       508            mov     _UFM_CONTROL_CMD,a
+009A            509   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:83: UFM_CONTROL_CMD|=0b_100; // read=1
+009A 43EF04     510            orl     _UFM_CONTROL_CMD,#0x04
+009D            511   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:84: UFM_CONTROL_CMD=0b_000; // read=0, write=0
+009D 75EF00     512            mov     _UFM_CONTROL_CMD,#0x00
+00A0 22         513            ret
+00A1            514   ;------------------------------------------------------------
+00A1            515   ;Allocation info for local variables in function 'inituart'
+00A1            516   ;------------------------------------------------------------
+00A1            517   ;------------------------------------------------------------
+00A1            518   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:136: void inituart (void)
+00A1            519   ;        -----------------------------------------
+00A1            520   ;         function inituart
+00A1            521   ;        -----------------------------------------
+00A1            522   _inituart:
+00A1            523   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:138: RCAP2H=HIGH(TIMER_2_RELOAD);
+00A1 75CBFF     524            mov     _RCAP2H,#0xFF
+00A4            525   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:139: RCAP2L=LOW(TIMER_2_RELOAD);
+00A4 75CAF7     526            mov     _RCAP2L,#0xF7
+00A7            527   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:140: T2CON=0x34; // #00110100B
+00A7 75C834     528            mov     _T2CON,#0x34
+00AA            529   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:141: SCON=0x52; // Serial port in mode 1, ren, txrdy, rxempty
+00AA 759852     530            mov     _SCON,#0x52
+00AD 22         531            ret
+00AE            532   ;------------------------------------------------------------
+00AE            533   ;Allocation info for local variables in function 'putchar'
+00AE            534   ;------------------------------------------------------------
+00AE            535   ;c                         Allocated to registers r2 
+00AE            536   ;------------------------------------------------------------
+00AE            537   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:144: void putchar (char c)
+00AE            538   ;        -----------------------------------------
+00AE            539   ;         function putchar
+00AE            540   ;        -----------------------------------------
+00AE            541   _putchar:
+00AE AA82       542            mov     r2,dpl
+00B0            543   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:146: if (c=='\n')
+00B0 BA0AC8     544            cjne    r2,#0x0A,L006006?
+00B3            545   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:148: while (!TI);
+00B3            546   L006001?:
+00B3            547   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:149: TI=0;
+00B3 109948     548            jbc     _TI,L006017?
+00B6 8000       549            sjmp    L006001?
+00B8            550   L006017?:
+00B8            551   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:150: SBUF='\r';
+00B8 75990D     552            mov     _SBUF,#0x0D
+00BB            553   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:152: while (!TI);
+00BB            554   L006006?:
+00BB            555   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:153: TI=0;
+00BB 109988     556            jbc     _TI,L006018?
+00BE 8000       557            sjmp    L006006?
+00C0            558   L006018?:
+00C0            559   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:154: SBUF=c;
+00C0 8A99       560            mov     _SBUF,r2
+00C2 22         561            ret
+00C3            562   ;------------------------------------------------------------
+00C3            563   ;Allocation info for local variables in function 'getchar'
+00C3            564   ;------------------------------------------------------------
+00C3            565   ;c                         Allocated to registers r2 
+00C3            566   ;------------------------------------------------------------
+00C3            567   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:157: char getchar (void)
+00C3            568   ;        -----------------------------------------
+00C3            569   ;         function getchar
+00C3            570   ;        -----------------------------------------
+00C3            571   _getchar:
+00C3            572   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:161: while (!RI);
+00C3            573   L007001?:
+00C3            574   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:162: RI=0;
+00C3 109808     575            jbc     _RI,L007011?
+00C6 8000       576            sjmp    L007001?
+00C8            577   L007011?:
+00C8            578   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:163: c=SBUF;
+00C8 AA99       579            mov     r2,_SBUF
+00CA            580   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:164: if (getchar_echo==1) putchar(c);
+00CA 306048     581            jnb     _getchar_echo,L007005?
+00CD 8A82       582            mov     dpl,r2
+00CF C002       583            push    ar2
+00D1 120000     584            lcall   _putchar
+00D4 D002       585            pop     ar2
+00D6            586   L007005?:
+00D6            587   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:166: return c;
+00D6 8A82       588            mov     dpl,r2
+00D8 22         589            ret
+00D9            590   ;------------------------------------------------------------
+00D9            591   ;Allocation info for local variables in function 'getchare'
+00D9            592   ;------------------------------------------------------------
+00D9            593   ;c                         Allocated to registers r2 
+00D9            594   ;------------------------------------------------------------
+00D9            595   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:169: char getchare (void)
+00D9            596   ;        -----------------------------------------
+00D9            597   ;         function getchare
+00D9            598   ;        -----------------------------------------
+00D9            599   _getchare:
+00D9            600   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:173: c=getchar();
+00D9 120000     601            lcall   _getchar
+00DC            602   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:174: putchar(c);
+00DC AA82       603            mov  r2,dpl
+00DE C002       604            push    ar2
+00E0 120000     605            lcall   _putchar
+00E3 D002       606            pop     ar2
+00E5            607   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:175: return c;
+00E5 8A82       608            mov     dpl,r2
+00E7 22         609            ret
+00E8            610   ;------------------------------------------------------------
+00E8            611   ;Allocation info for local variables in function 'sends'
+00E8            612   ;------------------------------------------------------------
+00E8            613   ;c                         Allocated to registers r2 r3 r4 
+00E8            614   ;n                         Allocated to registers r6 
+00E8            615   ;------------------------------------------------------------
+00E8            616   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:178: void sends (unsigned char * c)
+00E8            617   ;        -----------------------------------------
+00E8            618   ;         function sends
+00E8            619   ;        -----------------------------------------
+00E8            620   _sends:
+00E8 AA82       621            mov     r2,dpl
+00EA AB83       622            mov     r3,dph
+00EC ACF0       623            mov     r4,b
+00EE            624   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:181: while(n=*c)
+00EE            625   L009001?:
+00EE 8A82       626            mov     dpl,r2
+00F0 8B83       627            mov     dph,r3
+00F2 8CF0       628            mov     b,r4
+00F4 120000     629            lcall   __gptrget
+00F7 FD         630            mov     r5,a
+00F8 FE         631            mov     r6,a
+00F9 6000       632            jz      L009004?
+00FB            633   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:183: putchar(n);
+00FB 8E82       634            mov     dpl,r6
+00FD C002       635            push    ar2
+00FF C003       636            push    ar3
+0101 C004       637            push    ar4
+0103 120000     638            lcall   _putchar
+0106 D004       639            pop     ar4
+0108 D003       640            pop     ar3
+010A D002       641            pop     ar2
+010C            642   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:184: c++;
+010C 0A         643            inc     r2
+010D BA0088     644            cjne    r2,#0x00,L009001?
+0110 0B         645            inc     r3
+0111 8000       646            sjmp    L009001?
+0113            647   L009004?:
+0113 22         648            ret
+0114            649   ;------------------------------------------------------------
+0114            650   ;Allocation info for local variables in function 'chartohex'
+0114            651   ;------------------------------------------------------------
+0114            652   ;c                         Allocated to registers r2 
+0114            653   ;------------------------------------------------------------
+0114            654   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:188: unsigned char chartohex(char c)
+0114            655   ;        -----------------------------------------
+0114            656   ;         function chartohex
+0114            657   ;        -----------------------------------------
+0114            658   _chartohex:
+0114            659   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:190: if(c & 0x40) c+=9; //  a to f or A to F
+0114 E582       660            mov     a,dpl
+0116 FA         661            mov     r2,a
+0117 30E688     662            jnb     acc.6,L010002?
+011A 7409       663            mov     a,#0x09
+011C 2A         664            add     a,r2
+011D FA         665            mov     r2,a
+011E            666   L010002?:
+011E            667   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:191: return (c & 0xf);
+011E 740F       668            mov     a,#0x0F
+0120 5A         669            anl     a,r2
+0121 F582       670            mov     dpl,a
+0123 22         671            ret
+0124            672   ;------------------------------------------------------------
+0124            673   ;Allocation info for local variables in function 'getbyte'
+0124            674   ;------------------------------------------------------------
+0124            675   ;j                         Allocated with name '_getbyte_j_1_82'
+0124            676   ;------------------------------------------------------------
+0124            677   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:195: unsigned char getbyte (void)
+0124            678   ;        -----------------------------------------
+0124            679   ;         function getbyte
+0124            680   ;        -----------------------------------------
+0124            681   _getbyte:
+0124            682   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:199: j=chartohex(getchare())*0x10;
+0124 120000     683            lcall   _getchare
+0127 120000     684            lcall   _chartohex
+012A E582       685            mov     a,dpl
+012C C4         686            swap    a
+012D 54F0       687            anl     a,#0xf0
+012F F5C8       688            mov     _getbyte_j_1_82,a
+0131            689   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:200: j|=chartohex(getchare());
+0131 120000     690            lcall   _getchare
+0134 120000     691            lcall   _chartohex
+0137 E582       692            mov     a,dpl
+0139 42C8       693            orl     _getbyte_j_1_82,a
+013B            694   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:202: return j;
+013B 85C882     695            mov     dpl,_getbyte_j_1_82
+013E 22         696            ret
+013F            697   ;------------------------------------------------------------
+013F            698   ;Allocation info for local variables in function 'EraseSector'
+013F            699   ;------------------------------------------------------------
+013F            700   ;------------------------------------------------------------
+013F            701   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:205: void EraseSector (void)
+013F            702   ;        -----------------------------------------
+013F            703   ;         function EraseSector
+013F            704   ;        -----------------------------------------
+013F            705   _EraseSector:
+013F            706   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:208: Write_UFM_control(1, 0x0f1fffffL); // (23 downto 20) <= '0001'
+013F 7588FF     707            mov     _Write_UFM_control_PARM_2,#0xFF
+0142 7589FF     708            mov     (_Write_UFM_control_PARM_2 + 1),#0xFF
+0145 758A1F     709            mov     (_Write_UFM_control_PARM_2 + 2),#0x1F
+0148 758B0F     710            mov     (_Write_UFM_control_PARM_2 + 3),#0x0F
+014B 758201     711            mov     dpl,#0x01
+014E 120000     712            lcall   _Write_UFM_control
+0151            713   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:210: while ((Read_UFM_control(0)&0x00000003L)!=0);
+0151            714   L012001?:
+0151 758200     715            mov     dpl,#0x00
+0154 120000     716            lcall   _Read_UFM_control
+0157 AA82       717            mov     r2,dpl
+0159 AB83       718            mov     r3,dph
+015B ACF0       719            mov     r4,b
+015D FD         720            mov     r5,a
+015E EA         721            mov     a,r2
+015F 5403       722            anl     a,#0x03
+0161 6000       723            jz      L012008?
+0163 8000       724            sjmp    L012001?
+0165            725   L012008?:
+0165 22         726            ret
+0166            727   ;------------------------------------------------------------
+0166            728   ;Allocation info for local variables in function 'Write_XRAM'
+0166            729   ;------------------------------------------------------------
+0166            730   ;Value                     Allocated with name '_Write_XRAM_PARM_2'
+0166            731   ;Address                   Allocated to registers r2 r3 
+0166            732   ;------------------------------------------------------------
+0166            733   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:213: void Write_XRAM (unsigned int Address, unsigned char Value)
+0166            734   ;        -----------------------------------------
+0166            735   ;         function Write_XRAM
+0166            736   ;        -----------------------------------------
+0166            737   _Write_XRAM:
+0166            738   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:215: *((unsigned char xdata *) Address)=Value;
+0166 E538       739            mov     a,_Write_XRAM_PARM_2
+0168 F0         740            movx    @dptr,a
+0169 22         741            ret
+016A            742   ;------------------------------------------------------------
+016A            743   ;Allocation info for local variables in function 'Read_XRAM'
+016A            744   ;------------------------------------------------------------
+016A            745   ;Address                   Allocated to registers r2 r3 
+016A            746   ;------------------------------------------------------------
+016A            747   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:218: unsigned char Read_XRAM (unsigned int Address)
+016A            748   ;        -----------------------------------------
+016A            749   ;         function Read_XRAM
+016A            750   ;        -----------------------------------------
+016A            751   _Read_XRAM:
+016A            752   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:220: return *((unsigned char xdata *) Address);
+016A E0         753            movx    a,@dptr
+016B F582       754            mov     dpl,a
+016D 22         755            ret
+016E            756   ;------------------------------------------------------------
+016E            757   ;Allocation info for local variables in function 'Clear_XRAM'
+016E            758   ;------------------------------------------------------------
+016E            759   ;------------------------------------------------------------
+016E            760   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:225: void Clear_XRAM (void)
+016E            761   ;        -----------------------------------------
+016E            762   ;         function Clear_XRAM
+016E            763   ;        -----------------------------------------
+016E            764   _Clear_XRAM:
+016E            765   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:227: XRAMUSEDAS=0x01; // 32k RAM accessed as xdata
+016E 75C301     766            mov     _XRAMUSEDAS,#0x01
+0171            767   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:246: _endasm;
+0171            768            
+0171            769     ; Save used registers
+0171 C082       770              push dpl
+0173 C083       771              push dph
+0175 C0E0       772              push acc
+0177 E4         773              clr a
+0178 F582       774              mov dpl, a
+017A F583       775              mov dph, a
+017C            776             Clear_XRAM_Loop:
+017C E4         777              clr a
+017D F0         778              movx @dptr, a
+017E A3         779              inc dptr
+017F E583       780              mov a, dph
+0181 30E748     781              jnb acc.7, Clear_XRAM_Loop ; Check when dph is equal to 0x80 after increment
+0184 D0E0       782              pop acc
+0186 D083       783              pop dph
+0188 D082       784              pop dpl
+018A            785             
+018A 22         786            ret
+018B            787   ;------------------------------------------------------------
+018B            788   ;Allocation info for local variables in function 'Copy_Flash_to_XRAM'
+018B            789   ;------------------------------------------------------------
+018B            790   ;------------------------------------------------------------
+018B            791   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:249: void Copy_Flash_to_XRAM (void)
+018B            792   ;        -----------------------------------------
+018B            793   ;         function Copy_Flash_to_XRAM
+018B            794   ;        -----------------------------------------
+018B            795   _Copy_Flash_to_XRAM:
+018B            796   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:251: XRAMUSEDAS=0x01; // 32k RAM accessed as xdata
+018B 75C301     797            mov     _XRAMUSEDAS,#0x01
+018E            798   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:299: _endasm;
+018E            799            
+018E            800     ; Save used registers
+018E C082       801              push dpl
+0190 C083       802              push dph
+0192 C0E0       803              push acc
+0194            804            
+0194            805     ; Init pointers
+0194 900000     806              mov dptr, #0x0000
+0197 75E100     807              mov _UFM_ADD0, #0x00
+019A 75E200     808              mov _UFM_ADD1, #0x00
+019D 75E300     809              mov _UFM_ADD2, #0x00
+01A0            810            
+01A0            811     ; Copy loop
+01A0            812             ufm2xram_loop:
+01A0 75ED11     813              mov _UFM_DATA_CMD, #0b_01_0001 ;
+01A3 75ED01     814              mov _UFM_DATA_CMD, #0b_00_0001 ;
+01A6            815             ufm2xram_wait:
+01A6 E5EE       816              mov a, _UFM_DATA_STATUS
+01A8 30E1C8     817              jnb acc.1, ufm2xram_wait
+01AB            818            
+01AB            819     ; Save the flash 32 bits to xram
+01AB E5E4       820              mov a, _UFM_DATA0
+01AD F0         821              movx @dptr, a
+01AE A3         822              inc dptr
+01AF E5E5       823              mov a, _UFM_DATA1
+01B1 F0         824              movx @dptr, a
+01B2 A3         825              inc dptr
+01B3 E5E6       826              mov a, _UFM_DATA2
+01B5 F0         827              movx @dptr, a
+01B6 A3         828              inc dptr
+01B7 E5E7       829              mov a, _UFM_DATA3
+01B9 F0         830              movx @dptr, a
+01BA A3         831              inc dptr
+01BB            832            
+01BB            833     ; Increment destination address and check
+01BB 05E1       834              inc _UFM_ADD0
+01BD E5E1       835              mov a, _UFM_ADD0
+01BF 7000       836              jnz ufm2xram_loop
+01C1 05E2       837              inc _UFM_ADD1
+01C3 E5E2       838              mov a, _UFM_ADD1
+01C5 30E588     839              jnb acc.5, ufm2xram_loop ; UFM1 ends at 0x2000, so when bit 5 is '1' we are done.
+01C8            840            
+01C8            841     ; Restore used registers
+01C8 D0E0       842              pop acc
+01CA D083       843              pop dph
+01CC D082       844              pop dpl
+01CE            845             
+01CE 22         846            ret
+01CF            847   ;------------------------------------------------------------
+01CF            848   ;Allocation info for local variables in function 'Load_Ram_Fast_and_Run'
+01CF            849   ;------------------------------------------------------------
+01CF            850   ;------------------------------------------------------------
+01CF            851   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:302: void Load_Ram_Fast_and_Run (void)
+01CF            852   ;        -----------------------------------------
+01CF            853   ;         function Load_Ram_Fast_and_Run
+01CF            854   ;        -----------------------------------------
+01CF            855   _Load_Ram_Fast_and_Run:
+01CF            856   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:304: Copy_Flash_to_XRAM();
+01CF 120000     857            lcall   _Copy_Flash_to_XRAM
+01D2            858   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:306: T2CON=0;
+01D2 75C800     859            mov     _T2CON,#0x00
+01D5            860   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:307: SCON=0;
+01D5 759800     861            mov     _SCON,#0x00
+01D8            862   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:308: RCAP2H=0;
+01D8 75CB00     863            mov     _RCAP2H,#0x00
+01DB            864   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:309: RCAP2L=0;
+01DB 75CA00     865            mov     _RCAP2L,#0x00
+01DE            866   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:316: _endasm;
+01DE            867            
+01DE 75C300     868              mov _XRAMUSEDAS, #0 ; 32k RAM accessed as code
+01E1            869     ; RAM is loaded with user code. Run it.
+01E1 758107     870              mov sp, #7
+01E4 020000     871              ljmp 0x0000
+01E7            872             
+01E7 22         873            ret
+01E8            874   ;------------------------------------------------------------
+01E8            875   ;Allocation info for local variables in function 'Load_Ram_Fast_and_Run_Debugger'
+01E8            876   ;------------------------------------------------------------
+01E8            877   ;------------------------------------------------------------
+01E8            878   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:319: void Load_Ram_Fast_and_Run_Debugger (void)
+01E8            879   ;        -----------------------------------------
+01E8            880   ;         function Load_Ram_Fast_and_Run_Debugger
+01E8            881   ;        -----------------------------------------
+01E8            882   _Load_Ram_Fast_and_Run_Debugger:
+01E8            883   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:321: Copy_Flash_to_XRAM();
+01E8 120000     884            lcall   _Copy_Flash_to_XRAM
+01EB            885   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:323: T2CON=0;
+01EB 75C800     886            mov     _T2CON,#0x00
+01EE            887   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:324: SCON=0;
+01EE 759800     888            mov     _SCON,#0x00
+01F1            889   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:325: RCAP2H=0;
+01F1 75CB00     890            mov     _RCAP2H,#0x00
+01F4            891   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:326: RCAP2L=0;
+01F4 75CA00     892            mov     _RCAP2L,#0x00
+01F7            893   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:327: LEDRA=0xff;
+01F7 75E8FF     894            mov     _LEDRA,#0xFF
+01FA            895   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:328: LEDRB=0xff;
+01FA 7595FF     896            mov     _LEDRB,#0xFF
+01FD            897   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:336: _endasm;
+01FD            898            
+01FD 75C300     899              mov _XRAMUSEDAS, #0 ; 32k RAM accessed as code
+0200 758107     900              mov sp, #7
+0203            901            
+0203            902     ; RAM is loaded with user code. Run the debugger now.
+0203 02C000     903              ljmp 0xc000
+0206            904             
+0206 22         905            ret
+0207            906   ;------------------------------------------------------------
+0207            907   ;Allocation info for local variables in function 'Copy_XRAM_to_UFM'
+0207            908   ;------------------------------------------------------------
+0207            909   ;------------------------------------------------------------
+0207            910   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:339: void Copy_XRAM_to_UFM (void)
+0207            911   ;        -----------------------------------------
+0207            912   ;         function Copy_XRAM_to_UFM
+0207            913   ;        -----------------------------------------
+0207            914   _Copy_XRAM_to_UFM:
+0207            915   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:401: _endasm;
+0207            916            
+0207            917     ; Save used registers
+0207 C082       918              push dpl
+0209 C083       919              push dph
+020B C0E0       920              push acc
+020D C0F0       921              push b
+020F            922            
+020F            923     ; Init pointers
+020F 900000     924              mov dptr, #0x0000
+0212 75E100     925              mov _UFM_ADD0, #0x00
+0215 75E200     926              mov _UFM_ADD1, #0x00
+0218 75E300     927              mov _UFM_ADD2, #0x00
+021B            928            
+021B            929     ; Copy loop
+021B            930             xram2ufm_loop:
+021B            931     ; Load 32 bits from xram
+021B E0         932              movx a, @dptr
+021C F5E4       933              mov _UFM_DATA0, a
+021E F5F0       934              mov b, a
+0220 A3         935              inc dptr
+0221 E0         936              movx a, @dptr
+0222 F5E5       937              mov _UFM_DATA1, a
+0224 42F0       938              orl b, a
+0226 A3         939              inc dptr
+0227 E0         940              movx a, @dptr
+0228 F5E6       941              mov _UFM_DATA2, a
+022A 42F0       942              orl b, a
+022C A3         943              inc dptr
+022D E0         944              movx a, @dptr
+022E F5E7       945              mov _UFM_DATA3, a
+0230 45F0       946              orl a, b
+0232 A3         947              inc dptr
+0233            948            
+0233 6000       949              jz xram2ufm_skip ; If all four bytes are zero, do not write to flash. In the implementation
+0235            950                      ; of the interface to the UFM, both the input and output ports are inverted
+0235            951                      ; so 0x00 is stored as 0xff in the flash. After erase, the flash is all 0xff.
+0235            952            
+0235            953             xram2ufm_write:
+0235            954     ; Write to flash
+0235 43ED21     955              orl _UFM_DATA_CMD, #0b_10_0001 ; read=1, write=0, burstcount=0001b
+0238            956             xram2ufm_wait:
+0238 E5EE       957              mov a, _UFM_DATA_STATUS
+023A 20E0C8     958              jb acc.0, xram2ufm_wait
+023D 75ED01     959              mov _UFM_DATA_CMD, #0b_00_0001 ; read=0, write=0, burstcount=0000b
+0240            960             xram2ufm_skip:
+0240            961            
+0240            962     ; Increment destination address and check
+0240 05E1       963              inc _UFM_ADD0
+0242 E5E1       964              mov a, _UFM_ADD0
+0244 7000       965              jnz xram2ufm_loop
+0246 05E2       966              inc _UFM_ADD1
+0248 E5E2       967              mov a, _UFM_ADD1
+024A 30E508     968              jnb acc.5, xram2ufm_loop ; UFM1 ends at 0x2000, so when bit 5 is '1' we are done.
+024D            969            
+024D D2E9       970              setb _LEDRA_1
+024F            971     ; Restore used registers
+024F D0F0       972              pop b
+0251 D0E0       973              pop acc
+0253 D083       974              pop dph
+0255 D082       975              pop dpl
+0257            976             
+0257 22         977            ret
+0258            978   ;------------------------------------------------------------
+0258            979   ;Allocation info for local variables in function 'loadintelhex'
+0258            980   ;------------------------------------------------------------
+0258            981   ;address                   Allocated with name '_loadintelhex_address_1_100'
+0258            982   ;j                         Allocated with name '_loadintelhex_j_1_100'
+0258            983   ;k                         Allocated with name '_loadintelhex_k_1_100'
+0258            984   ;size                      Allocated with name '_loadintelhex_size_1_100'
+0258            985   ;type                      Allocated with name '_loadintelhex_type_1_100'
+0258            986   ;checksum                  Allocated with name '_loadintelhex_checksum_1_100'
+0258            987   ;n                         Allocated with name '_loadintelhex_n_1_100'
+0258            988   ;echo                      Allocated with name '_loadintelhex_echo_1_100'
+0258            989   ;savedcs                   Allocated to registers r2 
+0258            990   ;------------------------------------------------------------
+0258            991   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:404: void loadintelhex (void)
+0258            992   ;        -----------------------------------------
+0258            993   ;         function loadintelhex
+0258            994   ;        -----------------------------------------
+0258            995   _loadintelhex:
+0258            996   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:411: while(1)
+0258            997   L020022?:
+0258            998   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:413: n=getchare();
+0258 120000     999            lcall   _getchare
+025B 8582F8    1000            mov     _loadintelhex_n_1_100,dpl
+025E           1001   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:415: if(n==(unsigned char)':')
+025E 743A      1002            mov     a,#0x3A
+0260 B5F848    1003            cjne    a,_loadintelhex_n_1_100,L020049?
+0263 8000      1004            sjmp    L020050?
+0265           1005   L020049?:
+0265 020000    1006            ljmp    L020019?
+0268           1007   L020050?:
+0268           1008   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:417: echo='.'; // If everything works ok, send a period...
+0268 75482E    1009            mov     _loadintelhex_echo_1_100,#0x2E
+026B           1010   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:418: size=getbyte();
+026B 120000    1011            lcall   _getbyte
+026E 858208    1012            mov     _loadintelhex_size_1_100,dpl
+0271           1013   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:419: checksum=size;
+0271 8508A8    1014            mov     _loadintelhex_checksum_1_100,_loadintelhex_size_1_100
+0274           1015   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:421: address=getbyte();
+0274 120000    1016            lcall   _getbyte
+0277 AA82      1017            mov     r2,dpl
+0279 8A18      1018            mov     _loadintelhex_address_1_100,r2
+027B 751900    1019            mov     (_loadintelhex_address_1_100 + 1),#0x00
+027E           1020   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:422: checksum+=address;
+027E AA18      1021            mov     r2,_loadintelhex_address_1_100
+0280 EA        1022            mov     a,r2
+0281 25A8      1023            add     a,_loadintelhex_checksum_1_100
+0283 F5A8      1024            mov     _loadintelhex_checksum_1_100,a
+0285           1025   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:423: address*=0x100;
+0285 851819    1026            mov     (_loadintelhex_address_1_100 + 1),_loadintelhex_address_1_100
+0288 751800    1027            mov     _loadintelhex_address_1_100,#0x00
+028B           1028   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:424: n=getbyte();
+028B 120000    1029            lcall   _getbyte
+028E 8582F8    1030            mov     _loadintelhex_n_1_100,dpl
+0291           1031   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:425: checksum+=n;
+0291 E5F8      1032            mov     a,_loadintelhex_n_1_100
+0293 25A8      1033            add     a,_loadintelhex_checksum_1_100
+0295 F5A8      1034            mov     _loadintelhex_checksum_1_100,a
+0297           1035   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:426: address+=n;
+0297 AAF8      1036            mov     r2,_loadintelhex_n_1_100
+0299 7B00      1037            mov     r3,#0x00
+029B EA        1038            mov     a,r2
+029C 2518      1039            add     a,_loadintelhex_address_1_100
+029E F518      1040            mov     _loadintelhex_address_1_100,a
+02A0 EB        1041            mov     a,r3
+02A1 3519      1042            addc    a,(_loadintelhex_address_1_100 + 1)
+02A3 F519      1043            mov     (_loadintelhex_address_1_100 + 1),a
+02A5           1044   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:428: type=getbyte();
+02A5 120000    1045            lcall   _getbyte
+02A8 858258    1046            mov     _loadintelhex_type_1_100,dpl
+02AB           1047   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:429: checksum+=type;
+02AB E558      1048            mov     a,_loadintelhex_type_1_100
+02AD 25A8      1049            add     a,_loadintelhex_checksum_1_100
+02AF F5A8      1050            mov     _loadintelhex_checksum_1_100,a
+02B1           1051   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:431: for(j=0; j<size; j++)
+02B1 756800    1052            mov     _loadintelhex_j_1_100,#0x00
+02B4           1053   L020024?:
+02B4 C3        1054            clr     c
+02B5 E568      1055            mov     a,_loadintelhex_j_1_100
+02B7 9508      1056            subb    a,_loadintelhex_size_1_100
+02B9 5000      1057            jnc     L020027?
+02BB           1058   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:433: n=getbyte();
+02BB 120000    1059            lcall   _getbyte
+02BE 8582F8    1060            mov     _loadintelhex_n_1_100,dpl
+02C1           1061   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:434: if(j<MAXBUFF) buff[j]=n; // Don't overrun the buffer
+02C1 74C0      1062            mov     a,#0x100 - 0x40
+02C3 2568      1063            add     a,_loadintelhex_j_1_100
+02C5 4000      1064            jc      L020002?
+02C7 E568      1065            mov     a,_loadintelhex_j_1_100
+02C9 24A0      1066            add     a,#_buff
+02CB F8        1067            mov     r0,a
+02CC A6F8      1068            mov     @r0,_loadintelhex_n_1_100
+02CE           1069   L020002?:
+02CE           1070   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:435: checksum+=n;
+02CE E5F8      1071            mov     a,_loadintelhex_n_1_100
+02D0 25A8      1072            add     a,_loadintelhex_checksum_1_100
+02D2 F5A8      1073            mov     _loadintelhex_checksum_1_100,a
+02D4           1074   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:431: for(j=0; j<size; j++)
+02D4 0568      1075            inc     _loadintelhex_j_1_100
+02D6 8000      1076            sjmp    L020024?
+02D8           1077   L020027?:
+02D8           1078   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:438: savedcs=getbyte();
+02D8 120000    1079            lcall   _getbyte
+02DB           1080   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:439: checksum+=savedcs;
+02DB E582      1081            mov     a,dpl
+02DD FA        1082            mov     r2,a
+02DE 25A8      1083            add     a,_loadintelhex_checksum_1_100
+02E0 F5A8      1084            mov     _loadintelhex_checksum_1_100,a
+02E2           1085   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:440: if(size>MAXBUFF) checksum=1; // Force a checksum error
+02E2 E508      1086            mov     a,_loadintelhex_size_1_100
+02E4 24BF      1087            add     a,#0xff - 0x40
+02E6 5000      1088            jnc     L020004?
+02E8 75A801    1089            mov     _loadintelhex_checksum_1_100,#0x01
+02EB           1090   L020004?:
+02EB           1091   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:442: if(checksum==0) switch(type)
+02EB E5A8      1092            mov     a,_loadintelhex_checksum_1_100
+02ED 7000      1093            jnz     L020012?
+02EF AA58      1094            mov     r2,_loadintelhex_type_1_100
+02F1 BA0048    1095            cjne    r2,#0x00,L020055?
+02F4 8000      1096            sjmp    L020006?
+02F6           1097   L020055?:
+02F6 BA01C8    1098            cjne    r2,#0x01,L020056?
+02F9 8000      1099            sjmp    L020008?
+02FB           1100   L020056?:
+02FB BA0348    1101            cjne    r2,#0x03,L020057?
+02FE 8000      1102            sjmp    L020007?
+0300           1103   L020057?:
+0300 BA04C8    1104            cjne    r2,#0x04,L020009?
+0303           1105   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:445: EraseSector();
+0303 120000    1106            lcall   _EraseSector
+0306           1107   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:446: Clear_XRAM();
+0306 120000    1108            lcall   _Clear_XRAM
+0309           1109   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:447: LEDRA_1=1; // Flash erased
+0309 D2E9      1110            setb    _LEDRA_1
+030B           1111   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:448: break;
+030B           1112   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:450: case 0: // Write to XRAM
+030B 8000      1113            sjmp    L020013?
+030D           1114   L020006?:
+030D           1115   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:451: for(k=0; k<j; k++)
+030D 75B800    1116            mov     _loadintelhex_k_1_100,#0x00
+0310           1117   L020028?:
+0310 C3        1118            clr     c
+0311 E5B8      1119            mov     a,_loadintelhex_k_1_100
+0313 9568      1120            subb    a,_loadintelhex_j_1_100
+0315 5000      1121            jnc     L020013?
+0317           1122   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:453: Write_XRAM(address, buff[k]);
+0317 E5B8      1123            mov     a,_loadintelhex_k_1_100
+0319 24A0      1124            add     a,#_buff
+031B F8        1125            mov     r0,a
+031C 8638      1126            mov     _Write_XRAM_PARM_2,@r0
+031E 851882    1127            mov     dpl,_loadintelhex_address_1_100
+0321 851983    1128            mov     dph,(_loadintelhex_address_1_100 + 1)
+0324 120000    1129            lcall   _Write_XRAM
+0327           1130   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:454: address++;
+0327 7401      1131            mov     a,#0x01
+0329 2518      1132            add     a,_loadintelhex_address_1_100
+032B F518      1133            mov     _loadintelhex_address_1_100,a
+032D E4        1134            clr     a
+032E 3519      1135            addc    a,(_loadintelhex_address_1_100 + 1)
+0330 F519      1136            mov     (_loadintelhex_address_1_100 + 1),a
+0332           1137   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:451: for(k=0; k<j; k++)
+0332 05B8      1138            inc     _loadintelhex_k_1_100
+0334           1139   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:458: case 3: // Send ID number command.
+0334 8000      1140            sjmp    L020028?
+0336           1141   L020007?:
+0336           1142   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:459: sends("DE1");
+0336 909988    1143            mov     dptr,#__str_0
+0339 75F080    1144            mov     b,#0x80
+033C 120000    1145            lcall   _sends
+033F           1146   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:460: break;
+033F           1147   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:462: case 1: // End record: Write XRAM to flash
+033F 8000      1148            sjmp    L020013?
+0341           1149   L020008?:
+0341           1150   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:463: putchar(echo); // Acknowledge inmediatly
+0341 854882    1151            mov     dpl,_loadintelhex_echo_1_100
+0344 120000    1152            lcall   _putchar
+0347           1153   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:464: Copy_XRAM_to_UFM();
+0347 120000    1154            lcall   _Copy_XRAM_to_UFM
+034A           1155   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:465: LEDRA_2=1; // Flash loaded
+034A D2EA      1156            setb    _LEDRA_2
+034C           1157   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:466: break;
+034C           1158   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:468: default: // Unknown command;
+034C 8000      1159            sjmp    L020013?
+034E           1160   L020009?:
+034E           1161   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:469: echo='?';
+034E 75483F    1162            mov     _loadintelhex_echo_1_100,#0x3F
+0351           1163   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:470: LEDRA_2=1;
+0351 D2EA      1164            setb    _LEDRA_2
+0353           1165   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:472: }
+0353 8000      1166            sjmp    L020013?
+0355           1167   L020012?:
+0355           1168   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:475: echo='X'; // Checksum error
+0355 754858    1169            mov     _loadintelhex_echo_1_100,#0x58
+0358           1170   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:476: LEDRA_1=1;
+0358 D2E9      1171            setb    _LEDRA_1
+035A           1172   L020013?:
+035A           1173   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:478: if(type!=1) putchar(echo);
+035A 7401      1174            mov     a,#0x01
+035C B558C8    1175            cjne    a,_loadintelhex_type_1_100,L020061?
+035F 020000    1176            ljmp    L020022?
+0362           1177   L020061?:
+0362 854882    1178            mov     dpl,_loadintelhex_echo_1_100
+0365 120000    1179            lcall   _putchar
+0368 020000    1180            ljmp    L020022?
+036B           1181   L020019?:
+036B           1182   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:480: else if(n==(unsigned char)'U')
+036B 7455      1183            mov     a,#0x55
+036D B5F808    1184            cjne    a,_loadintelhex_n_1_100,L020062?
+0370 8000      1185            sjmp    L020063?
+0372           1186   L020062?:
+0372 020000    1187            ljmp    L020022?
+0375           1188   L020063?:
+0375           1189   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:482: LEDRA=0;
+0375 75E800    1190            mov     _LEDRA,#0x00
+0378           1191   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:483: LEDRB=0;
+0378 759500    1192            mov     _LEDRB,#0x00
+037B           1193   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:484: LEDRA=1; // Bootloader running
+037B 75E801    1194            mov     _LEDRA,#0x01
+037E 020000    1195            ljmp    L020022?
+0381           1196   ;------------------------------------------------------------
+0381           1197   ;Allocation info for local variables in function 'str2hex'
+0381           1198   ;------------------------------------------------------------
+0381           1199   ;s                         Allocated to registers r2 r3 r4 
+0381           1200   ;x                         Allocated to registers r5 r6 
+0381           1201   ;i                         Allocated to registers r7 
+0381           1202   ;sloc0                     Allocated with name '_str2hex_sloc0_1_0'
+0381           1203   ;------------------------------------------------------------
+0381           1204   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:489: unsigned int str2hex (char * s)
+0381           1205   ;        -----------------------------------------
+0381           1206   ;         function str2hex
+0381           1207   ;        -----------------------------------------
+0381           1208   _str2hex:
+0381 AA82      1209            mov     r2,dpl
+0383 AB83      1210            mov     r3,dph
+0385 ACF0      1211            mov     r4,b
+0387           1212   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:491: unsigned int x=0;
+0387 7D00      1213            mov     r5,#0x00
+0389 7E00      1214            mov     r6,#0x00
+038B           1215   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:493: while(*s)
+038B           1216   L021013?:
+038B 8A82      1217            mov     dpl,r2
+038D 8B83      1218            mov     dph,r3
+038F 8CF0      1219            mov     b,r4
+0391 120000    1220            lcall   __gptrget
+0394 FF        1221            mov     r7,a
+0395 7000      1222            jnz     L021027?
+0397 020000    1223            ljmp    L021015?
+039A           1224   L021027?:
+039A           1225   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:495: if((*s>='0')&&(*s<='9')) i=*s-'0';
+039A C3        1226            clr     c
+039B EF        1227            mov     a,r7
+039C 6480      1228            xrl     a,#0x80
+039E 94B0      1229            subb    a,#0xb0
+03A0 4000      1230            jc      L021010?
+03A2 74B9      1231            mov     a,#(0x39 ^ 0x80)
+03A4 8FF0      1232            mov     b,r7
+03A6 63F080    1233            xrl     b,#0x80
+03A9 95F0      1234            subb    a,b
+03AB 4000      1235            jc      L021010?
+03AD EF        1236            mov     a,r7
+03AE 24D0      1237            add     a,#0xd0
+03B0 FF        1238            mov     r7,a
+03B1 8000      1239            sjmp    L021011?
+03B3           1240   L021010?:
+03B3           1241   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:496: else if ( (*s>='A') && (*s<='F') ) i=*s-'A'+10;
+03B3 8A82      1242            mov     dpl,r2
+03B5 8B83      1243            mov     dph,r3
+03B7 8CF0      1244            mov     b,r4
+03B9 120000    1245            lcall   __gptrget
+03BC F8        1246            mov     r0,a
+03BD C3        1247            clr     c
+03BE 6480      1248            xrl     a,#0x80
+03C0 94C1      1249            subb    a,#0xc1
+03C2 4000      1250            jc      L021006?
+03C4 74C6      1251            mov     a,#(0x46 ^ 0x80)
+03C6 88F0      1252            mov     b,r0
+03C8 63F080    1253            xrl     b,#0x80
+03CB 95F0      1254            subb    a,b
+03CD 4000      1255            jc      L021006?
+03CF 74C9      1256            mov     a,#0xC9
+03D1 28        1257            add     a,r0
+03D2 FF        1258            mov     r7,a
+03D3 8000      1259            sjmp    L021011?
+03D5           1260   L021006?:
+03D5           1261   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:497: else if ( (*s>='a') && (*s<='f') ) i=*s-'a'+10;
+03D5 C3        1262            clr     c
+03D6 E8        1263            mov     a,r0
+03D7 6480      1264            xrl     a,#0x80
+03D9 94E1      1265            subb    a,#0xe1
+03DB 4000      1266            jc      L021015?
+03DD 74E6      1267            mov     a,#(0x66 ^ 0x80)
+03DF 88F0      1268            mov     b,r0
+03E1 63F080    1269            xrl     b,#0x80
+03E4 95F0      1270            subb    a,b
+03E6 4000      1271            jc      L021015?
+03E8 74A9      1272            mov     a,#0xA9
+03EA 28        1273            add     a,r0
+03EB FF        1274            mov     r7,a
+03EC           1275   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:498: else break;
+03EC           1276   L021011?:
+03EC           1277   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:499: x=(x*0x10)+i;
+03EC 8D38      1278            mov     _str2hex_sloc0_1_0,r5
+03EE EE        1279            mov     a,r6
+03EF C4        1280            swap    a
+03F0 54F0      1281            anl     a,#0xf0
+03F2 C538      1282            xch     a,_str2hex_sloc0_1_0
+03F4 C4        1283            swap    a
+03F5 C538      1284            xch     a,_str2hex_sloc0_1_0
+03F7 6538      1285            xrl     a,_str2hex_sloc0_1_0
+03F9 C538      1286            xch     a,_str2hex_sloc0_1_0
+03FB 54F0      1287            anl     a,#0xf0
+03FD C538      1288            xch     a,_str2hex_sloc0_1_0
+03FF 6538      1289            xrl     a,_str2hex_sloc0_1_0
+0401 F539      1290            mov     (_str2hex_sloc0_1_0 + 1),a
+0403 7800      1291            mov     r0,#0x00
+0405 EF        1292            mov     a,r7
+0406 2538      1293            add     a,_str2hex_sloc0_1_0
+0408 FD        1294            mov     r5,a
+0409 E8        1295            mov     a,r0
+040A 3539      1296            addc    a,(_str2hex_sloc0_1_0 + 1)
+040C FE        1297            mov     r6,a
+040D           1298   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:500: s++;
+040D 0A        1299            inc     r2
+040E BA0008    1300            cjne    r2,#0x00,L021034?
+0411 0B        1301            inc     r3
+0412           1302   L021034?:
+0412 020000    1303            ljmp    L021013?
+0415           1304   L021015?:
+0415           1305   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:502: return x;
+0415 8D82      1306            mov     dpl,r5
+0417 8E83      1307            mov     dph,r6
+0419 22        1308            ret
+041A           1309   ;------------------------------------------------------------
+041A           1310   ;Allocation info for local variables in function 'OutByte'
+041A           1311   ;------------------------------------------------------------
+041A           1312   ;x                         Allocated to registers r2 
+041A           1313   ;------------------------------------------------------------
+041A           1314   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:505: void OutByte (unsigned char x)
+041A           1315   ;        -----------------------------------------
+041A           1316   ;         function OutByte
+041A           1317   ;        -----------------------------------------
+041A           1318   _OutByte:
+041A           1319   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:507: putchar(hexval[x/0x10]);
+041A E582      1320            mov     a,dpl
+041C FA        1321            mov     r2,a
+041D C4        1322            swap    a
+041E 540F      1323            anl     a,#0x0f
+0420 902108    1324            mov     dptr,#_hexval
+0423 93        1325            movc    a,@a+dptr
+0424 F582      1326            mov     dpl,a
+0426 C002      1327            push    ar2
+0428 120000    1328            lcall   _putchar
+042B D002      1329            pop     ar2
+042D           1330   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:508: putchar(hexval[x%0x10]);
+042D 740F      1331            mov     a,#0x0F
+042F 5A        1332            anl     a,r2
+0430 902108    1333            mov     dptr,#_hexval
+0433 93        1334            movc    a,@a+dptr
+0434 F582      1335            mov     dpl,a
+0436 020000    1336            ljmp    _putchar
+0439           1337   ;------------------------------------------------------------
+0439           1338   ;Allocation info for local variables in function 'OutWord'
+0439           1339   ;------------------------------------------------------------
+0439           1340   ;x                         Allocated to registers r2 r3 
+0439           1341   ;------------------------------------------------------------
+0439           1342   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:511: void OutWord (unsigned int x)
+0439           1343   ;        -----------------------------------------
+0439           1344   ;         function OutWord
+0439           1345   ;        -----------------------------------------
+0439           1346   _OutWord:
+0439 AA82      1347            mov     r2,dpl
+043B AB83      1348            mov     r3,dph
+043D           1349   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:513: OutByte(x/0x100);
+043D 8B04      1350            mov     ar4,r3
+043F 8C82      1351            mov     dpl,r4
+0441 C002      1352            push    ar2
+0443 C003      1353            push    ar3
+0445 120000    1354            lcall   _OutByte
+0448 D003      1355            pop     ar3
+044A D002      1356            pop     ar2
+044C           1357   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:514: OutByte(x%0x100);
+044C 8A82      1358            mov     dpl,r2
+044E 020000    1359            ljmp    _OutByte
+0451           1360   ;------------------------------------------------------------
+0451           1361   ;Allocation info for local variables in function 'delay'
+0451           1362   ;------------------------------------------------------------
+0451           1363   ;i                         Allocated to registers r2 r3 
+0451           1364   ;------------------------------------------------------------
+0451           1365   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:517: void delay (void)
+0451           1366   ;        -----------------------------------------
+0451           1367   ;         function delay
+0451           1368   ;        -----------------------------------------
+0451           1369   _delay:
+0451           1370   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:520: for(i=0; i<20000; i++);
+0451 7A20      1371            mov     r2,#0x20
+0453 7B4E      1372            mov     r3,#0x4E
+0455           1373   L024003?:
+0455 1A        1374            dec     r2
+0456 BAFF88    1375            cjne    r2,#0xff,L024009?
+0459 1B        1376            dec     r3
+045A           1377   L024009?:
+045A EA        1378            mov     a,r2
+045B 4B        1379            orl     a,r3
+045C 7000      1380            jnz     L024003?
+045E 22        1381            ret
+045F           1382   ;------------------------------------------------------------
+045F           1383   ;Allocation info for local variables in function 'Manual_Load'
+045F           1384   ;------------------------------------------------------------
+045F           1385   ;add                       Allocated to registers r2 r3 
+045F           1386   ;val                       Allocated to registers r4 
+045F           1387   ;h_add                     Allocated to registers r4 
+045F           1388   ;l_add                     Allocated to registers r5 
+045F           1389   ;------------------------------------------------------------
+045F           1390   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:526: void Manual_Load (void)
+045F           1391   ;        -----------------------------------------
+045F           1392   ;         function Manual_Load
+045F           1393   ;        -----------------------------------------
+045F           1394   _Manual_Load:
+045F           1395   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:532: Copy_Flash_to_XRAM();
+045F 120000    1396            lcall   _Copy_Flash_to_XRAM
+0462           1397   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:534: LEDRA=0;
+0462 75E800    1398            mov     _LEDRA,#0x00
+0465           1399   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:535: LEDRB=0;
+0465 759500    1400            mov     _LEDRB,#0x00
+0468           1401   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:537: add=0;
+0468 7A00      1402            mov     r2,#0x00
+046A 7B00      1403            mov     r3,#0x00
+046C           1404   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:539: while(1)
+046C           1405   L025049?:
+046C           1406   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:542: h_add=add/0x100;
+046C 8B04      1407            mov     ar4,r3
+046E           1408   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:543: l_add=add%0x100;
+046E 8A05      1409            mov     ar5,r2
+0470           1410   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:544: HEX5=seven_seg[h_add/0x10];
+0470 EC        1411            mov     a,r4
+0471 C4        1412            swap    a
+0472 540F      1413            anl     a,#0x0f
+0474 9020C8    1414            mov     dptr,#_seven_seg
+0477 93        1415            movc    a,@a+dptr
+0478 F58F      1416            mov     _HEX5,a
+047A           1417   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:545: HEX4=seven_seg[h_add%0x10];
+047A 740F      1418            mov     a,#0x0F
+047C 5C        1419            anl     a,r4
+047D 9020C8    1420            mov     dptr,#_seven_seg
+0480 93        1421            movc    a,@a+dptr
+0481 F58E      1422            mov     _HEX4,a
+0483           1423   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:546: HEX3=seven_seg[l_add/0x10];
+0483 ED        1424            mov     a,r5
+0484 C4        1425            swap    a
+0485 540F      1426            anl     a,#0x0f
+0487 9020C8    1427            mov     dptr,#_seven_seg
+048A 93        1428            movc    a,@a+dptr
+048B F594      1429            mov     _HEX3,a
+048D           1430   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:547: HEX2=seven_seg[l_add%0x10];
+048D 740F      1431            mov     a,#0x0F
+048F 5D        1432            anl     a,r5
+0490 9020C8    1433            mov     dptr,#_seven_seg
+0493 93        1434            movc    a,@a+dptr
+0494 F593      1435            mov     _HEX2,a
+0496           1436   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:549: val=Read_XRAM(add);
+0496 8A82      1437            mov     dpl,r2
+0498 8B83      1438            mov     dph,r3
+049A C002      1439            push    ar2
+049C C003      1440            push    ar3
+049E 120000    1441            lcall   _Read_XRAM
+04A1 AC82      1442            mov     r4,dpl
+04A3 D003      1443            pop     ar3
+04A5 D002      1444            pop     ar2
+04A7           1445   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:550: HEX1=seven_seg[val/0x10];
+04A7 EC        1446            mov     a,r4
+04A8 C4        1447            swap    a
+04A9 540F      1448            anl     a,#0x0f
+04AB FD        1449            mov     r5,a
+04AC 9020C8    1450            mov     dptr,#_seven_seg
+04AF 93        1451            movc    a,@a+dptr
+04B0 F592      1452            mov     _HEX1,a
+04B2           1453   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:551: HEX0=seven_seg[val%0x10];
+04B2 740F      1454            mov     a,#0x0F
+04B4 5C        1455            anl     a,r4
+04B5 9020C8    1456            mov     dptr,#_seven_seg
+04B8 93        1457            movc    a,@a+dptr
+04B9 F591      1458            mov     _HEX0,a
+04BB           1459   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:553: if((KEY_2==0) && (KEY_1==1))
+04BB 20FA08    1460            jb      _KEY_2,L025045?
+04BE 30F908    1461            jnb     _KEY_1,L025045?
+04C1           1462   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:555: delay();
+04C1 C002      1463            push    ar2
+04C3 C003      1464            push    ar3
+04C5 120000    1465            lcall   _delay
+04C8 D003      1466            pop     ar3
+04CA D002      1467            pop     ar2
+04CC           1468   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:556: if(KEY_2==0)
+04CC 20FAC8    1469            jb      _KEY_2,L025049?
+04CF           1470   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:558: while (KEY_2==0); // Wait for key release
+04CF           1471   L025001?:
+04CF 30FA48    1472            jnb     _KEY_2,L025001?
+04D2           1473   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:559: if((SWB&0x01)==0x01) // Reading address low
+04D2 7401      1474            mov     a,#0x01
+04D4 5595      1475            anl     a,_SWB
+04D6 FC        1476            mov     r4,a
+04D7 BC0188    1477            cjne    r4,#0x01,L025010?
+04DA           1478   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:561: add&=0x7f00;
+04DA 7A00      1479            mov     r2,#0x00
+04DC 53037F    1480            anl     ar3,#0x7F
+04DF           1481   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:562: add|=SWA;   
+04DF ACE8      1482            mov     r4,_SWA
+04E1 7D00      1483            mov     r5,#0x00
+04E3 EC        1484            mov     a,r4
+04E4 4202      1485            orl     ar2,a
+04E6 ED        1486            mov     a,r5
+04E7 4203      1487            orl     ar3,a
+04E9 020000    1488            ljmp    L025049?
+04EC           1489   L025010?:
+04EC           1490   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:564: else if((SWB&0x02)==0x02) // Reading address high
+04EC 7402      1491            mov     a,#0x02
+04EE 5595      1492            anl     a,_SWB
+04F0 FC        1493            mov     r4,a
+04F1 BC02C8    1494            cjne    r4,#0x02,L025007?
+04F4           1495   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:566: add&=0x00ff;
+04F4 7B00      1496            mov     r3,#0x00
+04F6           1497   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:567: add|=(SWA*0x100);   
+04F6 ACE8      1498            mov     r4,_SWA
+04F8 8C05      1499            mov     ar5,r4
+04FA E4        1500            clr     a
+04FB FC        1501            mov     r4,a
+04FC 4202      1502            orl     ar2,a
+04FE ED        1503            mov     a,r5
+04FF 4203      1504            orl     ar3,a
+0501 020000    1505            ljmp    L025049?
+0504           1506   L025007?:
+0504           1507   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:569: else if ((SWB&0x03)==0) // Reading data
+0504 E595      1508            mov     a,_SWB
+0506 5403      1509            anl     a,#0x03
+0508 6000      1510            jz      L025083?
+050A 020000    1511            ljmp    L025049?
+050D           1512   L025083?:
+050D           1513   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:571: val=SWA;
+050D 85E838    1514            mov     _Write_XRAM_PARM_2,_SWA
+0510           1515   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:572: Write_XRAM(add, val);
+0510 8A82      1516            mov     dpl,r2
+0512 8B83      1517            mov     dph,r3
+0514 C002      1518            push    ar2
+0516 C003      1519            push    ar3
+0518 120000    1520            lcall   _Write_XRAM
+051B D003      1521            pop     ar3
+051D D002      1522            pop     ar2
+051F 020000    1523            ljmp    L025049?
+0522           1524   L025045?:
+0522           1525   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:577: else if(KEY_4==0) // Increment address
+0522 20FC48    1526            jb      _KEY_4,L025042?
+0525           1527   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:579: delay();
+0525 C002      1528            push    ar2
+0527 C003      1529            push    ar3
+0529 120000    1530            lcall   _delay
+052C D003      1531            pop     ar3
+052E D002      1532            pop     ar2
+0530           1533   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:580: if(KEY_4==0)
+0530 30FC88    1534            jnb     _KEY_4,L025085?
+0533 020000    1535            ljmp    L025049?
+0536           1536   L025085?:
+0536           1537   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:582: while(KEY_4==0); // Wait for key release
+0536           1538   L025014?:
+0536 30FCC8    1539            jnb     _KEY_4,L025014?
+0539           1540   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:583: LEDRA_1=0;
+0539 C2E9      1541            clr     _LEDRA_1
+053B           1542   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:584: LEDRA_2=0;
+053B C2EA      1543            clr     _LEDRA_2
+053D           1544   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:585: add++;
+053D 0A        1545            inc     r2
+053E BA0008    1546            cjne    r2,#0x00,L025087?
+0541 0B        1547            inc     r3
+0542           1548   L025087?:
+0542           1549   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:586: if (add>0x7fff) add=0;
+0542 C3        1550            clr     c
+0543 74FF      1551            mov     a,#0xFF
+0545 9A        1552            subb    a,r2
+0546 747F      1553            mov     a,#0x7F
+0548 9B        1554            subb    a,r3
+0549 4000      1555            jc      L025088?
+054B 020000    1556            ljmp    L025049?
+054E           1557   L025088?:
+054E 7A00      1558            mov     r2,#0x00
+0550 7B00      1559            mov     r3,#0x00
+0552 020000    1560            ljmp    L025049?
+0555           1561   L025042?:
+0555           1562   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:589: else if (KEY_3==0) // Decrement address
+0555 20FB88    1563            jb      _KEY_3,L025039?
+0558           1564   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:591: delay();
+0558 C002      1565            push    ar2
+055A C003      1566            push    ar3
+055C 120000    1567            lcall   _delay
+055F D003      1568            pop     ar3
+0561 D002      1569            pop     ar2
+0563           1570   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:592: if(KEY_3==0)
+0563 30FBC8    1571            jnb     _KEY_3,L025090?
+0566 020000    1572            ljmp    L025049?
+0569           1573   L025090?:
+0569           1574   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:594: while(KEY_3==0); // Wait for key release
+0569           1575   L025021?:
+0569 30FB08    1576            jnb     _KEY_3,L025021?
+056C           1577   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:595: LEDRA_1=0;
+056C C2E9      1578            clr     _LEDRA_1
+056E           1579   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:596: LEDRA_2=0;
+056E C2EA      1580            clr     _LEDRA_2
+0570           1581   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:597: add--;
+0570 1A        1582            dec     r2
+0571 BAFF48    1583            cjne    r2,#0xff,L025092?
+0574 1B        1584            dec     r3
+0575           1585   L025092?:
+0575           1586   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:598: if (add>0x7fff) add=0x7fff;
+0575 C3        1587            clr     c
+0576 74FF      1588            mov     a,#0xFF
+0578 9A        1589            subb    a,r2
+0579 747F      1590            mov     a,#0x7F
+057B 9B        1591            subb    a,r3
+057C 4000      1592            jc      L025093?
+057E 020000    1593            ljmp    L025049?
+0581           1594   L025093?:
+0581 7AFF      1595            mov     r2,#0xFF
+0583 7B7F      1596            mov     r3,#0x7F
+0585 020000    1597            ljmp    L025049?
+0588           1598   L025039?:
+0588           1599   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:601: else if ( (KEY_2==0) && (KEY_1==0) ) // Save RAM to flash
+0588 30FAC8    1600            jnb     _KEY_2,L025094?
+058B 020000    1601            ljmp    L025049?
+058E           1602   L025094?:
+058E 30F908    1603            jnb     _KEY_1,L025095?
+0591 020000    1604            ljmp    L025049?
+0594           1605   L025095?:
+0594           1606   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:603: delay();
+0594 C002      1607            push    ar2
+0596 C003      1608            push    ar3
+0598 120000    1609            lcall   _delay
+059B D003      1610            pop     ar3
+059D D002      1611            pop     ar2
+059F           1612   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:604: if ((KEY_2==0) && (KEY_1==0))
+059F 30FA48    1613            jnb     _KEY_2,L025096?
+05A2 020000    1614            ljmp    L025049?
+05A5           1615   L025096?:
+05A5 30F988    1616            jnb     _KEY_1,L025097?
+05A8 020000    1617            ljmp    L025049?
+05AB           1618   L025097?:
+05AB           1619   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:606: while( (KEY_2==0) && (KEY_1==0) ); // Wait for key release
+05AB           1620   L025029?:
+05AB 20FA08    1621            jb      _KEY_2,L025031?
+05AE 30F9C8    1622            jnb     _KEY_1,L025029?
+05B1           1623   L025031?:
+05B1           1624   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:607: EraseSector();
+05B1 C002      1625            push    ar2
+05B3 C003      1626            push    ar3
+05B5 120000    1627            lcall   _EraseSector
+05B8           1628   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:608: LEDRA_1=1;
+05B8 D2E9      1629            setb    _LEDRA_1
+05BA           1630   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:609: Copy_XRAM_to_UFM();
+05BA 120000    1631            lcall   _Copy_XRAM_to_UFM
+05BD D003      1632            pop     ar3
+05BF D002      1633            pop     ar2
+05C1           1634   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:610: LEDRA_2=1;
+05C1 D2EA      1635            setb    _LEDRA_2
+05C3 020000    1636            ljmp    L025049?
+05C6           1637   ;------------------------------------------------------------
+05C6           1638   ;Allocation info for local variables in function 'main'
+05C6           1639   ;------------------------------------------------------------
+05C6           1640   ;d                         Allocated to registers r2 
+05C6           1641   ;------------------------------------------------------------
+05C6           1642   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:625: void main (void)
+05C6           1643   ;        -----------------------------------------
+05C6           1644   ;         function main
+05C6           1645   ;        -----------------------------------------
+05C6           1646   _main:
+05C6           1647   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:630: UFM_DATA_CMD=0x00;
+05C6 75ED00    1648            mov     _UFM_DATA_CMD,#0x00
+05C9           1649   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:631: UFM_CONTROL_CMD=0x00;
+05C9 75EF00    1650            mov     _UFM_CONTROL_CMD,#0x00
+05CC           1651   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:633: KEY_2=0; // Ground por key2
+05CC C2FA      1652            clr     _KEY_2
+05CE           1653   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:634: KEY_3=0; // Ground por key3
+05CE C2FB      1654            clr     _KEY_3
+05D0           1655   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:636: if( (KEY_1==1) && (KEY_3==1) && (KEY_4==1) ) Load_Ram_Fast_and_Run();
+05D0 30F948    1656            jnb     _KEY_1,L026002?
+05D3 30FB48    1657            jnb     _KEY_3,L026002?
+05D6 30FC48    1658            jnb     _KEY_4,L026002?
+05D9 120000    1659            lcall   _Load_Ram_Fast_and_Run
+05DC           1660   L026002?:
+05DC           1661   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:638: if (KEY_4==0) // Run debugger?
+05DC 20FC88    1662            jb      _KEY_4,L026009?
+05DF           1663   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:640: HEX5=LetterD;
+05DF 758FA1    1664            mov     _HEX5,#0xA1
+05E2           1665   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:641: HEX4=LetterE;
+05E2 758E86    1666            mov     _HEX4,#0x86
+05E5           1667   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:642: HEX3=LetterB;
+05E5 759483    1668            mov     _HEX3,#0x83
+05E8           1669   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:643: HEX2=LetterU;
+05E8 7593C1    1670            mov     _HEX2,#0xC1
+05EB           1671   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:644: HEX1=LetterG;
+05EB 7592C2    1672            mov     _HEX1,#0xC2
+05EE           1673   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:645: HEX0=LetterG;
+05EE 7591C2    1674            mov     _HEX0,#0xC2
+05F1           1675   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:648: while(KEY_4==0);
+05F1           1676   L026005?:
+05F1 30FCC8    1677            jnb     _KEY_4,L026005?
+05F4           1678   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:650: HEX0=0xff;
+05F4 7591FF    1679            mov     _HEX0,#0xFF
+05F7           1680   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:651: HEX1=0xff;
+05F7 7592FF    1681            mov     _HEX1,#0xFF
+05FA           1682   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:652: HEX2=0xff;
+05FA 7593FF    1683            mov     _HEX2,#0xFF
+05FD           1684   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:653: HEX3=0xff;
+05FD 7594FF    1685            mov     _HEX3,#0xFF
+0600           1686   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:654: HEX4=0xff;
+0600 758EFF    1687            mov     _HEX4,#0xFF
+0603           1688   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:655: HEX5=0xff;
+0603 758FFF    1689            mov     _HEX5,#0xFF
+0606           1690   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:657: Load_Ram_Fast_and_Run_Debugger();
+0606 120000    1691            lcall   _Load_Ram_Fast_and_Run_Debugger
+0609           1692   L026009?:
+0609           1693   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:660: if (KEY_3==0)
+0609 20FB08    1694            jb      _KEY_3,L026014?
+060C           1695   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:662: HEX5=Dash;
+060C 758FBF    1696            mov     _HEX5,#0xBF
+060F           1697   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:663: HEX4=Dash;
+060F 758EBF    1698            mov     _HEX4,#0xBF
+0612           1699   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:664: HEX3=Dash;
+0612 7594BF    1700            mov     _HEX3,#0xBF
+0615           1701   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:665: HEX2=Dash;
+0615 7593BF    1702            mov     _HEX2,#0xBF
+0618           1703   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:666: HEX1=Dash;
+0618 7592BF    1704            mov     _HEX1,#0xBF
+061B           1705   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:667: HEX0=Dash;
+061B 7591BF    1706            mov     _HEX0,#0xBF
+061E           1707   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:669: while(KEY_3==0);
+061E           1708   L026010?:
+061E 30FB48    1709            jnb     _KEY_3,L026010?
+0621           1710   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:671: Manual_Load();
+0621 120000    1711            lcall   _Manual_Load
+0624           1712   L026014?:
+0624           1713   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:674: XRAMUSEDAS=1; // 32k RAM accessed as xdata
+0624 75C301    1714            mov     _XRAMUSEDAS,#0x01
+0627           1715   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:676: HEX3=LetterB;
+0627 759483    1716            mov     _HEX3,#0x83
+062A           1717   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:677: HEX2=LetterO;
+062A 7593A3    1718            mov     _HEX2,#0xA3
+062D           1719   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:678: HEX1=LetterO;
+062D 7592A3    1720            mov     _HEX1,#0xA3
+0630           1721   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:679: HEX0=LetterT;
+0630 759187    1722            mov     _HEX0,#0x87
+0633           1723   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:681: while(KEY_1==0); // Wait for key release
+0633           1724   L026015?:
+0633 30F988    1725            jnb     _KEY_1,L026015?
+0636           1726   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:683: LEDRA=1;// Bootloader running
+0636 75E801    1727            mov     _LEDRA,#0x01
+0639           1728   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:684: LEDRB=0;
+0639 759500    1729            mov     _LEDRB,#0x00
+063C           1730   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:686: HEX0=0xff;
+063C 7591FF    1731            mov     _HEX0,#0xFF
+063F           1732   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:687: HEX1=0xff;
+063F 7592FF    1733            mov     _HEX1,#0xFF
+0642           1734   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:688: HEX2=0xff;
+0642 7593FF    1735            mov     _HEX2,#0xFF
+0645           1736   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:689: HEX3=0xff;
+0645 7594FF    1737            mov     _HEX3,#0xFF
+0648           1738   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:690: HEX4=0xff;
+0648 758EFF    1739            mov     _HEX4,#0xFF
+064B           1740   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:691: HEX5=0xff;
+064B 758FFF    1741            mov     _HEX5,#0xFF
+064E           1742   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:693: inituart();
+064E 120000    1743            lcall   _inituart
+0651           1744   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:697: Write_XRAM(MEMORY_KEY, 0x00);
+0651 753800    1745            mov     _Write_XRAM_PARM_2,#0x00
+0654 907FFF    1746            mov     dptr,#0x7FFF
+0657 120000    1747            lcall   _Write_XRAM
+065A           1748   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:700: while(1)
+065A           1749   L026025?:
+065A           1750   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:702: if (RI==1)
+065A 309808    1751            jnb     _RI,L026021?
+065D           1752   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:704: d=SBUF;
+065D AA99      1753            mov     r2,_SBUF
+065F           1754   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:705: RI=0;
+065F C298      1755            clr     _RI
+0661           1756   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:706: if(d==(unsigned char)'U') break;
+0661 BA5548    1757            cjne    r2,#0x55,L026053?
+0664 8000      1758            sjmp    L026026?
+0666           1759   L026053?:
+0666           1760   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:707: TI=0; // Echo what was received
+0666 C299      1761            clr     _TI
+0668           1762   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:708: SBUF=d;
+0668 8A99      1763            mov     _SBUF,r2
+066A           1764   L026021?:
+066A           1765   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:711: if(Read_XRAM(MEMORY_KEY)!=0x00)
+066A 907FFF    1766            mov     dptr,#0x7FFF
+066D 120000    1767            lcall   _Read_XRAM
+0670 E582      1768            mov     a,dpl
+0672 6000      1769            jz      L026025?
+0674           1770   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:713: LEDRA_1=0;
+0674 C2E9      1771            clr     _LEDRA_1
+0676           1772   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:714: LEDRA_2=0;
+0676 C2EA      1773            clr     _LEDRA_2
+0678           1774   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:715: Write_XRAM(MEMORY_KEY, 0x00);
+0678 753800    1775            mov     _Write_XRAM_PARM_2,#0x00
+067B 907FFF    1776            mov     dptr,#0x7FFF
+067E 120000    1777            lcall   _Write_XRAM
+0681           1778   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:716: EraseSector();
+0681 120000    1779            lcall   _EraseSector
+0684           1780   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:717: LEDRA_1=1;
+0684 D2E9      1781            setb    _LEDRA_1
+0686           1782   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:718: Copy_XRAM_to_UFM();
+0686 120000    1783            lcall   _Copy_XRAM_to_UFM
+0689           1784   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:719: LEDRA_2=1;
+0689 D2EA      1785            setb    _LEDRA_2
+068B 8000      1786            sjmp    L026025?
+068D           1787   L026026?:
+068D           1788   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:723: loadintelhex();
+068D 020000    1789            ljmp    _loadintelhex
+0690           1790   ;------------------------------------------------------------
+0690           1791   ;Allocation info for local variables in function 'dummy_switch'
+0690           1792   ;------------------------------------------------------------
+0690           1793   ;------------------------------------------------------------
+0690           1794   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:726: void dummy_switch(void) __naked
+0690           1795   ;        -----------------------------------------
+0690           1796   ;         function dummy_switch
+0690           1797   ;        -----------------------------------------
+0690           1798   _dummy_switch:
+0690           1799   ;        naked function: no prologue.
+0690           1800   ;        C:\Source\MAX10_8052_FD_ADC\Boot\CV_Boot_UFM.c:738: _endasm;
+0690           1801            
+FFE0           1802              CSEG at 0xFFE0
+FFE0 75C300    1803              mov _XRAMUSEDAS, #0x00 ; 32k RAM accessed as code
+FFE3 00        1804              nop
+FFE4 22        1805              ret
+FFE5           1806            
+FFE8           1807              CSEG at 0xffE8
+FFE8 75C301    1808              mov _XRAMUSEDAS, #0x01 ; 32k RAM accessed as xdata
+FFEB 00        1809              nop
+FFEC 22        1810              ret
+FFED           1811             
+FFED           1812   ;        naked function: no epilogue.
+0000           1813            rseg R_CSEG
+0000           1814   
+0000           1815            rseg R_XINIT
+0000           1816   
+0000           1817            rseg R_CONST
+0000           1818   _hexval:
+0000 30313233  1819            db '0123456789ABCDEF'
+     34353637
+     38394142
+     43444546
+0010 00        1820            db 0x00
+0011           1821   __str_0:
+0011 444531    1822            db 'DE1'
+0014 00        1823            db 0x00
+0015           1824   _seven_seg:
+0015 C0        1825            db 0xc0         ; 192
+0016 F9        1826            db 0xf9         ; 249
+0017 A4        1827            db 0xa4         ; 164
+0018 B0        1828            db 0xb0         ; 176
+0019 99        1829            db 0x99         ; 153
+001A 92        1830            db 0x92         ; 146
+001B 82        1831            db 0x82         ; 130
+001C F8        1832            db 0xf8         ; 248
+001D 80        1833            db 0x80         ; 128
+001E 90        1834            db 0x90         ; 144
+001F 88        1835            db 0x88         ; 136
+0020 83        1836            db 0x83         ; 131
+0021 C6        1837            db 0xc6         ; 198
+0022 A1        1838            db 0xa1         ; 161
+0023 86        1839            db 0x86         ; 134
+0024 8E        1840            db 0x8e         ; 142
+0025           1841   
+FFED           1842            CSEG
+FFED           1843   
+FFED           1844   end

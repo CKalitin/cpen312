@@ -1,0 +1,2 @@
+v1
+DSP_BALANCING_IMPLEMENTATION,DSP_BLOCKS,T51:core51|T51_ALU:alu|T51_MD:md|lpm_mult:Mult0|mult_0ls:auto_generated|mac_out2,
