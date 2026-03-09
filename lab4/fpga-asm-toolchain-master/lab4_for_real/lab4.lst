@@ -1,0 +1,667 @@
+0000              1   ; lab4.asm: Display student number on HEX5-HEX0
+0000              2   ; Format depends on SW2-SW0 latched by KEY3
+0000              3   ; Student number: 73177271
+                 -1   $MODMAX10
+0000              1   ;--------------------------------------------------------
+0000              2   ; Special Function Registers
+0000              3   ;--------------------------------------------------------
+0000              4   P0             DATA 0x80
+0000              5   SP             DATA 0x81
+0000              6   DPL            DATA 0x82
+0000              7   DPH            DATA 0x83
+0000              8   PCON           DATA 0x87
+0000              9   TCON           DATA 0x88
+0000             10   TMOD           DATA 0x89
+0000             11   TL0            DATA 0x8a
+0000             12   TL1            DATA 0x8b
+0000             13   TH0            DATA 0x8c
+0000             14   TH1            DATA 0x8d
+0000             15   P1             DATA 0x90
+0000             16   SCON           DATA 0x98
+0000             17   SBUF           DATA 0x99
+0000             18   P2             DATA 0xa0
+0000             19   IE             DATA 0xa8
+0000             20   P3             DATA 0xb0
+0000             21   IP             DATA 0xb8
+0000             22   PSW            DATA 0xd0
+0000             23   ACC            DATA 0xe0
+0000             24   B              DATA 0xf0
+0000             25   T2CON          DATA 0xc8
+0000             26   RCAP2L         DATA 0xca
+0000             27   RCAP2H         DATA 0xcb
+0000             28   TL2            DATA 0xcc
+0000             29   TH2            DATA 0xcd
+0000             30   DPS            DATA 0x86
+0000             31   DPH1           DATA 0x85
+0000             32   DPL1           DATA 0x84
+0000             33   HEX0           DATA 0x91
+0000             34   HEX1           DATA 0x92
+0000             35   HEX2           DATA 0x93
+0000             36   HEX3           DATA 0x94
+0000             37   HEX4           DATA 0x8e
+0000             38   HEX5           DATA 0x8f
+0000             39   LEDRA          DATA 0xe8
+0000             40   LEDRB          DATA 0x95
+0000             41   SWA            DATA 0xe8
+0000             42   SWB            DATA 0x95
+0000             43   KEY            DATA 0xf8
+0000             44   P0MOD          DATA 0x9a
+0000             45   P1MOD          DATA 0x9b
+0000             46   P2MOD          DATA 0x9c
+0000             47   P3MOD          DATA 0x9d
+0000             48   REP_ADD_L      DATA 0xf1
+0000             49   REP_ADD_H      DATA 0xf2
+0000             50   REP_VALUE      DATA 0xf3
+0000             51   DEBUG_CALL_L   DATA 0xfa
+0000             52   DEBUG_CALL_H   DATA 0xfb
+0000             53   BPC            DATA 0xfc
+0000             54   BPS            DATA 0xfd
+0000             55   BPAL           DATA 0xfe
+0000             56   BPAH           DATA 0xff
+0000             57   LBPAL          DATA 0xfa
+0000             58   LBPAH          DATA 0xfb
+0000             59   P4             DATA 0xc0
+0000             60   P4MOD          DATA 0xc1
+0000             61   XRAMUSEDAS     DATA 0xc3
+0000             62   UFM_ADD0       DATA 0xe1
+0000             63   UFM_ADD1       DATA 0xe2
+0000             64   UFM_ADD2       DATA 0xe3
+0000             65   UFM_DATA0      DATA 0xe4
+0000             66   UFM_DATA1      DATA 0xe5
+0000             67   UFM_DATA2      DATA 0xe6
+0000             68   UFM_DATA3      DATA 0xe7
+0000             69   UFM_CONTROL0   DATA 0xe9
+0000             70   UFM_CONTROL1   DATA 0xea
+0000             71   UFM_CONTROL2   DATA 0xeb
+0000             72   UFM_CONTROL3   DATA 0xec
+0000             73   UFM_DATA_CMD   DATA 0xed
+0000             74   UFM_DATA_STATUS DATA 0xee
+0000             75   UFM_CONTROL_CMD DATA 0xef
+0000             76   ADC_C          DATA 0xa1
+0000             77   ADC_L          DATA 0xa2
+0000             78   ADC_H          DATA 0xa3
+0000             79   
+0000             80   ;--------------------------------------------------------
+0000             81   ; special function bits
+0000             82   ;--------------------------------------------------------
+0000             83   P0_0           BIT 0x80
+0000             84   P0_1           BIT 0x81
+0000             85   P0_2           BIT 0x82
+0000             86   P0_3           BIT 0x83
+0000             87   P0_4           BIT 0x84
+0000             88   P0_5           BIT 0x85
+0000             89   P0_6           BIT 0x86
+0000             90   P0_7           BIT 0x87
+0000             91   IT0            BIT 0x88
+0000             92   IE0            BIT 0x89
+0000             93   IT1            BIT 0x8a
+0000             94   IE1            BIT 0x8b
+0000             95   TR0            BIT 0x8c
+0000             96   TF0            BIT 0x8d
+0000             97   TR1            BIT 0x8e
+0000             98   TF1            BIT 0x8f
+0000             99   P1_0           BIT 0x90
+0000            100   P1_1           BIT 0x91
+0000            101   P1_2           BIT 0x92
+0000            102   P1_3           BIT 0x93
+0000            103   P1_4           BIT 0x94
+0000            104   P1_5           BIT 0x95
+0000            105   P1_6           BIT 0x96
+0000            106   P1_7           BIT 0x97
+0000            107   RI             BIT 0x98
+0000            108   TI             BIT 0x99
+0000            109   RB8            BIT 0x9a
+0000            110   TB8            BIT 0x9b
+0000            111   REN            BIT 0x9c
+0000            112   SM2            BIT 0x9d
+0000            113   SM1            BIT 0x9e
+0000            114   SM0            BIT 0x9f
+0000            115   P2_0           BIT 0xa0
+0000            116   P2_1           BIT 0xa1
+0000            117   P2_2           BIT 0xa2
+0000            118   P2_3           BIT 0xa3
+0000            119   P2_4           BIT 0xa4
+0000            120   P2_5           BIT 0xa5
+0000            121   P2_6           BIT 0xa6
+0000            122   P2_7           BIT 0xa7
+0000            123   EX0            BIT 0xa8
+0000            124   ET0            BIT 0xa9
+0000            125   EX1            BIT 0xaa
+0000            126   ET1            BIT 0xab
+0000            127   ES             BIT 0xac
+0000            128   ET2            BIT 0xad
+0000            129   EA             BIT 0xaf
+0000            130   P3_0           BIT 0xb0
+0000            131   P3_1           BIT 0xb1
+0000            132   P3_2           BIT 0xb2
+0000            133   P3_3           BIT 0xb3
+0000            134   P3_4           BIT 0xb4
+0000            135   P3_5           BIT 0xb5
+0000            136   P3_6           BIT 0xb6
+0000            137   P3_7           BIT 0xb7
+0000            138   RXD            BIT 0xb0
+0000            139   TXD            BIT 0xb1
+0000            140   INT0           BIT 0xb2
+0000            141   INT1           BIT 0xb3
+0000            142   T0             BIT 0xb4
+0000            143   T1             BIT 0xb5
+0000            144   WR             BIT 0xb6
+0000            145   RD             BIT 0xb7
+0000            146   PX0            BIT 0xb8
+0000            147   PT0            BIT 0xb9
+0000            148   PX1            BIT 0xba
+0000            149   PT1            BIT 0xbb
+0000            150   PS             BIT 0xbc
+0000            151   PT2            BIT 0xbd
+0000            152   P              BIT 0xd0
+0000            153   F1             BIT 0xd1
+0000            154   OV             BIT 0xd2
+0000            155   RS0            BIT 0xd3
+0000            156   RS1            BIT 0xd4
+0000            157   F0             BIT 0xd5
+0000            158   AC             BIT 0xd6
+0000            159   CY             BIT 0xd7
+0000            160   T2CON_0        BIT 0xc8
+0000            161   T2CON_1        BIT 0xc9
+0000            162   T2CON_2        BIT 0xca
+0000            163   T2CON_3        BIT 0xcb
+0000            164   T2CON_4        BIT 0xcc
+0000            165   T2CON_5        BIT 0xcd
+0000            166   T2CON_6        BIT 0xce
+0000            167   T2CON_7        BIT 0xcf
+0000            168   CP_RL2         BIT 0xc8
+0000            169   C_T2           BIT 0xc9
+0000            170   TR2            BIT 0xca
+0000            171   EXEN2          BIT 0xcb
+0000            172   TCLK           BIT 0xcc
+0000            173   RCLK           BIT 0xcd
+0000            174   EXF2           BIT 0xce
+0000            175   TF2            BIT 0xcf
+0000            176   LEDRA_0        BIT 0xe8
+0000            177   LEDRA_1        BIT 0xe9
+0000            178   LEDRA_2        BIT 0xea
+0000            179   LEDRA_3        BIT 0xeb
+0000            180   LEDRA_4        BIT 0xec
+0000            181   LEDRA_5        BIT 0xed
+0000            182   LEDRA_6        BIT 0xee
+0000            183   LEDRA_7        BIT 0xef
+0000            184   SWA_0          BIT 0xe8
+0000            185   SWA_1          BIT 0xe9
+0000            186   SWA_2          BIT 0xea
+0000            187   SWA_3          BIT 0xeb
+0000            188   SWA_4          BIT 0xec
+0000            189   SWA_5          BIT 0xed
+0000            190   SWA_6          BIT 0xee
+0000            191   SWA_7          BIT 0xef
+0000            192   KEY_0          BIT 0xf8
+0000            193   KEY_1          BIT 0xf9
+0000            194   KEY_2          BIT 0xfa
+0000            195   KEY_3          BIT 0xfb
+0000            196   P4_0           BIT 0xc0
+0000            197   P4_1           BIT 0xc1
+0000            198   P4_2           BIT 0xc2
+0000            199   P4_3           BIT 0xc3
+0000            200   P4_4           BIT 0xc4
+0000            201   P4_5           BIT 0xc5
+0000            202   P4_6           BIT 0xc6
+0000            203   P4_7           BIT 0xc7
+0000              5   
+0000              6   ; 7-seg lookup table (active low, dp off)
+0000              7   ; 0=0xC0, 1=0xF9, 2=0xA4, 3=0xB0, 4=0x99
+0000              8   ; 5=0x92, 6=0x82, 7=0xF8, 8=0x80, 9=0x90
+0000              9   ; blank=0xFF
+0000             10   ; H=0x89, E=0x86, L=0xC7, O=0xC0, C=0xC6, P=0x8C, N=0xAB, 3=0xB0, 1=0xF9, 2=0xA4
+0000             11   
+0000             12   BLANK  EQU 0xFF
+0000             13   SEG_0  EQU 0xC0
+0000             14   SEG_1  EQU 0xF9
+0000             15   SEG_2  EQU 0xA4
+0000             16   SEG_3  EQU 0xB0
+0000             17   SEG_4  EQU 0x99
+0000             18   SEG_5  EQU 0x92
+0000             19   SEG_6  EQU 0x82
+0000             20   SEG_7  EQU 0xF8
+0000             21   SEG_8  EQU 0x80
+0000             22   SEG_9  EQU 0x90
+0000             23   SEG_H  EQU 0x89
+0000             24   SEG_E  EQU 0x86
+0000             25   SEG_L  EQU 0xC7
+0000             26   SEG_O  EQU 0xC0
+0000             27   SEG_C  EQU 0xC6
+0000             28   SEG_P  EQU 0x8C
+0000             29   SEG_N  EQU 0xAB
+0000             30   
+0000             31   org 0000H
+0000 020043      32            ljmp myprogram
+0003             33   
+0003             34   ; ============================================================
+0003             35   ; Delay subroutines (33.33MHz clock, 1 cycle = 30ns)
+0003             36   ; ============================================================
+0003             37   ; ~0.5s delay
+0003             38   WaitHalfSec:
+0003 7A5A        39            mov R2, #90
+0005 79FA        40   L3: mov R1, #250
+0007 78FA        41   L2: mov R0, #250
+0009 D8FE        42   L1: djnz R0, L1
+000B D9FA        43            djnz R1, L2
+000D DAF6        44            djnz R2, L3
+000F 22          45            ret
+0010             46   
+0010             47   ; ~1s delay
+0010             48   WaitOneSec:
+0010 120003      49            lcall WaitHalfSec
+0013 120003      50            lcall WaitHalfSec
+0016 22          51            ret
+0017             52   
+0017             53   ; Delay based on SW3: 1s if SW3=0, 0.5s if SW3=1
+0017             54   WaitSW3:
+0017 E5E8        55            mov A, SWA
+0019 5408        56            anl A, #0x08
+001B 7004        57            jnz WaitSW3_half
+001D 120010      58            lcall WaitOneSec
+0020 22          59            ret
+0021             60   WaitSW3_half:
+0021 120003      61            lcall WaitHalfSec
+0024 22          62            ret
+0025             63   
+0025             64   ; Check if SW2-SW0 changed. Returns: sets carry if changed.
+0025             65   ; Compares current SW2-SW0 with value in R7.
+0025             66   CheckSWChanged:
+0025 E5E8        67            mov A, SWA
+0027 5407        68            anl A, #0x07
+0029 B50702      69            cjne A, 7, sw_changed  ; compare with R7 (register 7)
+002C C3          70            clr C
+002D 22          71            ret
+002E             72   sw_changed:
+002E D3          73            setb C
+002F 22          74            ret
+0030             75   
+0030             76   ; Blank all HEX displays
+0030             77   BlankAll:
+0030 7591FF      78            mov HEX0, #BLANK
+0033 7592FF      79            mov HEX1, #BLANK
+0036 7593FF      80            mov HEX2, #BLANK
+0039 7594FF      81            mov HEX3, #BLANK
+003C 758EFF      82            mov HEX4, #BLANK
+003F 758FFF      83            mov HEX5, #BLANK
+0042 22          84            ret
+0043             85   
+0043             86   ; ============================================================
+0043             87   ; Main program
+0043             88   ; ============================================================
+0043             89   myprogram:
+0043 75817F      90            mov SP, #7FH
+0046 75E800      91            mov LEDRA, #0
+0049 759500      92            mov LEDRB, #0
+004C 120030      93            lcall BlankAll
+004F             94   
+004F             95   main_loop:
+004F             96            ; Wait for KEY3 press (active low)
+004F             97   wait_key3:
+004F 20FBFD      98            jb KEY_3, wait_key3
+0052             99            ; Debounce: wait for KEY3 release
+0052            100   wait_key3_release:
+0052 30FBFD     101            jnb KEY_3, wait_key3_release
+0055            102   
+0055            103            ; Latch SW2-SW0
+0055 E5E8       104            mov A, SWA
+0057 5407       105            anl A, #0x07
+0059 FF         106            mov R7, A          ; save switch state in R7 for change detection
+005A            107   
+005A            108            ; Jump table based on switch value
+005A B40003     109            cjne A, #0, check_case1
+005D 02008A     110            ljmp case_000
+0060            111   check_case1:
+0060 B40103     112            cjne A, #1, check_case2
+0063 0200A2     113            ljmp case_001
+0066            114   check_case2:
+0066 B40203     115            cjne A, #2, check_case3
+0069 0200AE     116            ljmp case_010
+006C            117   check_case3:
+006C B40303     118            cjne A, #3, check_case4
+006F 0200F1     119            ljmp case_011
+0072            120   check_case4:
+0072 B40403     121            cjne A, #4, check_case5
+0075 02013D     122            ljmp case_100
+0078            123   check_case5:
+0078 B40503     124            cjne A, #5, check_case6
+007B 020167     125            ljmp case_101
+007E            126   check_case6:
+007E B40603     127            cjne A, #6, check_case7
+0081 0201B3     128            ljmp case_110
+0084            129   check_case7:
+0084 B407C8     130            cjne A, #7, main_loop
+0087 020206     131            ljmp case_111
+008A            132   
+008A            133   ; ============================================================
+008A            134   ; Case 000: Display 6 most significant digits "731772"
+008A            135   ; ============================================================
+008A            136   case_000:
+008A 120030     137            lcall BlankAll
+008D 758FF8     138            mov HEX5, #SEG_7
+0090 758EB0     139            mov HEX4, #SEG_3
+0093 7594F9     140            mov HEX3, #SEG_1
+0096 7593F8     141            mov HEX2, #SEG_7
+0099 7592F8     142            mov HEX1, #SEG_7
+009C 7591A4     143            mov HEX0, #SEG_2
+009F 02004F     144            ljmp main_loop
+00A2            145   
+00A2            146   ; ============================================================
+00A2            147   ; Case 001: Display 2 least significant digits "71" on HEX1-HEX0
+00A2            148   ; ============================================================
+00A2            149   case_001:
+00A2 120030     150            lcall BlankAll
+00A5 7592F8     151            mov HEX1, #SEG_7
+00A8 7591F9     152            mov HEX0, #SEG_1
+00AB 02004F     153            ljmp main_loop
+00AE            154   
+00AE            155   ; ============================================================
+00AE            156   ; Case 010: Scroll left every 1s (SW3=0) or 0.5s (SW3=1)
+00AE            157   ; "731772"->"317727"->"177271"->"772717"->"727173"->"271731"->...
+00AE            158   ; ============================================================
+00AE            159   case_010:
+00AE 7B00       160            mov R3, #0        ; R3 = scroll offset (0-7)
+00B0            161   case_010_loop:
+00B0 120025     162            lcall CheckSWChanged
+00B3 4039       163            jc main_loop_jump_010
+00B5            164   
+00B5            165            ; Display 6 digits starting at offset R3
+00B5 EB         166            mov A, R3
+00B6 12025A     167            lcall get_digit
+00B9 F58F       168            mov HEX5, A
+00BB            169   
+00BB EB         170            mov A, R3
+00BC 04         171            inc A
+00BD 120258     172            lcall get_digit_mod8
+00C0 F58E       173            mov HEX4, A
+00C2            174   
+00C2 EB         175            mov A, R3
+00C3 2402       176            add A, #2
+00C5 120258     177            lcall get_digit_mod8
+00C8 F594       178            mov HEX3, A
+00CA            179   
+00CA EB         180            mov A, R3
+00CB 2403       181            add A, #3
+00CD 120258     182            lcall get_digit_mod8
+00D0 F593       183            mov HEX2, A
+00D2            184   
+00D2 EB         185            mov A, R3
+00D3 2404       186            add A, #4
+00D5 120258     187            lcall get_digit_mod8
+00D8 F592       188            mov HEX1, A
+00DA            189   
+00DA EB         190            mov A, R3
+00DB 2405       191            add A, #5
+00DD 120258     192            lcall get_digit_mod8
+00E0 F591       193            mov HEX0, A
+00E2            194   
+00E2 120017     195            lcall WaitSW3
+00E5            196   
+00E5            197            ; Increment offset, wrap at 8
+00E5 0B         198            inc R3
+00E6 EB         199            mov A, R3
+00E7 B408C6     200            cjne A, #8, case_010_loop
+00EA 7B00       201            mov R3, #0
+00EC 80C2       202            sjmp case_010_loop
+00EE            203   
+00EE            204   main_loop_jump_010:
+00EE 02004F     205            ljmp main_loop
+00F1            206   
+00F1            207   ; ============================================================
+00F1            208   ; Case 011: Scroll right every 1s (SW3=0) or 0.5s (SW3=1)
+00F1            209   ; "731772"->"173177"->"717317"->"271731"->...
+00F1            210   ; ============================================================
+00F1            211   case_011:
+00F1 7B00       212            mov R3, #0        ; R3 = scroll offset
+00F3            213   case_011_loop:
+00F3 120025     214            lcall CheckSWChanged
+00F6 4042       215            jc main_loop_jump_011
+00F8            216   
+00F8            217            ; offset for right scroll: display starts at (8-R3) mod 8
+00F8 7408       218            mov A, #8
+00FA C3         219            clr C
+00FB 9B         220            subb A, R3
+00FC 120258     221            lcall get_digit_mod8
+00FF F58F       222            mov HEX5, A
+0101            223   
+0101 7409       224            mov A, #9
+0103 C3         225            clr C
+0104 9B         226            subb A, R3
+0105 120258     227            lcall get_digit_mod8
+0108 F58E       228            mov HEX4, A
+010A            229   
+010A 740A       230            mov A, #10
+010C C3         231            clr C
+010D 9B         232            subb A, R3
+010E 120258     233            lcall get_digit_mod8
+0111 F594       234            mov HEX3, A
+0113            235   
+0113 740B       236            mov A, #11
+0115 C3         237            clr C
+0116 9B         238            subb A, R3
+0117 120258     239            lcall get_digit_mod8
+011A F593       240            mov HEX2, A
+011C            241   
+011C 740C       242            mov A, #12
+011E C3         243            clr C
+011F 9B         244            subb A, R3
+0120 120258     245            lcall get_digit_mod8
+0123 F592       246            mov HEX1, A
+0125            247   
+0125 740D       248            mov A, #13
+0127 C3         249            clr C
+0128 9B         250            subb A, R3
+0129 120258     251            lcall get_digit_mod8
+012C F591       252            mov HEX0, A
+012E            253   
+012E 120017     254            lcall WaitSW3
+0131            255   
+0131 0B         256            inc R3
+0132 EB         257            mov A, R3
+0133 B408BD     258            cjne A, #8, case_011_loop
+0136 7B00       259            mov R3, #0
+0138 80B9       260            sjmp case_011_loop
+013A            261   
+013A            262   main_loop_jump_011:
+013A 02004F     263            ljmp main_loop
+013D            264   
+013D            265   ; ============================================================
+013D            266   ; Case 100: Blink "177271" every 1s (SW3=0) or 0.5s (SW3=1)
+013D            267   ; ============================================================
+013D            268   case_100:
+013D 120025     269            lcall CheckSWChanged
+0140 4022       270            jc main_loop_jump_100
+0142            271   
+0142            272            ; Show digits
+0142 758FF9     273            mov HEX5, #SEG_1
+0145 758EF8     274            mov HEX4, #SEG_7
+0148 7594F8     275            mov HEX3, #SEG_7
+014B 7593A4     276            mov HEX2, #SEG_2
+014E 7592F8     277            mov HEX1, #SEG_7
+0151 7591F9     278            mov HEX0, #SEG_1
+0154 120017     279            lcall WaitSW3
+0157            280   
+0157 120025     281            lcall CheckSWChanged
+015A 4008       282            jc main_loop_jump_100
+015C            283   
+015C            284            ; Blank
+015C 120030     285            lcall BlankAll
+015F 120017     286            lcall WaitSW3
+0162 80D9       287            sjmp case_100
+0164            288   
+0164            289   main_loop_jump_100:
+0164 02004F     290            ljmp main_loop
+0167            291   
+0167            292   ; ============================================================
+0167            293   ; Case 101: Digits appear one at a time "7"->"73"->"731"->...
+0167            294   ; ============================================================
+0167            295   case_101:
+0167 7B00       296            mov R3, #0        ; number of digits showing (0=blank)
+0169            297   case_101_loop:
+0169 120025     298            lcall CheckSWChanged
+016C 4042       299            jc main_loop_jump_101
+016E            300   
+016E 120030     301            lcall BlankAll
+0171            302   
+0171            303            ; Show R3 digits from left
+0171 EB         304            mov A, R3
+0172 6030       305            jz case_101_wait  ; 0 = all blank
+0174            306   
+0174            307            ; Always show HEX5 = '7' if R3 >= 1
+0174 758FF8     308            mov HEX5, #SEG_7
+0177 EB         309            mov A, R3
+0178 B40102     310            cjne A, #1, case_101_2
+017B 8027       311            sjmp case_101_wait
+017D            312   case_101_2:
+017D 758EB0     313            mov HEX4, #SEG_3
+0180 EB         314            mov A, R3
+0181 B40202     315            cjne A, #2, case_101_3
+0184 801E       316            sjmp case_101_wait
+0186            317   case_101_3:
+0186 7594F9     318            mov HEX3, #SEG_1
+0189 EB         319            mov A, R3
+018A B40302     320            cjne A, #3, case_101_4
+018D 8015       321            sjmp case_101_wait
+018F            322   case_101_4:
+018F 7593F8     323            mov HEX2, #SEG_7
+0192 EB         324            mov A, R3
+0193 B40402     325            cjne A, #4, case_101_5
+0196 800C       326            sjmp case_101_wait
+0198            327   case_101_5:
+0198 7592F8     328            mov HEX1, #SEG_7
+019B EB         329            mov A, R3
+019C B40502     330            cjne A, #5, case_101_6
+019F 8003       331            sjmp case_101_wait
+01A1            332   case_101_6:
+01A1 7591A4     333            mov HEX0, #SEG_2
+01A4            334   
+01A4            335   case_101_wait:
+01A4 120017     336            lcall WaitSW3
+01A7 0B         337            inc R3
+01A8 EB         338            mov A, R3
+01A9 B407BD     339            cjne A, #7, case_101_loop
+01AC 7B00       340            mov R3, #0        ; reset to blank
+01AE 80B9       341            sjmp case_101_loop
+01B0            342   
+01B0            343   main_loop_jump_101:
+01B0 02004F     344            ljmp main_loop
+01B3            345   
+01B3            346   ; ============================================================
+01B3            347   ; Case 110: "HELLO " -> "123456" -> "CPN312" -> repeat
+01B3            348   ; ============================================================
+01B3            349   case_110:
+01B3 120025     350            lcall CheckSWChanged
+01B6 404B       351            jc main_loop_jump_110
+01B8            352   
+01B8            353            ; "HELLO "
+01B8 758F89     354            mov HEX5, #SEG_H
+01BB 758E86     355            mov HEX4, #SEG_E
+01BE 7594C7     356            mov HEX3, #SEG_L
+01C1 7593C7     357            mov HEX2, #SEG_L
+01C4 7592C0     358            mov HEX1, #SEG_O
+01C7 7591FF     359            mov HEX0, #BLANK
+01CA 120017     360            lcall WaitSW3
+01CD            361   
+01CD 120025     362            lcall CheckSWChanged
+01D0 4031       363            jc main_loop_jump_110
+01D2            364   
+01D2            365            ; "731772"
+01D2 758FF8     366            mov HEX5, #SEG_7
+01D5 758EB0     367            mov HEX4, #SEG_3
+01D8 7594F9     368            mov HEX3, #SEG_1
+01DB 7593F8     369            mov HEX2, #SEG_7
+01DE 7592F8     370            mov HEX1, #SEG_7
+01E1 7591A4     371            mov HEX0, #SEG_2
+01E4 120017     372            lcall WaitSW3
+01E7            373   
+01E7 120025     374            lcall CheckSWChanged
+01EA 4017       375            jc main_loop_jump_110
+01EC            376   
+01EC            377            ; "CPN312"
+01EC 758FC6     378            mov HEX5, #SEG_C
+01EF 758E8C     379            mov HEX4, #SEG_P
+01F2 7594AB     380            mov HEX3, #SEG_N
+01F5 7593B0     381            mov HEX2, #SEG_3
+01F8 7592F9     382            mov HEX1, #SEG_1
+01FB 7591A4     383            mov HEX0, #SEG_2
+01FE 120017     384            lcall WaitSW3
+0201            385   
+0201 80B0       386            sjmp case_110
+0203            387   
+0203            388   main_loop_jump_110:
+0203 02004F     389            ljmp main_loop
+0206            390   
+0206            391   ; ============================================================
+0206            392   ; Case 111: Custom - Knight rider bounce across digits
+0206            393   ; Displays single digit bouncing: 7.....  .3....  ..1...  ...7..  ....7.  .....2  ....7.  ...7.. etc.
+0206            394   ; ============================================================
+0206            395   case_111:
+0206 7B00       396            mov R3, #0        ; position 0-5
+0208 7C00       397            mov R4, #0        ; direction: 0=right, 1=left
+020A            398   case_111_loop:
+020A 120025     399            lcall CheckSWChanged
+020D 4046       400            jc main_loop_jump_111
+020F            401   
+020F 120030     402            lcall BlankAll
+0212            403   
+0212            404            ; Display digit at position R3
+0212 EB         405            mov A, R3
+0213 B40005     406            cjne A, #0, case_111_p1
+0216 758FF8     407            mov HEX5, #SEG_7
+0219 8023       408            sjmp case_111_show
+021B            409   case_111_p1:
+021B B40105     410            cjne A, #1, case_111_p2
+021E 758EB0     411            mov HEX4, #SEG_3
+0221 801B       412            sjmp case_111_show
+0223            413   case_111_p2:
+0223 B40205     414            cjne A, #2, case_111_p3
+0226 7594F9     415            mov HEX3, #SEG_1
+0229 8013       416            sjmp case_111_show
+022B            417   case_111_p3:
+022B B40305     418            cjne A, #3, case_111_p4
+022E 7593F8     419            mov HEX2, #SEG_7
+0231 800B       420            sjmp case_111_show
+0233            421   case_111_p4:
+0233 B40405     422            cjne A, #4, case_111_p5
+0236 7592F8     423            mov HEX1, #SEG_7
+0239 8003       424            sjmp case_111_show
+023B            425   case_111_p5:
+023B 7591A4     426            mov HEX0, #SEG_2
+023E            427   
+023E            428   case_111_show:
+023E 120017     429            lcall WaitSW3
+0241            430   
+0241            431            ; Update position based on direction
+0241 EC         432            mov A, R4
+0242 7009       433            jnz case_111_goleft
+0244            434            ; Going right
+0244 0B         435            inc R3
+0245 EB         436            mov A, R3
+0246 B405C1     437            cjne A, #5, case_111_loop
+0249 7C01       438            mov R4, #1        ; switch to left
+024B 80BD       439            sjmp case_111_loop
+024D            440   case_111_goleft:
+024D 1B         441            dec R3
+024E EB         442            mov A, R3
+024F 70B9       443            jnz case_111_loop
+0251 7C00       444            mov R4, #0        ; switch to right
+0253 80B5       445            sjmp case_111_loop
+0255            446   
+0255            447   main_loop_jump_111:
+0255 02004F     448            ljmp main_loop
+0258            449   
+0258            450   ; ============================================================
+0258            451   ; Utility: Get 7-seg code for student number digit
+0258            452   ; Input: A = index (0-7 maps to digits 7,3,1,7,7,2,7,1)
+0258            453   ; Output: A = 7-seg code
+0258            454   ; ============================================================
+0258            455   get_digit_mod8:
+0258 5407       456            anl A, #0x07      ; mod 8
+025A            457   get_digit:
+025A 04         458            inc A             ; DPTR offset (skip ret)
+025B 83         459            movc A, @A+PC
+025C 22         460            ret
+025D F8B0F9F8   461            DB SEG_7, SEG_3, SEG_1, SEG_7, SEG_7, SEG_2, SEG_7, SEG_1
+     F8A4F8F9
+0265            462   
+0265            463   END
