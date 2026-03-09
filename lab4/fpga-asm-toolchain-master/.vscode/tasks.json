@@ -1,0 +1,64 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Assemble (a51)",
+            "type": "shell",
+            "command": "& '${workspaceFolder}/Call51/Bin/a51.exe' -l '${file}'; if ($LASTEXITCODE -eq 0) { echo 'Successfully compiled ${fileBasename}!\n' }; exit 0",
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "group": "build",
+            "presentation": {
+                "echo": false,
+                "clear": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Flash via JTAG",
+            "type": "shell",
+            "command": "${env:QUARTUS_ROOTDIR}/bin64/quartus_stp.exe",
+            "args": [
+                "-t",
+                "${workspaceFolder}/Load_Script.tcl",
+                "${fileBasenameNoExtension}.hex"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "presentation": {
+                "echo": false,
+                "clear": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Build & Flash",
+            "type": "shell",
+            "command": "& '${workspaceFolder}/Call51/Bin/a51.exe' -l '${file}'; if ($LASTEXITCODE -eq 0) { echo 'Successfully compiled ${fileBasename}!\n'; & '${env:QUARTUS_ROOTDIR}/bin64/quartus_stp.exe' -t '${workspaceFolder}/Load_Script.tcl' '${fileBasenameNoExtension}.hex' }; exit 0",
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": false,
+                "clear": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Clean (remove .hex and .lst files)",
+            "type": "shell",
+            "command": "Get-ChildItem -Path '${workspaceFolder}' -Recurse -Include *.hex,*.lst | Remove-Item -Force; echo 'Cleaned .hex and .lst files.'",
+            "presentation": {
+                "echo": false,
+                "clear": true
+            },
+            "problemMatcher": []
+        }
+    ]
+}

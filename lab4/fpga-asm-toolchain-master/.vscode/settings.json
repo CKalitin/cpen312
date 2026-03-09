@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "*.asm": "asm8051",
+        "*.a51": "asm8051",
+        "*.lst": "plaintext"
+    },
+    "files.eol": "\r\n",
+    "files.encoding": "utf8",
+    "[asm8051]": {
+        "editor.colorDecorators": false,
+        "editor.acceptSuggestionOnEnter": "off"
+    }
+}
