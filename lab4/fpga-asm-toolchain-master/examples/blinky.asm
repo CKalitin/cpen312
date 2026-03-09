@@ -1,5 +1,5 @@
 ; Blinky.asm: blinks LEDR0 of the DE0-CV
-$MODDE0CV
+$MODMAX10
 
 org 0000H
 	ljmp myprogram
@@ -18,8 +18,6 @@ myprogram:
 	mov SP, #7FH
 	mov LEDRA,#0
 	mov LEDRB,#0
-	mov LEDRC,#0
-	mov LEDG,#0
 M0:
 	cpl LEDRA.0
 	lcall WaitHalfSec
